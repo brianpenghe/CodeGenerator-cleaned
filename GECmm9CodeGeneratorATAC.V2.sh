@@ -106,8 +106,8 @@ while read line
         printf "python /woldlab/castor/home/georgi/code/commoncode/findall.py "$line".mm9.36_4mer.unique.nochrM.5x.4RPM- "$line".mm9.36_4mer.unique.nochrM.aligned.rds "$line".mm9.36_4mer.unique.nochrM.5x.4RPM.hts -minimum 4 -ratio 5 -listPeak -cache 20000000 -nodirectionality && rm "$line".mm9.36_4mer.unique.nochrM.aligned.rds && rm "$line".mm9.36_4mer.unique.nochrM.aligned.rds.log && " >> testcode
         printf "python /woldlab/castor/home/georgi/code/commoncode/regiontobed.py --- "$line".mm9.36_4mer.unique.nochrM.3x.2RPM.hts "$line".mm9.36_4mer.unique.nochrM.3x.2RPM.bed -nolabel && " >> testcode
         printf "python /woldlab/castor/home/georgi/code/commoncode/regiontobed.py --- "$line".mm9.36_4mer.unique.nochrM.5x.4RPM.hts "$line".mm9.36_4mer.unique.nochrM.5x.4RPM.bed -nolabel && " >> testcode
-        printf "/woldlab/castor/proj/programs/x86_64/bedToBigBed "$line".mm9.36mer.unique.nochrM.3x.2RPM.bed /woldlab/castor/home/georgi/genomes/mm9/mm9.chrom.sizes "$line".mm9.36mer.unique.nochrM.3x.2RPM.bigBed && " >> testcode
-        printf "/woldlab/castor/proj/programs/x86_64/bedToBigBed "$line".mm9.36mer.unique.nochrM.5x.4RPM.bed /woldlab/castor/home/georgi/genomes/mm9/mm9.chrom.sizes "$line".mm9.36mer.unique.nochrM.5x.4RPM.bigBed & " >> testcode
+        printf "/woldlab/castor/proj/programs/x86_64/bedToBigBed "$line".mm9.36_4mer.unique.nochrM.3x.2RPM.bed /woldlab/castor/home/georgi/genomes/mm9/mm9.chrom.sizes "$line".mm9.36_4mer.unique.nochrM.3x.2RPM.bigBed && " >> testcode
+        printf "/woldlab/castor/proj/programs/x86_64/bedToBigBed "$line".mm9.36_4mer.unique.nochrM.5x.4RPM.bed /woldlab/castor/home/georgi/genomes/mm9/mm9.chrom.sizes "$line".mm9.36_4mer.unique.nochrM.5x.4RPM.bigBed & " >> testcode
     done <testFolderPath
 
 
