@@ -160,7 +160,7 @@ while read line
 
 echo '' >> testcode
 echo "Mitochondria-Sex-reports codes:" >> testcode
-echo "*****************" >> testcode
+echo "******************" >> testcode
 
 printf '''
 echo "file chrXYM_reads" > chrXYM_reads
