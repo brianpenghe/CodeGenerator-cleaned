@@ -166,34 +166,19 @@ printf '''
 echo "file chrXYM_reads" > chrXYM_reads
 for file in *.idxstats
     do
-        chr1_reads=$(egrep -w "chr1|chr1_random" $file | cut -f3 | awk "{sum+=$1} END {print sum}")
-        chr2_reads=$(egrep -w "chr2|chr2_random" $file | cut -f3 | awk "{sum+=$1} END {print sum}")
-        chr3_reads=$(egrep -w "chr3|chr3_random" $file | cut -f3 | awk "{sum+=$1} END {print sum}")
-        chr4_reads=$(egrep -w "chr4|chr4_random" $file | cut -f3 | awk "{sum+=$1} END {print sum}")
-        chr5_reads=$(egrep -w "chr5|chr5_random" $file | cut -f3 | awk "{sum+=$1} END {print sum}")
-        chr6_reads=$(egrep -w "chr6|chr6_random" $file | cut -f3 | awk "{sum+=$1} END {print sum}")
-        chr7_reads=$(egrep -w "chr7|chr7_random" $file | cut -f3 | awk "{sum+=$1} END {print sum}")
-        chr8_reads=$(egrep -w "chr8|chr8_random" $file | cut -f3 | awk "{sum+=$1} END {print sum}")
-        chr9_reads=$(egrep -w "chr9|chr9_random" $file | cut -f3 | awk "{sum+=$1} END {print sum}")
-        chr10_reads=$(egrep -w "chr10|chr10_random" $file | cut -f3 | awk "{sum+=$1} END {print sum}")
-        chr11_reads=$(egrep -w "chr11|chr11_random" $file | cut -f3 | awk "{sum+=$1} END {print sum}")
-        chr12_reads=$(egrep -w "chr12|chr12_random" $file | cut -f3 | awk "{sum+=$1} END {print sum}")
-        chr13_reads=$(egrep -w "chr13|chr13_random" $file | cut -f3 | awk "{sum+=$1} END {print sum}")
-        chr14_reads=$(egrep -w "chr14|chr14_random" $file | cut -f3 | awk "{sum+=$1} END {print sum}")
-        chr15_reads=$(egrep -w "chr15|chr15_random" $file | cut -f3 | awk "{sum+=$1} END {print sum}")
-        chr16_reads=$(egrep -w "chr16|chr16_random" $file | cut -f3 | awk "{sum+=$1} END {print sum}")
-        chr17_reads=$(egrep -w "chr17|chr17_random" $file | cut -f3 | awk "{sum+=$1} END {print sum}")
-        chr18_reads=$(egrep -w "chr18|chr18_random" $file | cut -f3 | awk "{sum+=$1} END {print sum}")
-        chr19_reads=$(egrep -w "chr19|chr19_random" $file | cut -f3 | awk "{sum+=$1} END {print sum}")
-        chrX_reads=$(egrep -w "chrX|chrX_random" $file | cut -f3 | awk "{sum+=$1} END {print sum}")
-        chrY_reads=$(egrep -w "chrY|chrY_random" $file | cut -f3 | awk "{sum+=$1} END {print sum}")
-        chrM_reads=$(egrep -w "chrM|chrM_random" $file | cut -f3 | awk "{sum+=$1} END {print sum}")
-        chrUn_reads=$(egrep -w "chrUn_random" $file | cut -f3)
-        chrUnmapped=$(egrep -w '*' $file | cut -f4)
+''' >> testcode
+
+for i in {1..19} 'X' 'Y' 'M'
+do
+    echo "      chr"$i"_reads=\$(egrep -w 'chr"$i"|chr"$i"_random' \$file | cut -f3 | awk '{sum+=\$1} END {print sum}')" >> testcode
+done
+    echo "      chrUn_reads=\$(egrep -w 'chrUn_random' \$file | cut -f3)" >> testcode
+    echo "      chrUnmapped=\$(egrep -w '*' \$file | cut -f4)" >> testcode
+printf '''
         echo $file $chr1_reads $chr2_reads $chr3_reads $chr4_reads $chr5_reads $chr6_reads $chr7_reads $chr8_reads $chr9_reads $chr10_reads $chr11_reads $chr12_reads $chr13_reads $chr14_reads $chr15_reads $chr16_reads $chr17_reads $chr18_reads $chr19_reads $chrX_reads $chrY_reads $chrM_reads $chrUn_reads $chrUnmapped >> chr_reads
     done
-
 ''' >> testcode
+
 
 
 
