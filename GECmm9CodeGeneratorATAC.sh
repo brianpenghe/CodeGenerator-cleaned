@@ -180,6 +180,23 @@ printf '''
 ''' >> testcode
 
 
+echo '' >> testcode
+echo "These are bigWig tracks:" >> testcode
+echo "******************" >> testcode
+current_folder_name=$(pwd|rev|cut -d '/' -f1|rev)
+for file in *.bigWig
+    do
+        echo "track type=bigWig name="$file" description="$file" maxHeightPixels=60:32:8 visibility=full color=150,0,150 bigDataUrl=http://woldlab.caltech.edu/~phe/"$current_folder_name"/"$file >> testcode
+    done
+
+echo '' >> testcode
+echo "These are bigBed tracks:" >> testcode
+echo "******************" >> testcode
+current_folder_name=$(pwd|rev|cut -d '/' -f1|rev)
+for file in *.bigBed
+do
+echo "track type=bigBed name="$file" description="$file" maxHeightPixels=60:32:8 visibility=full color=150,0,150 bigDataUrl=http://woldlab.caltech.edu/~phe/"$current_folder_name"/"$file >> testcode
+done
 
 
 
