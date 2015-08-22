@@ -169,9 +169,9 @@ for file in *.idxstats
 ''' >> testcode
 
 for i in {1..19} 'X' 'Y' 'M'
-do
-    echo "      chr"$i"_reads=\$(egrep -w 'chr"$i"|chr"$i"_random' \$file | cut -f3 | awk '{sum+=\$1} END {print sum}')" >> testcode
-done
+    do
+        echo "      chr"$i"_reads=\$(egrep -w 'chr"$i"|chr"$i"_random' \$file | cut -f3 | awk '{sum+=\$1} END {print sum}')" >> testcode
+    done
     echo "      chrUn_reads=\$(egrep -w 'chrUn_random' \$file | cut -f3)" >> testcode
     echo "      chrUnmapped=\$(egrep -w '*' \$file | cut -f4)" >> testcode
 printf '''
