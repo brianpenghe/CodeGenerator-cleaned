@@ -3,11 +3,15 @@
 #the file $test has two columns, link and name, only one space allowed
 #delete the testFolderPath file
 #it generates three files: bowtieXXXXXX testcode & testFolderPath
-#usage: ./GECmm9CodeGeneratorATAC.sh test
+#usage: ./GECmm9CodeGeneratorATAC.sh test mm9
 echo '' > testcode
 echo "wget codes:" >> testcode
 echo "****************" >> testcode
-
+if [ "$2" == "mm9" ]
+then
+    $fa="/woldlab/castor/proj/genome/bowtie-indexes/mm9.fa"
+    $bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/mm9"
+    $chromsizes="/woldlab/castor/home/georgi/genomes/mm9/mm9.chrom.sizes"
 CurrentLo=$(pwd)
 
 while read line
@@ -55,7 +59,7 @@ while read line
         printf "mkdir "$path"FastQCk6 && " >> testcode
         printf "gunzip -c "$path"/*.fastq.gz > "$CurrentLo"/"$SampleID$SampleMeta"allfastq && " >> testcode
         printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"allfastq -o "$path"FastQCk6 -k 6 & \n" >> testcode
-        printf "arguments=\"-c \'python /woldlab/castor/home/georgi/code/trimfastq.py "$path"allfastq 36 -stdout | /woldlab/castor/proj/genome/programs/bowtie-1.0.1+hamrhein_nh_patch/bowtie /woldlab/castor/proj/genome/bowtie-indexes/mm9 -p 8 -v 2 -k 2 -m 1 -t --sam-nh --best --strata -q --sam - | /woldlab/castor/proj/genome/programs/samtools-0.1.8/samtools view -bT  /woldlab/castor/proj/genome/bowtie-indexes/mm9.fa - | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools sort - "$path".mm9.36mer.unique \' \"\nqueue\n" >> bowtie$bowtiedate".condor"
+        printf "arguments=\"-c \'python /woldlab/castor/home/georgi/code/trimfastq.py "$path"allfastq 36 -stdout | /woldlab/castor/proj/genome/programs/bowtie-1.0.1+hamrhein_nh_patch/bowtie "$bowtieindex" -p 8 -v 2 -k 2 -m 1 -t --sam-nh --best --strata -q --sam - | /woldlab/castor/proj/genome/programs/samtools-0.1.8/samtools view -bT  "$fa" - | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools sort - "$path""$2"36mer.unique \' \"\nqueue\n" >> bowtie$bowtiedate".condor"
     done <$1
 
 
@@ -88,18 +92,18 @@ echo "*****************" >> testcode
 
 while read line
     do
-        printf "condor_run \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view "$line".mm9.36mer.unique.bam | egrep -v chrM | /woldlab/castor/proj/programs/samtools-0.1.8/samtools view -bT /woldlab/castor/proj/genome/bowtie-indexes/mm9.fa - -o "$line".mm9.36mer.unique.nochrM.bam \" && " >> testcode
-        printf "condor_run \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index "$line".mm9.36mer.unique.nochrM.bam \" && " >> testcode
-        printf "condor_run \" python /woldlab/castor/home/georgi/code/filterBAMMulti.py "$line".mm9.36mer.unique.nochrM.bam /woldlab/castor/proj/programs/samtools-0.1.8/samtools 1 "$line".mm9.36mer.unique.nochrM.aligned.bam\" && " >> testcode
-        printf "condor_run \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index "$line".mm9.36mer.unique.nochrM.aligned.bam \" && rm "$line".mm9.36mer.unique.nochrM.bam && " >> testcode
-        printf "condor_run \"python /woldlab/castor/home/georgi/code/SAMstats.py "$line".mm9.36mer.unique.nochrM.aligned.bam "$line".mm9.36mer.unique.nochrM.aligned.SAMstats -bam /woldlab/castor/home/georgi/genomes/mm9/mm9.chrom.sizes /woldlab/castor/proj/programs/samtools-0.1.8/samtools \" && " >> testcode
-        printf "condor_run \"python /woldlab/castor/home/georgi/code/erange-4.0a/MakeRdsFromBam5.py reads "$line".mm9.36mer.unique.nochrM.aligned.bam "$line".mm9.36mer.unique.nochrM.aligned.rds --index --cache=20000000\" && " >> testcode
-        printf "python /woldlab/castor/home/georgi/code/commoncode/findall.py "$line".mm9.36mer.unique.nochrM.3x.2RPM- "$line".mm9.36mer.unique.nochrM.aligned.rds "$line".mm9.36mer.unique.nochrM.3x.2RPM.hts -minimum 2 -ratio 3 -listPeak -cache 20000000 -nodirectionality && " >> testcode
-        printf "python /woldlab/castor/home/georgi/code/commoncode/findall.py "$line".mm9.36mer.unique.nochrM.5x.4RPM- "$line".mm9.36mer.unique.nochrM.aligned.rds "$line".mm9.36mer.unique.nochrM.5x.4RPM.hts -minimum 4 -ratio 5 -listPeak -cache 20000000 -nodirectionality && rm "$line".mm9.36mer.unique.nochrM.aligned.rds && rm "$line".mm9.36mer.unique.nochrM.aligned.rds.log && " >> testcode
-        printf "python /woldlab/castor/home/georgi/code/commoncode/regiontobed.py --- "$line".mm9.36mer.unique.nochrM.3x.2RPM.hts "$line".mm9.36mer.unique.nochrM.3x.2RPM.bed -nolabel && " >> testcode
-        printf "python /woldlab/castor/home/georgi/code/commoncode/regiontobed.py --- "$line".mm9.36mer.unique.nochrM.5x.4RPM.hts "$line".mm9.36mer.unique.nochrM.5x.4RPM.bed -nolabel && " >> testcode
-        printf "/woldlab/castor/proj/programs/x86_64/bedToBigBed "$line".mm9.36mer.unique.nochrM.3x.2RPM.bed /woldlab/castor/home/georgi/genomes/mm9/mm9.chrom.sizes "$line".mm9.36mer.unique.nochrM.3x.2RPM.bigBed && " >> testcode
-        printf "/woldlab/castor/proj/programs/x86_64/bedToBigBed "$line".mm9.36mer.unique.nochrM.5x.4RPM.bed /woldlab/castor/home/georgi/genomes/mm9/mm9.chrom.sizes "$line".mm9.36mer.unique.nochrM.5x.4RPM.bigBed & " >> testcode
+        printf "condor_run \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view "$line""$2"36mer.unique.bam | egrep -v chrM | /woldlab/castor/proj/programs/samtools-0.1.8/samtools view -bT "$fa" - -o "$line""$2"36mer.unique.nochrM.bam \" && " >> testcode
+        printf "condor_run \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index "$line""$2"36mer.unique.nochrM.bam \" && " >> testcode
+        printf "condor_run \" python /woldlab/castor/home/georgi/code/filterBAMMulti.py "$line""$2"36mer.unique.nochrM.bam /woldlab/castor/proj/programs/samtools-0.1.8/samtools 1 "$line""$2"36mer.unique.nochrM.aligned.bam\" && " >> testcode
+        printf "condor_run \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index "$line""$2"36mer.unique.nochrM.aligned.bam \" && rm "$line""$2"36mer.unique.nochrM.bam && " >> testcode
+        printf "condor_run \"python /woldlab/castor/home/georgi/code/SAMstats.py "$line""$2"36mer.unique.nochrM.aligned.bam "$line""$2"36mer.unique.nochrM.aligned.SAMstats -bam "chromsizes" /woldlab/castor/proj/programs/samtools-0.1.8/samtools \" && " >> testcode
+        printf "condor_run \"python /woldlab/castor/home/georgi/code/erange-4.0a/MakeRdsFromBam5.py reads "$line""$2"36mer.unique.nochrM.aligned.bam "$line""$2"36mer.unique.nochrM.aligned.rds --index --cache=20000000\" && " >> testcode
+        printf "python /woldlab/castor/home/georgi/code/commoncode/findall.py "$line""$2"36mer.unique.nochrM.3x.2RPM- "$line""$2"36mer.unique.nochrM.aligned.rds "$line""$2"36mer.unique.nochrM.3x.2RPM.hts -minimum 2 -ratio 3 -listPeak -cache 20000000 -nodirectionality && " >> testcode
+        printf "python /woldlab/castor/home/georgi/code/commoncode/findall.py "$line""$2"36mer.unique.nochrM.5x.4RPM- "$line""$2"36mer.unique.nochrM.aligned.rds "$line""$2"36mer.unique.nochrM.5x.4RPM.hts -minimum 4 -ratio 5 -listPeak -cache 20000000 -nodirectionality && rm "$line""$2"36mer.unique.nochrM.aligned.rds && rm "$line""$2"36mer.unique.nochrM.aligned.rds.log && " >> testcode
+        printf "python /woldlab/castor/home/georgi/code/commoncode/regiontobed.py --- "$line""$2"36mer.unique.nochrM.3x.2RPM.hts "$line""$2"36mer.unique.nochrM.3x.2RPM.bed -nolabel && " >> testcode
+        printf "python /woldlab/castor/home/georgi/code/commoncode/regiontobed.py --- "$line""$2"36mer.unique.nochrM.5x.4RPM.hts "$line""$2"36mer.unique.nochrM.5x.4RPM.bed -nolabel && " >> testcode
+        printf "/woldlab/castor/proj/programs/x86_64/bedToBigBed "$line""$2"36mer.unique.nochrM.3x.2RPM.bed "chromsizes" "$line""$2"36mer.unique.nochrM.3x.2RPM.bigBed && " >> testcode
+        printf "/woldlab/castor/proj/programs/x86_64/bedToBigBed "$line""$2"36mer.unique.nochrM.5x.4RPM.bed "chromsizes" "$line""$2"36mer.unique.nochrM.5x.4RPM.bigBed & " >> testcode
     done <testFolderPath
 
 
@@ -113,21 +117,21 @@ echo "*****************" >> testcode
 printf "export PYTHONPATH=/woldlab/castor/home/hamrhein/src/python/packages \n" >> testcode
 while read line
     do
-        printf "condor_run \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index "$line".mm9.36mer.unique.bam \" && " >> testcode
-        printf "condor_run \"python /woldlab/castor/home/georgi/code/SAMstats.py "$line".mm9.36mer.unique.bam "$line".mm9.36mer.SAMstats -bam /woldlab/castor/home/georgi/genomes/mm9/mm9.chrom.sizes /woldlab/castor/proj/programs/samtools-0.1.8/samtools \" && " >> testcode
-        printf "condor_run \"/woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools idxstats "$line".mm9.36mer.unique.bam > "$line".mm9.36mer.idxstats\" && " >> testcode
-        printf "condor_run \"python /woldlab/castor/home/hamrhein/bin/bamToBedGraph.py --match --strand + --unique --splice --chromonly --normalize --verbose "$line".mm9.36mer.unique.bam "$line".mm9.36mer.unique.plus.bg4\" && " >> testcode
-        printf "condor_run \"python /woldlab/castor/home/hamrhein/bin/bamToBedGraph.py --match --strand - --unique --splice --chromonly --normalize --verbose "$line".mm9.36mer.unique.bam "$line".mm9.36mer.unique.minus.bg4\" && " >> testcode
-        printf "condor_run \"python /woldlab/castor/home/hamrhein/bin/bamToBedGraph.py --match --unique --splice --chromonly --normalize --verbose "$line".mm9.36mer.unique.bam "$line".mm9.36mer.unique.bg4\" && " >> testcode
-        printf "condor_run \"python /woldlab/castor/home/georgi/code/make5primeWigglefromBAM-NH.py --- "$line".mm9.36mer.unique.bam  /woldlab/castor/home/georgi/genomes/mm9/mm9.chrom.sizes "$line".mm9.36mer.unique.5prime.wig -notitle -uniqueBAM -RPM\" && " >> testcode
-        printf "condor_run \"python /woldlab/castor/home/georgi/code/make5primeWigglefromBAM-NH.py --- "$line".mm9.36mer.unique.bam  /woldlab/castor/home/georgi/genomes/mm9/mm9.chrom.sizes "$line".mm9.36mer.unique.5prime.plus.wig -stranded + -notitle -uniqueBAM -RPM\" && " >> testcode
-        printf "condor_run \"python /woldlab/castor/home/georgi/code/make5primeWigglefromBAM-NH.py --- "$line".mm9.36mer.unique.bam  /woldlab/castor/home/georgi/genomes/mm9/mm9.chrom.sizes "$line".mm9.36mer.unique.5prime.minus.wig -stranded - -notitle -uniqueBAM -RPM\" && " >> testcode
-        printf "condor_run \"/woldlab/castor/proj/genome/programs/x86_64/wigToBigWig "$line".mm9.36mer.unique.plus.bg4 /woldlab/castor/home/georgi/genomes/mm9/mm9.chrom.sizes "$line".mm9.36mer.unique.plus.bigWig\" && " >> testcode
-        printf "condor_run \"/woldlab/castor/proj/genome/programs/x86_64/wigToBigWig "$line".mm9.36mer.unique.minus.bg4 /woldlab/castor/home/georgi/genomes/mm9/mm9.chrom.sizes "$line".mm9.36mer.unique.minus.bigWig\" && " >> testcode
-        printf "condor_run \"/woldlab/castor/proj/genome/programs/x86_64/wigToBigWig "$line".mm9.36mer.unique.bg4 /woldlab/castor/home/georgi/genomes/mm9/mm9.chrom.sizes "$line".mm9.36mer.unique.bigWig\" && " >> testcode
-        printf "condor_run \"/woldlab/castor/proj/genome/programs/x86_64/wigToBigWig "$line".mm9.36mer.unique.5prime.plus.wig /woldlab/castor/home/georgi/genomes/mm9/mm9.chrom.sizes "$line".mm9.36mer.unique.5prime.plus.bigWig\" && " >> testcode
-        printf "condor_run \"/woldlab/castor/proj/genome/programs/x86_64/wigToBigWig "$line".mm9.36mer.unique.5prime.minus.wig /woldlab/castor/home/georgi/genomes/mm9/mm9.chrom.sizes "$line".mm9.36mer.unique.5prime.minus.bigWig\" && " >> testcode
-        printf "condor_run \"/woldlab/castor/proj/genome/programs/x86_64/wigToBigWig "$line".mm9.36mer.unique.5prime.wig /woldlab/castor/home/georgi/genomes/mm9/mm9.chrom.sizes "$line".mm9.36mer.unique.5prime.bigWig\" & \n" >> testcode
+        printf "condor_run \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index "$line""$2"36mer.unique.bam \" && " >> testcode
+        printf "condor_run \"python /woldlab/castor/home/georgi/code/SAMstats.py "$line""$2"36mer.unique.bam "$line""$2"36mer.SAMstats -bam "chromsizes" /woldlab/castor/proj/programs/samtools-0.1.8/samtools \" && " >> testcode
+        printf "condor_run \"/woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools idxstats "$line""$2"36mer.unique.bam > "$line""$2"36mer.idxstats\" && " >> testcode
+        printf "condor_run \"python /woldlab/castor/home/hamrhein/bin/bamToBedGraph.py --match --strand + --unique --splice --chromonly --normalize --verbose "$line""$2"36mer.unique.bam "$line""$2"36mer.unique.plus.bg4\" && " >> testcode
+        printf "condor_run \"python /woldlab/castor/home/hamrhein/bin/bamToBedGraph.py --match --strand - --unique --splice --chromonly --normalize --verbose "$line""$2"36mer.unique.bam "$line""$2"36mer.unique.minus.bg4\" && " >> testcode
+        printf "condor_run \"python /woldlab/castor/home/hamrhein/bin/bamToBedGraph.py --match --unique --splice --chromonly --normalize --verbose "$line""$2"36mer.unique.bam "$line""$2"36mer.unique.bg4\" && " >> testcode
+        printf "condor_run \"python /woldlab/castor/home/georgi/code/make5primeWigglefromBAM-NH.py --- "$line""$2"36mer.unique.bam  "chromsizes" "$line""$2"36mer.unique.5prime.wig -notitle -uniqueBAM -RPM\" && " >> testcode
+        printf "condor_run \"python /woldlab/castor/home/georgi/code/make5primeWigglefromBAM-NH.py --- "$line""$2"36mer.unique.bam  "chromsizes" "$line""$2"36mer.unique.5prime.plus.wig -stranded + -notitle -uniqueBAM -RPM\" && " >> testcode
+        printf "condor_run \"python /woldlab/castor/home/georgi/code/make5primeWigglefromBAM-NH.py --- "$line""$2"36mer.unique.bam  "chromsizes" "$line""$2"36mer.unique.5prime.minus.wig -stranded - -notitle -uniqueBAM -RPM\" && " >> testcode
+        printf "condor_run \"/woldlab/castor/proj/genome/programs/x86_64/wigToBigWig "$line""$2"36mer.unique.plus.bg4 "chromsizes" "$line""$2"36mer.unique.plus.bigWig\" && " >> testcode
+        printf "condor_run \"/woldlab/castor/proj/genome/programs/x86_64/wigToBigWig "$line""$2"36mer.unique.minus.bg4 "chromsizes" "$line""$2"36mer.unique.minus.bigWig\" && " >> testcode
+        printf "condor_run \"/woldlab/castor/proj/genome/programs/x86_64/wigToBigWig "$line""$2"36mer.unique.bg4 "chromsizes" "$line""$2"36mer.unique.bigWig\" && " >> testcode
+        printf "condor_run \"/woldlab/castor/proj/genome/programs/x86_64/wigToBigWig "$line""$2"36mer.unique.5prime.plus.wig "chromsizes" "$line""$2"36mer.unique.5prime.plus.bigWig\" && " >> testcode
+        printf "condor_run \"/woldlab/castor/proj/genome/programs/x86_64/wigToBigWig "$line""$2"36mer.unique.5prime.minus.wig "chromsizes" "$line""$2"36mer.unique.5prime.minus.bigWig\" && " >> testcode
+        printf "condor_run \"/woldlab/castor/proj/genome/programs/x86_64/wigToBigWig "$line""$2"36mer.unique.5prime.wig "chromsizes" "$line""$2"36mer.unique.5prime.bigWig\" & \n" >> testcode
     done <testFolderPath
 
 
