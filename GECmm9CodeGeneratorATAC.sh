@@ -3,6 +3,7 @@
 #the file $test has two columns, link and name, only one space allowed
 #delete the testFolderPath file
 #it generates three files: bowtieXXXXXX testcode & testFolderPath
+#usage: ./GECmm9CodeGeneratorATAC.sh test
 echo '' > testcode
 echo "wget codes:" >> testcode
 echo "****************" >> testcode
@@ -13,7 +14,7 @@ while read line
     do
         Download=$(echo $line | cut -d' ' -f1 | sed "s/https:/http:/g")
         echo 'wget -r --no-parent --no-check-certificate '$Download' ' >> testcode
-    done <test
+    done <$1
 
 
 
@@ -55,7 +56,7 @@ while read line
         printf "gunzip -c "$path"/*.fastq.gz > "$CurrentLo"/"$SampleID$SampleMeta"allfastq && " >> testcode
         printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"allfastq -o "$path"FastQCk6 -k 6 & \n" >> testcode
         printf "arguments=\"-c \'python /woldlab/castor/home/georgi/code/trimfastq.py "$path"allfastq 36 -stdout | /woldlab/castor/proj/genome/programs/bowtie-1.0.1+hamrhein_nh_patch/bowtie /woldlab/castor/proj/genome/bowtie-indexes/mm9 -p 8 -v 2 -k 2 -m 1 -t --sam-nh --best --strata -q --sam - | /woldlab/castor/proj/genome/programs/samtools-0.1.8/samtools view -bT  /woldlab/castor/proj/genome/bowtie-indexes/mm9.fa - | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools sort - "$path".mm9.36mer.unique \' \"\nqueue\n" >> bowtie$bowtiedate".condor"
-    done <test
+    done <$1
 
 
 
