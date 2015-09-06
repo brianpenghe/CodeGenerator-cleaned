@@ -27,32 +27,10 @@ fi
 
 source /woldlab/castor/home/phe/programs/DownloadFolder.sh $1
 
-
-
-
 echo '' >> testcode
 echo "******take a break***********" >> testcode
-echo "ATAC FastQC and bowtie.condor codes:" >> testcode
+echo "unzip and refolder codes:" >> testcode
 echo "********(checkout bowtie condor file)*********" >> testcode
-
-bowtiedate=$(date +"%y%m%d")
-printf '''
-universe=vanilla
-
-executable=/bin/sh
-
-log=shell.$(Process).log
-output=shell.$(Process).out
-error=shell.$(Process).err
-
-request_cpus = 8
-request_memory = 4000
-request_disk = 0
-
-Requirements = (Machine == "pongo.cacr.caltech.edu" || Machine == "myogenin.cacr.caltech.edu" || Machine == "mondom.cacr.caltech.edu" || Machine == "trog.caltech.edu" || Machine == "wold-clst-3.woldlab" || Machine == "wold-clst-4.woldlab" || Machine == "myostatin.cacr.caltech.edu")
-
-''' >> bowtie$bowtiedate".condor"
-
 while read line
     do
         Folders=$(echo $line | cut -d' ' -f1 | sed "s/https:\///g" | rev | cut -d '/' -f3- | rev)
@@ -60,35 +38,11 @@ while read line
         SampleMeta=$(echo $line | cut -d' ' -f2- | sed "s/\//_/g" | sed "s/ /_/g")
         OldDataPath=$(echo $CurrentLo$Folders"/"$SampleID)
         path=$(echo $CurrentLo"/"$SampleID$SampleMeta)
-        printf "mv "$OldDataPath" "$path" && " >> testcode
-        printf $path >> testFolderPath
-        printf "mkdir "$path"FastQCk6 && " >> testcode
-        printf "gunzip -c "$path"/*.fastq.gz > "$CurrentLo"/"$SampleID$SampleMeta"allfastq && " >> testcode
-        printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"allfastq -o "$path"FastQCk6 -k 6 & \n" >> testcode
-        printf "arguments=\"-c \'python /woldlab/castor/home/georgi/code/trimfastq.py "$path"allfastq 36 -stdout | /woldlab/castor/proj/genome/programs/bowtie-1.0.1+hamrhein_nh_patch/bowtie "$bowtieindex" -p 8 -v 2 -k 2 -m 1 -t --sam-nh --best --strata -q --sam - | /woldlab/castor/proj/genome/programs/samtools-0.1.8/samtools view -bT  "$fa" - | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools sort - "$path"."$2".36mer.unique \' \"\nqueue\n" >> bowtie$bowtiedate".condor"
+        printf "mv "$OldDataPath" "$path"\n" >> testcode
+        printf $path"\n" >> testFolderPath
     done <$1
 
-
-
-echo '' >> testcode
-echo "******take a break***********" >> testcode
-echo "bowtie-reports codes:" >> testcode
-echo "*****************" >> testcode
-
-
-
-
-printf '''
-echo "file processed unique" > bowtie_report
-for file in shell*err
-    do
-        all_reads=$(grep processed $file | cut -d':' -f2)
-        unique_reads=$(grep least $file | cut -d':' -f2)
-        echo $file $all_reads $unique_reads >> bowtie_report
-    done
-
-''' >> testcode
-
+source /woldlab/castor/home/phe/programs/bowtieCodeGenerator.sh testFolderPath $2
 
 echo '' >> testcode
 echo "******take a break***********" >> testcode

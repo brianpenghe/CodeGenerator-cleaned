@@ -1,7 +1,7 @@
 #!/bin/bash
 #Run these codes in the current SERVER directory
 #the file $test has two columns, link and name, only one space allowed
-#usage: ./GECmm9CodeGeneratorATAC.sh test
+#usage: ./DownloadFolder.sh test
 
 echo "wget codes:" >> testcode
 echo "****************" >> testcode
