@@ -25,11 +25,8 @@ then
     chromsizes="/woldlab/castor/home/georgi/genomes/hg19/hg19-female-single-cell-NIST-fixed-spikes.chrom.sizes"
 fi
 
-while read line
-    do
-        Download=$(echo $line | cut -d' ' -f1 | sed "s/https:/http:/g")
-        echo 'wget -r --no-parent --no-check-certificate '$Download' ' >> testcode
-    done <$1
+
+source /woldlab/castor/home/phe/programs/DownloadFolder.sh $1
 
 
 
@@ -62,8 +59,7 @@ while read line
         Folders=$(echo $line | cut -d' ' -f1 | sed "s/https:\///g" | rev | cut -d '/' -f3- | rev)
         SampleID=$(echo $line | cut -d' ' -f1 | rev | cut -d '/' -f2 | rev)
         SampleMeta=$(echo $line | cut -d' ' -f2- | sed "s/\//_/g" | sed "s/ /_/g")
-        FolderPath=$(echo $CurrentLo$Folders)
-        OldDataPath=$(echo $FolderPath"/"$SampleID)
+        OldDataPath=$(echo $CurrentLo$Folders"/"$SampleID)
         path=$(echo $CurrentLo"/"$SampleID$SampleMeta)
         echo "mv "$OldDataPath" "$path" && " >> testcode
         echo $path >> testFolderPath
