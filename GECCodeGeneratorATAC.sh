@@ -4,9 +4,8 @@
 #delete the testFolderPath file
 #it generates three files: bowtieXXXXXX testcode & testFolderPath
 #usage: ./GECmm9CodeGeneratorATAC.sh test mm9
+
 echo '' > testcode
-echo "wget codes:" >> testcode
-echo "****************" >> testcode
 CurrentLo=$(pwd)
 if [ "$2" == "mm9" ]
 then
@@ -61,8 +60,8 @@ while read line
         SampleMeta=$(echo $line | cut -d' ' -f2- | sed "s/\//_/g" | sed "s/ /_/g")
         OldDataPath=$(echo $CurrentLo$Folders"/"$SampleID)
         path=$(echo $CurrentLo"/"$SampleID$SampleMeta)
-        echo "mv "$OldDataPath" "$path" && " >> testcode
-        echo $path >> testFolderPath
+        printf "mv "$OldDataPath" "$path" && " >> testcode
+        printf $path >> testFolderPath
         printf "mkdir "$path"FastQCk6 && " >> testcode
         printf "gunzip -c "$path"/*.fastq.gz > "$CurrentLo"/"$SampleID$SampleMeta"allfastq && " >> testcode
         printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"allfastq -o "$path"FastQCk6 -k 6 & \n" >> testcode
