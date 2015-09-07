@@ -41,7 +41,7 @@ while read line
         printf "mv "$OldDataPath" "$path" &&\n" >> testcode
         printf $path"\n" >> testFolderPath
         printf "mkdir "$path"FastQCk6 && " >> testcode
-        printf "gunzip -c "$path"/*.fastq.gz | python /woldlab/castor/home/georgi/code/trimfastq.py - 36 -stdout > "$path"allfastq && " >> testcode
+        printf "gunzip -c "$path"/*.fastq.gz | python /woldlab/castor/home/georgi/code/trimfastq.py - "$3" -stdout > "$path"allfastq && " >> testcode
         printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"allfastq -o "$path"FastQCk6 -k 6 & \n" >> testcode
     done <$1
 
