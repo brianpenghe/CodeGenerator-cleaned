@@ -45,7 +45,7 @@ while read line
         printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"allfastq -o "$path"FastQCk6 -k 6 & \n" >> testcode
     done <$1
 
-source /woldlab/castor/home/phe/programs/FastQC_bowtieCodeGenerator.sh testFolderPath $2
+source /woldlab/castor/home/phe/programs/BowtieCodeGenerator.sh testFolderPath $2
 
 echo '' >> testcode
 echo "******take a break***********" >> testcode
