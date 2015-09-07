@@ -29,7 +29,7 @@ source /woldlab/castor/home/phe/programs/DownloadFolder.sh $1
 
 echo '' >> testcode
 echo "******take a break***********" >> testcode
-echo "unzip and refolder codes:" >> testcode
+echo "refolder,unzip and FastQC codes:" >> testcode
 echo "********(checkout bowtie condor file)*********" >> testcode
 while read line
     do
@@ -38,11 +38,14 @@ while read line
         SampleMeta=$(echo $line | cut -d' ' -f2- | sed "s/\//_/g" | sed "s/ /_/g")
         OldDataPath=$(echo $CurrentLo$Folders"/"$SampleID)
         path=$(echo $CurrentLo"/"$SampleID$SampleMeta)
-        printf "mv "$OldDataPath" "$path"\n" >> testcode
+        printf "mv "$OldDataPath" "$path" &&\n" >> testcode
         printf $path"\n" >> testFolderPath
+        printf "mkdir "$path"FastQCk6 && " >> testcode
+        printf "gunzip -c "$path"/*.fastq.gz | python /woldlab/castor/home/georgi/code/trimfastq.py - 36 -stdout > "$path"allfastq && " >> testcode
+        printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"allfastq -o "$path"FastQCk6 -k 6 & \n" >> testcode
     done <$1
 
-source /woldlab/castor/home/phe/programs/bowtieCodeGenerator.sh testFolderPath $2
+source /woldlab/castor/home/phe/programs/FastQC_bowtieCodeGenerator.sh testFolderPath $2
 
 echo '' >> testcode
 echo "******take a break***********" >> testcode

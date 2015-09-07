@@ -29,7 +29,7 @@ fi
 
 echo '' >> testcode
 echo "******take a break***********" >> testcode
-echo "ATAC FastQC and bowtie.condor codes:" >> testcode
+echo "bowtie.condor codes:" >> testcode
 echo "********(checkout bowtie condor file)*********" >> testcode
 
 bowtiedate=$(date +"%y%m%d")
@@ -52,10 +52,7 @@ Requirements = (Machine == "pongo.cacr.caltech.edu" || Machine == "myogenin.cacr
 
 while read path
     do
-        printf "mkdir "$path"FastQCk6 && " >> testcode
-        printf "gunzip -c "$path"/*.fastq.gz > "$path"allfastq && " >> testcode
-        printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"allfastq -o "$path"FastQCk6 -k 6 & \n" >> testcode
-        printf "arguments=\"-c \'python /woldlab/castor/home/georgi/code/trimfastq.py "$path"allfastq 36 -stdout | /woldlab/castor/proj/genome/programs/bowtie-1.0.1+hamrhein_nh_patch/bowtie "$bowtieindex" -p 8 -v 2 -k 2 -m 1 -t --sam-nh --best --strata -q --sam - | /woldlab/castor/proj/genome/programs/samtools-0.1.8/samtools view -bT  "$fa" - | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools sort - "$path"."$2".36mer.unique \' \"\nqueue\n" >> bowtie$bowtiedate".condor"
+        printf "arguments=\"-c \' /woldlab/castor/proj/genome/programs/bowtie-1.0.1+hamrhein_nh_patch/bowtie "$bowtieindex" -p 8 -v 2 -k 2 -m 1 -t --sam-nh --best --strata -q --sam "$path"allfastq | /woldlab/castor/proj/genome/programs/samtools-0.1.8/samtools view -bT  "$fa" - | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools sort - "$path"."$2".36mer.unique \' \"\nqueue\n" >> bowtie$bowtiedate".condor"
     done <$1
 
 
