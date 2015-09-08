@@ -101,17 +101,18 @@ then
     ''' >> testcode
 fi
 
-#for the following part: move the folder to public_html, then copy paste the following codes to run
+printf "#for the following part: move the folder to public_html, then copy paste the following codes to run" >> testcode
 
 echo '' >> testcode
 echo "These are bigWig tracks:" >> testcode
 echo "******************" >> testcode
-current_folder_name=$(pwd|rev|cut -d '/' -f1|rev)
+printf "current_folder_name=\$(pwd|rev|cut -d '/' -f1|rev)" >> testcode
+printf '''
 for file in *.bigWig
     do
         echo "track type=bigWig name="$file" description="$file" maxHeightPixels=60:32:8 visibility=full color=150,0,150 bigDataUrl=http://woldlab.caltech.edu/~phe/"$current_folder_name"/"$file >> testcode
     done
-
+''' >> testcode
 
 
 
