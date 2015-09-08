@@ -1,7 +1,7 @@
 #!/bin/bash
 #Run these codes in the current SERVER directory
 #the testFolderPath file contains the paths
-#usage: ~/programs/eRangeCode.sh testFolderPath mm9 36
+#usage: ~/programs/eRangeCode.sh testFolderPath mm9 36mer
 
 echo '' >> testcode
 CurrentLo=$(pwd)
@@ -44,6 +44,18 @@ while read line
         printf "/woldlab/castor/proj/programs/x86_64/bedToBigBed "$line"."$2"."$3".unique.nochrM.3x.2RPM.bed "$chromsizes" "$line"."$2"."$3".unique.nochrM.3x.2RPM.bigBed && " >> testcode
         printf "/woldlab/castor/proj/programs/x86_64/bedToBigBed "$line"."$2"."$3".unique.nochrM.5x.4RPM.bed "$chromsizes" "$line"."$2"."$3".unique.nochrM.5x.4RPM.bigBed & \n" >> testcode
     done <$1
+
+
+#for the following part: move the folder to public_html, then copy paste the following codes to run
+echo '' >> testcode
+echo "These are bigBed tracks:" >> testcode
+echo "******************" >> testcode
+current_folder_name=$(pwd|rev|cut -d '/' -f1|rev)
+    for file in *.bigBed
+        do
+        echo "track type=bigBed name="$file" description="$file" maxHeightPixels=60:32:8 visibility=full color=150,0,150 bigDataUrl=http://woldlab.caltech.edu/~phe/"$current_folder_name"/"$file >> testcode
+        done
+
 
 
 
