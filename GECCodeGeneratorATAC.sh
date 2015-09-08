@@ -24,7 +24,6 @@ then
     chromsizes="/woldlab/castor/home/georgi/genomes/hg19/hg19-female-single-cell-NIST-fixed-spikes.chrom.sizes"
 fi
 
-
 source /woldlab/castor/home/phe/programs/DownloadFolder.sh $1
 
 echo '' >> testcode
@@ -47,34 +46,13 @@ while read line
 
 source /woldlab/castor/home/phe/programs/BowtieCodeGenerator.sh testFolderPath $2 $3"mer"
 
-echo '' >> testcode
-echo "******take a break***********" >> testcode
-echo "eRange(chrM-Removal, filtermulti, index, SAMstats, makeRds, findall, regiontobed, bedtobigbed) codes:" >> testcode
-echo "*****************" >> testcode
-
-
-while read line
-    do
-        printf "condor_run \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view "$line"."$2"."$3"mer.unique.bam | egrep -v chrM | /woldlab/castor/proj/programs/samtools-0.1.8/samtools view -bT "$fa" - -o "$line"."$2"."$3"mer.unique.nochrM.bam \" && " >> testcode
-        printf "condor_run \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index "$line"."$2"."$3"mer.unique.nochrM.bam \" && " >> testcode
-        printf "condor_run \" python /woldlab/castor/home/georgi/code/filterBAMMulti.py "$line"."$2"."$3"mer.unique.nochrM.bam /woldlab/castor/proj/programs/samtools-0.1.8/samtools 1 "$line"."$2"."$3"mer.unique.nochrM.aligned.bam\" && " >> testcode
-        printf "condor_run \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index "$line"."$2"."$3"mer.unique.nochrM.aligned.bam \" && rm "$line"."$2"."$3"mer.unique.nochrM.bam && " >> testcode
-        printf "condor_run \"python /woldlab/castor/home/georgi/code/SAMstats.py "$line"."$2"."$3"mer.unique.nochrM.aligned.bam "$line"."$2"."$3"mer.unique.nochrM.aligned.SAMstats -bam "$chromsizes" /woldlab/castor/proj/programs/samtools-0.1.8/samtools \" && " >> testcode
-        printf "condor_run \"python /woldlab/castor/home/georgi/code/erange-4.0a/MakeRdsFromBam5.py reads "$line"."$2"."$3"mer.unique.nochrM.aligned.bam "$line"."$2"."$3"mer.unique.nochrM.aligned.rds --index --cache=20000000\" && " >> testcode
-        printf "python /woldlab/castor/home/georgi/code/commoncode/findall.py "$line"."$2"."$3"mer.unique.nochrM.3x.2RPM- "$line"."$2"."$3"mer.unique.nochrM.aligned.rds "$line"."$2"."$3"mer.unique.nochrM.3x.2RPM.hts -minimum 2 -ratio 3 -listPeak -cache 20000000 -nodirectionality && " >> testcode
-        printf "python /woldlab/castor/home/georgi/code/commoncode/findall.py "$line"."$2"."$3"mer.unique.nochrM.5x.4RPM- "$line"."$2"."$3"mer.unique.nochrM.aligned.rds "$line"."$2"."$3"mer.unique.nochrM.5x.4RPM.hts -minimum 4 -ratio 5 -listPeak -cache 20000000 -nodirectionality && rm "$line"."$2"."$3"mer.unique.nochrM.aligned.rds && rm "$line"."$2"."$3"mer.unique.nochrM.aligned.rds.log && " >> testcode
-        printf "python /woldlab/castor/home/georgi/code/commoncode/regiontobed.py --- "$line"."$2"."$3"mer.unique.nochrM.3x.2RPM.hts "$line"."$2"."$3"mer.unique.nochrM.3x.2RPM.bed -nolabel && " >> testcode
-        printf "python /woldlab/castor/home/georgi/code/commoncode/regiontobed.py --- "$line"."$2"."$3"mer.unique.nochrM.5x.4RPM.hts "$line"."$2"."$3"mer.unique.nochrM.5x.4RPM.bed -nolabel && " >> testcode
-        printf "/woldlab/castor/proj/programs/x86_64/bedToBigBed "$line"."$2"."$3"mer.unique.nochrM.3x.2RPM.bed "$chromsizes" "$line"."$2"."$3"mer.unique.nochrM.3x.2RPM.bigBed && " >> testcode
-        printf "/woldlab/castor/proj/programs/x86_64/bedToBigBed "$line"."$2"."$3"mer.unique.nochrM.5x.4RPM.bed "$chromsizes" "$line"."$2"."$3"mer.unique.nochrM.5x.4RPM.bigBed & \n" >> testcode
-    done <testFolderPath
-
+source /woldlab/castor/home/phe/programs/eRangeCode.sh testFolderPath $2 $3"mer"
 
 
 
 echo '' >> testcode
 echo "******take a break***********" >> testcode
-echo "bigWig (Index, SAMstats, idxstats, bedgraph, make5prime, wigToBigwig codes:" >> testcode
+echo "bigWig (Index, SAMstats, idxstats, bedgraph, make5prime, wigToBigwig) codes:" >> testcode
 echo "*****************" >> testcode
 
 printf "export PYTHONPATH=/woldlab/castor/home/hamrhein/src/python/packages \n" >> testcode
