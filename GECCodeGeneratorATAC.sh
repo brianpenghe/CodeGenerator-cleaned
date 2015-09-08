@@ -7,25 +7,10 @@
 
 echo '' > testcode
 CurrentLo=$(pwd)
-if [ "$2" == "mm9" ]
-then
-    fa="/woldlab/castor/proj/genome/bowtie-indexes/mm9.fa"
-    bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/mm9"
-    chromsizes="/woldlab/castor/home/georgi/genomes/mm9/mm9.chrom.sizes"
-elif [ "$2" == "hg19male" ]
-then
-    fa="/woldlab/castor/proj/genome/bowtie-indexes/ENCFF001RGR+spikes.fa"
-    bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/ENCFF001RGR+spikes"
-    chromsizes="/woldlab/castor/home/georgi/genomes/hg19/hg19-male-single-cell-NIST-fixed-spikes.chrom.sizes"
-elif [ "$2" == "hg19female" ]
-then
-    fa="/woldlab/castor/proj/genome/bowtie-indexes/ENCFF001RGS+spikes.fa"
-    bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/ENCFF001RGS+spikes"
-    chromsizes="/woldlab/castor/home/georgi/genomes/hg19/hg19-female-single-cell-NIST-fixed-spikes.chrom.sizes"
-fi
+source /woldlab/castor/home/phe/programs/GenomeDefinitions.sh $2
+/woldlab/castor/home/phe/programs/DownloadFolder.sh $1
 
-source /woldlab/castor/home/phe/programs/DownloadFolder.sh $1
-
+echo $2
 echo '' >> testcode
 echo "******take a break***********" >> testcode
 echo "refolder,unzip and FastQC codes:" >> testcode
@@ -44,11 +29,11 @@ while read line
         printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"allfastq -o "$path"FastQCk6 -k 6 & \n" >> testcode
     done <$1
 
-source /woldlab/castor/home/phe/programs/BowtieCodeGenerator.sh testFolderPath $2 $3"mer"
+/woldlab/castor/home/phe/programs/BowtieCodeGenerator.sh testFolderPath $2 $3"mer"
 
-source /woldlab/castor/home/phe/programs/eRangeCode.sh testFolderPath $2 $3"mer"
+/woldlab/castor/home/phe/programs/eRangeCode.sh testFolderPath $2 $3"mer"
 
-source /woldlab/castor/home/phe/programs/bigWigCode.sh testFolderPath $2 $3"mer"
+/woldlab/castor/home/phe/programs/bigWigCode.sh testFolderPath $2 $3"mer"
 
 
 
