@@ -66,12 +66,13 @@ echo "*****************" >> testcode
 
 
 printf '''
-echo "file processed unique" > bowtie_report
-for file in shell*err
-    do
-        all_reads=$(grep processed $file | cut -d':' -f2)
-        unique_reads=$(grep least $file | cut -d':' -f2)
-        echo $file $all_reads $unique_reads >> bowtie_report
-    done
+echo "file processed unique suppressed " > bowtie_report
+    for file in shell*err
+        do
+            all_reads=$(grep processed $file | cut -d: -f2)
+            unique_reads=$(grep least $file | cut -d: -f2)
+            suppressed_reads=$(grep suppressed $file | cut -d: -f2)
+            echo $file $all_reads $unique_reads $suppressed_reads>> bowtie_report
+        done
 
 ''' >> testcode
