@@ -66,13 +66,14 @@ echo "*****************" >> testcode
 
 
 printf '''
-echo "file processed unique suppressed " > bowtie_report
+echo "file processed unique failed suppressed " > bowtie_report
     for file in shell*err
         do
             all_reads=$(grep processed $file | cut -d: -f2)
             unique_reads=$(grep least $file | cut -d: -f2)
+            failed_reads=$(grep failed $file | cut -d: -f2)
             suppressed_reads=$(grep suppressed $file | cut -d: -f2)
-            echo $file $all_reads $unique_reads $suppressed_reads>> bowtie_report
+            echo $file $all_reads $unique_reads $failed_reads $suppressed_reads>> bowtie_report
         done
 
 ''' >> testcode
