@@ -32,6 +32,8 @@ while read line
 
 /woldlab/castor/home/phe/programs/eRangeCode.sh testFolderPath $2 $3"mer"
 
+/woldlab/castor/home/phe/programs/HOMERCode.sh testFolderPath $2 $3"mer"
+
 /woldlab/castor/home/phe/programs/bigWigCode.sh testFolderPath $2 $3"mer"
 
 
