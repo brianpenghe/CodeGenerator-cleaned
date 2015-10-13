@@ -10,7 +10,7 @@ then
     fa="/woldlab/castor/proj/genome/bowtie-indexes/mm9.fa"
     bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/mm9"
     chromsizes="/woldlab/castor/home/georgi/genomes/mm9/mm9.chrom.sizes"
-if [ "$2" == "mm10" ]
+elif [ "$2" == "mm10" ]
 then
 fa="/woldlab/castor/proj/genome/bowtie-indexes/mm10.fa"
 bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/mm10"
