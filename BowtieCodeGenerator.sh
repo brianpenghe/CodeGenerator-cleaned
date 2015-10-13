@@ -10,6 +10,11 @@ then
     fa="/woldlab/castor/proj/genome/bowtie-indexes/mm9.fa"
     bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/mm9"
     chromsizes="/woldlab/castor/home/georgi/genomes/mm9/mm9.chrom.sizes"
+if [ "$2" == "mm10" ]
+then
+fa="/woldlab/castor/proj/genome/bowtie-indexes/mm10.fa"
+bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/mm10"
+chromsizes="/woldlab/castor/home/georgi/genomes/mm10/mm10.chrom.sizes"
 elif [ "$2" == "hg19male" ]
 then
     fa="/woldlab/castor/proj/genome/bowtie-indexes/ENCFF001RGR+spikes.fa"
