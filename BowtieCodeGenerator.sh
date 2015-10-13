@@ -5,29 +5,7 @@
 
 #usage: ./bowtieCodeGenerator.sh testFolderPath mm9 30mer
 CurrentLo=$(pwd)
-if [ "$2" == "mm9" ]
-then
-    fa="/woldlab/castor/proj/genome/bowtie-indexes/mm9.fa"
-    bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/mm9"
-    chromsizes="/woldlab/castor/home/georgi/genomes/mm9/mm9.chrom.sizes"
-elif [ "$2" == "mm10" ]
-then
-fa="/woldlab/castor/proj/genome/bowtie-indexes/mm10.fa"
-bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/mm10"
-chromsizes="/woldlab/castor/home/georgi/genomes/mm10/mm10.chrom.sizes"
-elif [ "$2" == "hg19male" ]
-then
-    fa="/woldlab/castor/proj/genome/bowtie-indexes/ENCFF001RGR+spikes.fa"
-    bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/ENCFF001RGR+spikes"
-    chromsizes="/woldlab/castor/home/georgi/genomes/hg19/hg19-male-single-cell-NIST-fixed-spikes.chrom.sizes"
-elif [ "$2" == "hg19female" ]
-then
-    fa="/woldlab/castor/proj/genome/bowtie-indexes/ENCFF001RGS+spikes.fa"
-    bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/ENCFF001RGS+spikes"
-    chromsizes="/woldlab/castor/home/georgi/genomes/hg19/hg19-female-single-cell-NIST-fixed-spikes.chrom.sizes"
-fi
-
-
+source ~/programs/GenomeDefinitions.sh $2
 
 
 
