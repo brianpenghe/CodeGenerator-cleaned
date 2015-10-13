@@ -20,8 +20,8 @@ while read line
         printf "condor_run \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index "$line"."$2"."$3".unique.nochrM.bam \" && " >> testcode
         printf "condor_run \"python /woldlab/castor/home/georgi/code/SAMstats.py "$line"."$2"."$3".unique.nochrM.bam "$line"."$2"."$3".unique.nochrM.SAMstats -bam "$chromsizes" /woldlab/castor/proj/programs/samtools-0.1.8/samtools \" && " >> testcode
         printf "condor_run \" /woldlab/castor/proj/programs/homer-4.7/bin/makeTagDirectory "$line"."$2"."$3"HomerTags "$line"."$2"."$3".unique.nochrM.bam \" && " >> testcode
-        printf "condor_run \"/woldlab/castor/proj/programs/homer-4.7/bin/findPeaks "$line"."$2"."$3"HomerTags -localSize 50000 -minDist 50 -size 150 -F 4 -fdr 0.01 -o "$line"."$2"."$3"lS50000mD50s150F4fdr0.01 2> "$line"."$2"."$3"lS50000mD50s150F4fdr0.01.err \" && " >> testcode
-        printf "grep 000 "$line"."$2"."$3"lS50000mD50s150F4fdr0.01 | grep chr - | grep -v = | awk '{print \$2\"\\\t\"\$3\"\\\t\"\$4\"\\\t\"\$1\"\\\t225\\\t\"\$5}' - | sort -k 1d,1 -k 2n,2 > "$line"."$2"."$3"lS50000mD50s150F4fdr0.01.bed & " >> testcode
+        printf "condor_run \"/woldlab/castor/proj/programs/homer-4.7/bin/findPeaks "$line"."$2"."$3"HomerTags -localSize 50000 -minDist 50 -size 150 -fragLength 0 -o "$line"."$2"."$3"lS50000mD50s150fL0 2> "$line"."$2"."$3"lS50000mD50s150fL0.err \" && " >> testcode
+        printf "grep 000 "$line"."$2"."$3"lS50000mD50s150fL0 | grep chr - | grep -v = | awk '{print \$2\"\\\t\"\$3\"\\\t\"\$4\"\\\t\"\$1\"\\\t225\\\t\"\$5}' - | sort -k 1d,1 -k 2n,2 > "$line"."$2"."$3"lS50000mD50s150fL0.bed & " >> testcode
     done <$1
 
 
