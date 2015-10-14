@@ -7,12 +7,13 @@ echo "wget codes:" >> testcode
 echo "****************" >> testcode
 while read line
     do
-        k = 1
-        while [$(cut $line -d' ' -f$k | cut -c1-4) == http ]
+        declare -i k
+        k=1
+        while [[ $(echo $line | cut -d' ' -f$k | cut -c1-4) == "http" ]]
             do
                 Download=$(echo $line | cut -d' ' -f1 | sed "s/https:/http:/g")
                 echo 'wget -r --no-parent --no-check-certificate '$Download' ' >> testcode
-                k = k + 1
+                k=$k+1
             done
     done <$1
 
