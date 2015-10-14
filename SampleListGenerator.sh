@@ -1,6 +1,6 @@
 #!/bin/bash
 #SampleListGenerator.sh input output
-echo '' > $2
+printf '' > $2
 while read line
     do
         if [$(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/library/$line/ -q -O - | grep 'libns:flowcell" resource="' | wc -l) != 0 ]
@@ -10,7 +10,9 @@ while read line
                     do
                         folder=$(grep $Flow index.html | grep -v $Flow"_temp" | cut -d"\"" -f8)
                         if [$(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox/$folder"Unaligned/" -q -O - | grep $line | wc -l) == 0 ]
-                            then continue
+                            then
+                                printf $line" no "$Flow" data found\n"
+                                continue
                         else
                             project=$(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox/$folder"Unaligned/" -q -O - | grep $line | cut -d"\"" -f8)
                             printf https://jumpgate.caltech.edu/runfolders/volvox/$folder"Unaligned/"$project"Sample_"$line"/ " >> $2
