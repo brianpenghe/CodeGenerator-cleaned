@@ -4,11 +4,13 @@
 #delete the testFolderPath file
 #it generates three files: bowtieXXXXXX testcode & testFolderPath
 #usage: ~/programs/GECCodeGeneratorATAC.sh test mm9 36
+#test file is just a list of library ID(number)s. In other words, this script enables combining multiple flowcells.
 
 echo '' > testcode
 CurrentLo=$(pwd)
+/woldlab/castor/home/phe/programs/SampleListGenerator.sh $1 testSampleList
 source /woldlab/castor/home/phe/programs/GenomeDefinitions.sh $2
-/woldlab/castor/home/phe/programs/DownloadFolder.sh $1
+/woldlab/castor/home/phe/programs/DownloadFolder.sh testSampleList
 
 echo '' >> testcode
 echo "******take a break***********" >> testcode
@@ -16,17 +18,31 @@ echo "refolder,unzip and FastQC codes:" >> testcode
 echo "********(checkout bowtie condor file)*********" >> testcode
 while read line
     do
-        Folders=$(echo $line | cut -d' ' -f1 | sed "s/https:\///g" | rev | cut -d '/' -f3- | rev)
+        declare -i k
+        k=1
+        declare -a Folder
         SampleID=$(echo $line | cut -d' ' -f1 | rev | cut -d '/' -f2 | rev)
-        SampleMeta=$(echo $line | cut -d' ' -f2- | sed "s/\//_/g" | sed "s/ /_/g")
-        OldDataPath=$(echo $CurrentLo$Folders"/"$SampleID)
+        while [[ $(echo $line | cut -d' ' -f$k | cut -c1-4) == "http" ]]
+            do
+                Folder[$k]=$(echo $line | cut -d' ' -f$k | sed "s/https:\///g" | rev | cut -d '/' -f3- | rev)
+                k=$k+1
+            done
+        SampleMeta=$(echo $line | cut -d' ' -f$k- | sed "s/\//_/g" | sed "s/ /_/g")
         path=$(echo $CurrentLo"/"$SampleID$SampleMeta)
-        printf "mv "$OldDataPath" "$path" && " >> testcode
         printf $path"\n" >> testFolderPath
+        printf "mkdir "$path" && " >> testcode
+        k=1
+        while [[ $(echo $line | cut -d' ' -f$k | cut -c1-4) == "http" ]]
+            do
+                OldDataPath=$(echo $CurrentLo${Folder[$k]}"/"$SampleID)
+                printf "gunzip -c "$OldDataPath"/*.fastq.gz | python /woldlab/castor/home/georgi/code/trimfastq.py - "$3" -stdout > "$path$k" && " >> testcode
+                k=$k+1
+            done
         printf "mkdir "$path"FastQCk6 && " >> testcode
-        printf "gunzip -c "$path"/*.fastq.gz | python /woldlab/castor/home/georgi/code/trimfastq.py - "$3" -stdout > "$path"allfastq && " >> testcode
+        printf "cat "$path"/*.fastq > "$path"allfastq && " >> testcode
+        printf "rm "$path"/*.fastq && " >> testcode
         printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"allfastq -o "$path"FastQCk6 -k 6 & \n" >> testcode
-    done <$1
+    done <testSampleList
 
 /woldlab/castor/home/phe/programs/BowtieCodeGenerator.sh testFolderPath $2 $3"mer"
 
