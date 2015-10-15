@@ -35,12 +35,12 @@ while read line
         while [[ $(echo $line | cut -d' ' -f$k | cut -c1-4) == "http" ]]
             do
                 OldDataPath=$(echo $CurrentLo${Folder[$k]}"/"$SampleID)
-                printf "gunzip -c "$OldDataPath"/*.fastq.gz | python /woldlab/castor/home/georgi/code/trimfastq.py - "$3" -stdout > "$path$k" && " >> testcode
+                printf "gunzip -c "$OldDataPath"/*.fastq.gz | python /woldlab/castor/home/georgi/code/trimfastq.py - "$3" -stdout > "$path$k".fastq && " >> testcode
                 k=$k+1
             done
         printf "mkdir "$path"FastQCk6 && " >> testcode
-        printf "cat "$path"/*.fastq > "$path"allfastq && " >> testcode
-        printf "rm "$path"/*.fastq && " >> testcode
+        printf "cat "$path"*.fastq > "$path"allfastq && " >> testcode
+        printf "rm "$path"*.fastq && " >> testcode
         printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"allfastq -o "$path"FastQCk6 -k 6 & \n" >> testcode
     done <testSampleList
 
