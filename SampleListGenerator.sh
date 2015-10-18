@@ -26,3 +26,4 @@ while read line
             printf " no Flowcells found\n"
         fi
     done <$1
+rm Flowcell
