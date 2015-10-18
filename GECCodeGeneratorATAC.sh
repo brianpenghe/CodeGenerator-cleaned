@@ -1,10 +1,9 @@
 #!/bin/bash
 #Run these codes in the current SERVER directory
-#the file $test has two columns, link and name, only one space allowed
-#delete the testFolderPath file
-#it generates three files: bowtieXXXXXX testcode & testFolderPath
+#it generates three testfiles: testcode, testFolderPath and testSampleList
 #usage: ~/programs/GECCodeGeneratorATAC.sh test mm9 36
-#test file is just a list of library ID(number)s. In other words, this script enables combining multiple flowcells.
+#test file is just a list of library ID(number)s.
+#this script enables combining multiple flowcells.
 
 echo '' > testcode
 CurrentLo=$(pwd)
