@@ -10,16 +10,25 @@ while read line
                 wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/library/$line/ -q -O - | grep 'libns:flowcell" resource="' | cut -d/ -f3 > Flowcell
                 while read Flow
                     do
+                        printf $Flow
+                        declare -i FlowN=0
                         folder=$(grep $Flow index.html | grep -v $Flow"_temp" | cut -d"\"" -f8)
-                        if [ $(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox/$folder"Unaligned/" -q -O - | grep $line | wc -l) == 0 ]
+                        for label in "Unaligned/" "Unaligned.dualIndex/" "Unaligned.singleIndex/"
+                            do
+                                if [ $(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox/$folder$label -q -O - | grep $line | wc -l) != 0 ]
+                                    then
+                                        project=$(echo $Flowcount | cut -d"\"" -f8)
+                                        printf https://jumpgate.caltech.edu/runfolders/volvox/$folder$label$project"Sample_"$line"/ " >> $2
+                                        printf " got in "$label
+                                        FlowN=$FlowN+1
+                                fi
+                            done
+                        if [ $FlowN == 0 ]
                             then
-                                printf " no "$Flow" data found\n"
-                                continue
-                        else
-                            project=$(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox/$folder"Unaligned/" -q -O - | grep $line | cut -d"\"" -f8)
-                            printf https://jumpgate.caltech.edu/runfolders/volvox/$folder"Unaligned/"$project"Sample_"$line"/ " >> $2
-                            printf " got "$Flow"\n"
+                                printf " Not found"
                         fi
+                        printf "\n"
+
                     done<Flowcell
                 wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/library/$line/ -q -O - | grep libns:name | cut -d"<" -f2 | cut -d">" -f2 >> $2
         else
