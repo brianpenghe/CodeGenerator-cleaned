@@ -17,7 +17,7 @@ while read line
                             do
                                 if [ $(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox/$folder$label -q -O - | grep $line | wc -l) != 0 ]
                                     then
-                                        project=$(echo $Flowcount | cut -d"\"" -f8)
+                                        project=$(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox/$folder$label -q -O - | grep $line | cut -d"\"" -f8)
                                         printf https://jumpgate.caltech.edu/runfolders/volvox/$folder$label$project"Sample_"$line"/ " >> $2
                                         printf " got in "$label
                                         FlowN=$FlowN+1
