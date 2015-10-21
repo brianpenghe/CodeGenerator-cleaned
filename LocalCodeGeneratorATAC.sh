@@ -1,6 +1,7 @@
 #!/bin/bash
 #Run these codes in the current SERVER directory
-#the file $test has two columns, link and name, only one space allowed
+#the files must be fastq files, no compressed forms allowed
+#the file $test has two columns, Full Location Path and name, only one space allowed
 #each experiment folder contains a set of fastq files belonging to the same library
 # for example: /woldlab/castor/home/phe/ChIPseq   test1
 #delete the testFolderPath file
@@ -25,12 +26,11 @@ while read line
         printf "mv "$OldDataPath" "$path" && " >> testcode
         printf $path"\n" >> testFolderPath
         printf "mkdir "$path"FastQCk6 && " >> testcode
-        printf "cat "$path"/*.fastq | python /woldlab/castor/home/georgi/code/trimfastq.py - "$3" -stdout > "$path"allfastq ; " >> testcode
-        printf "if [ -s "$path"allfastq ] ; then echo 'q' ; else ; gunzip -c "$path"/*.fastq.gz | python /woldlab/castor/home/georgi/code/trimfastq.py - "$3" -stdout > "$path"allfastq ; fi ; " >> testcode
+        printf "cat "$path"/*.fastq > "$path"allfastq && " >> testcode
         printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"allfastq -o "$path"FastQCk6 -k 6 & \n" >> testcode
     done <$1
 
-/woldlab/castor/home/phe/programs/BowtieCodeGenerator.sh testFolderPath $2 $3"mer"
+/woldlab/castor/home/phe/programs/BowtieCodeGenerator.sh testFolderPath $2 $3
 
 /woldlab/castor/home/phe/programs/HOMERCode.sh testFolderPath $2 $3"mer"
 
