@@ -19,7 +19,7 @@ printf "current_folder_name=\$(pwd|rev|cut -d '/' -f1|rev)" >> testcode
 printf '''
     for file in *.'$1'
         do
-            echo "track type=bigBed name="$file" description="$file" maxHeightPixels=60:32:8 visibility='$visibility' color=150,0,150 bigDataUrl=http://woldlab.caltech.edu/~phe/"$current_folder_name"/"$file >> tracksummary
+            echo "track type='$1' name="$file" description="$file" maxHeightPixels=60:32:8 visibility='$visibility' color=150,0,150 bigDataUrl=http://woldlab.caltech.edu/~phe/"$current_folder_name"/"$file >> tracksummary
         done
     ''' >> testcode
 
