@@ -36,7 +36,7 @@ while read line
 
 
 
-
+/woldlab/castor/home/phe/programs/TrackSummary.sh bigWig
 
 echo '' >> testcode
 echo "Mitochondria-Sex-reports codes:" >> testcode
@@ -97,19 +97,6 @@ then
         done
     ''' >> testcode
 fi
-
-printf "#for the following part: move the folder to public_html, then copy paste the following codes to run" >> testcode
-
-echo '' >> testcode
-echo "These are bigWig tracks:" >> testcode
-echo "******************" >> testcode
-printf "current_folder_name=\$(pwd|rev|cut -d '/' -f1|rev)" >> testcode
-printf '''
-for file in *.bigWig
-    do
-        echo "track type=bigWig name="$file" description="$file" maxHeightPixels=60:32:8 visibility=full color=150,0,150 bigDataUrl=http://woldlab.caltech.edu/~phe/"$current_folder_name"/"$file >> tracksummary
-    done
-''' >> testcode
 
 
 

@@ -26,19 +26,7 @@ while read line
     done <$1
 
 
-echo "" >> testcode
-printf "#for the following part: move the folder to public_html, then copy paste the following codes to run" >> testcode
-
-echo '' >> testcode
-echo "These are bigBed tracks:" >> testcode
-echo "******************" >> testcode
-printf "current_folder_name=\$(pwd|rev|cut -d '/' -f1|rev)" >> testcode
-printf '''
-    for file in *.bigBed
-        do
-        echo "track type=bigBed name="$file" description="$file" maxHeightPixels=60:32:8 visibility=pack color=150,0,150 bigDataUrl=http://woldlab.caltech.edu/~phe/"$current_folder_name"/"$file >> tracksummary
-        done
-''' >> testcode
+/woldlab/castor/home/phe/programs/TrackSummary.sh bigBed
 
 
 
