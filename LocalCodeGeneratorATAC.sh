@@ -32,12 +32,18 @@ while read line
 
 /woldlab/castor/home/phe/programs/BowtieCodeGenerator.sh testFolderPath $2 $3
 
-/woldlab/castor/home/phe/programs/HOMERCode.sh testFolderPath $2 $3"mer"
-
-
 /woldlab/castor/home/phe/programs/eRangeCode.sh testFolderPath $2 $3"mer"
+
+/woldlab/castor/home/phe/programs/HOMERCode.sh testFolderPath $2 $3"mer"
 
 /woldlab/castor/home/phe/programs/bigWigCode.sh testFolderPath $2 $3"mer"
 
 /woldlab/castor/home/phe/programs/FseqCode.sh testFolderPath $2 $3"mer"
+
+/woldlab/castor/home/phe/programs/TrackSummary.sh bigWig
+
+/woldlab/castor/home/phe/programs/TrackSummary.sh bigBed
+
+/woldlab/castor/home/phe/programs/Stats.sh testFolderPath $2
+
 

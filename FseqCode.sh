@@ -25,7 +25,6 @@ while read line
     done <$1
 
 
-/woldlab/castor/home/phe/programs/TrackSummary.sh bigBed
 
 
 

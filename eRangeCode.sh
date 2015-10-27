@@ -27,7 +27,6 @@ while read line
         printf "/woldlab/castor/proj/programs/x86_64/bedToBigBed "$line"."$2"."$3".unique.nochrM.5x.4RPM.bed "$chromsizes" "$line"."$2"."$3".unique.nochrM.5x.4RPM.bigBed & \n" >> testcodeeRange
     done <$1
 
-/woldlab/castor/home/phe/programs/TrackSummary.sh bigBed
 
 
 
