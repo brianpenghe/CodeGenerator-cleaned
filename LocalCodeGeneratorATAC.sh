@@ -20,7 +20,7 @@ while read line
     do
         Folders=$(echo $line | cut -d' ' -f1 | rev | cut -d '/' -f2- | rev)
         SampleID=$(echo $line | cut -d' ' -f1 | rev | cut -d '/' -f1 | rev)
-        SampleMeta=$(echo $line | cut -d' ' -f2- | sed "s/\//_/g" | sed "s/ /_/g")
+        SampleMeta=$(echo $line | cut -d' ' -f2- | sed "s/\//_/g" | sed "s/ /_/g" | sed "s/#/_/g")
         OldDataPath=$(echo $Folders"/"$SampleID)
         path=$(echo $CurrentLo"/"$SampleID$SampleMeta)
         printf "mv "$OldDataPath" "$path" && " >> testcode
