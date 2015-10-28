@@ -44,6 +44,6 @@ while read line
 
 /woldlab/castor/home/phe/programs/TrackSummary.sh bigBed
 
-/woldlab/castor/home/phe/programs/Stats.sh testFolderPath $2
+/woldlab/castor/home/phe/programs/Stats.sh testFolderPath $2 $3
 
 
