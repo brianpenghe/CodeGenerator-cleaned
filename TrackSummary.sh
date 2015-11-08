@@ -13,7 +13,7 @@ fi
 echo '' >> testcode
 echo "These are $1 tracks:" >> testcode
 echo "******************" >> testcode
-printf "current_folder_name=\$(pwd|rev|cut -d '/' -f1|rev)" >> testcode
+printf "current_folder_name=\$(pwd|cut -d '/' -f7-)" >> testcode
 
 
 printf '''
