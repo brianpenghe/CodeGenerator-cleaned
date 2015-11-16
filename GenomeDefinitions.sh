@@ -33,6 +33,13 @@ then
     chromsizes="/woldlab/castor/home/georgi/genomes/hg19/hg19-female-single-cell-NIST-fixed-spikes.chrom.sizes"
     blacklist="/woldlab/castor/home/phe/genomes/hg19/blacklist/wgEncodeDacMapabilityConsensusExcludable.bed"
     mitoblack="/woldlab/castor/home/phe/genomes/hg19/blacklist/blacklist_.hg19male.30merlS50000mD50s150fL0.bed"
+elif [ "$1" == "hg38" ]
+    fa="/woldlab/castor/proj/genome/bowtie-indexes/hg38.fa"
+    bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/hg38"
+    chromsizes="/woldlab/castor/home/phe/genomes/hg38.chrom.sizes"
+    blacklist="/woldlab/castor/home/phe/genomes/hg19/blacklist/wgEncodeDacMapabilityConsensusExcludable.bed"
+    mitoblack="/woldlab/castor/home/phe/genomes/hg19/blacklist/blacklist_.hg19male.30merlS50000mD50s150fL0.bed"
+then
 fi
 
 
