@@ -29,7 +29,7 @@ elif [ "$2" == "mm10" ]
         printf '
             echo "file total_complexity nucleus_complexity eRange3x2Peaks eRange5x4Peaks F-seqPeaks HOMERpeaks processed unique failed suppressed chr1_reads chr2_reads chr3_reads chr4_reads chr5_reads chr6_reads chr7_reads chr8_reads chr9_reads chr10_reads chr11_reads chr12_reads chr13_reads chr14_reads chr15_reads chr16_reads chr17_reads chr18_reads chr19_reads chrX_reads chrY_reads chrM_reads chrUn_reads chrUnmapped" >> stats
         ' >> testcode
-elif [ "$2" == "hg19male" ]
+elif [ "$2" == "hg19male" -o "$2" == "hg38" ]
     then
         printf '
             echo "file total_complexity nucleus_complexity eRange3x2Peaks eRange5x4Peaks F-seqPeaks HOMERpeaks processed unique failed suppressed chr1_reads chr2_reads chr3_reads chr4_reads chr5_reads chr6_reads chr7_reads chr8_reads chr9_reads chr10_reads chr11_reads chr12_reads chr13_reads chr14_reads chr15_reads chr16_reads chr17_reads chr18_reads chr19_reads chr20_reads chr21_reads chr22_reads chrX_reads chrY_reads chrM_reads chrUnmapped" >> stats
@@ -75,7 +75,7 @@ elif [ "$2" == "mm10" ]
         printf '
             echo $chr1_reads $chr2_reads $chr3_reads $chr4_reads $chr5_reads $chr6_reads $chr7_reads $chr8_reads $chr9_reads $chr10_reads $chr11_reads $chr12_reads $chr13_reads $chr14_reads $chr15_reads $chr16_reads $chr17_reads $chr18_reads $chr19_reads $chrX_reads $chrY_reads $chrM_reads $chrUn_reads $chrUnmapped >> stats
         ' >> testcode
-elif [ "$2" == "hg19male" ]
+elif [ "$2" == "hg19male" -o "$2" == "hg38" ]
     then
         for i in {1..22} 'X' 'Y' 'M'
             do
