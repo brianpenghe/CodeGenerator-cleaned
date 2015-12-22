@@ -3,21 +3,37 @@
 
 #usage: ./GenomeDefinitions.sh mm9
 CurrentLo=$(pwd)
-if [ "$1" == "mm9" ]
+if [ "$1" == "mm9full" ]
 then
     fa="/woldlab/castor/proj/genome/bowtie-indexes/mm9.fa"
     bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/mm9"
     chromsizes="/woldlab/castor/home/georgi/genomes/mm9/mm9.chrom.sizes"
     blacklist="/woldlab/castor/home/phe/genomes/mm9/mm9-blacklist.bed"
     mitoblack="/woldlab/castor/home/phe/genomes/mm9/chrM30mermm9lS50000mD50s150fL0.bed"
-    
-elif [ "$1" == "mm10" ]
+
+elif [ "$1" == "mm9" ]
+then
+    fa="/woldlab/castor/home/phe/genomes/mm9/male.mm9.fa"
+    bowtieindex="/woldlab/castor/home/phe/genomes/mm9/male.mm9"
+    chromsizes="/woldlab/castor/home/phe/genomes/mm9/male.mm9.chrom.sizes"
+    blacklist="/woldlab/castor/home/phe/genomes/mm9/mm9-blacklist.bed"
+    mitoblack="/woldlab/castor/home/phe/genomes/mm9/chrM30mermm9lS50000mD50s150fL0.bed"
+
+elif [ "$1" == "mm10full" ]
 then
     fa="/woldlab/castor/proj/genome/bowtie-indexes/mm10.fa"
     bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/mm10"
     chromsizes="/woldlab/castor/home/georgi/genomes/mm10/mm10.chrom.sizes"
     blacklist="/woldlab/castor/home/phe/genomes/mm10/mm10blacklist_Ricardo.bed"
     mitoblack="/woldlab/castor/home/phe/genomes/mm10/chrM30mermm10lS50000mD50s150fL0.bed"
+
+elif [ "$1" == "mm10" ]
+then
+fa="/woldlab/castor/home/phe/genomes/mm10/male.mm10.chrom.fa"
+bowtieindex="/woldlab/castor/home/phe/genomes/mm10/male.mm10.chrom"
+chromsizes="/woldlab/castor/home/phe/genomes/mm10/male.mm10.chrom.sizes"
+blacklist="/woldlab/castor/home/phe/genomes/mm10/mm10blacklist_Ricardo.bed"
+mitoblack="/woldlab/castor/home/phe/genomes/mm10/chrM30mermm10lS50000mD50s150fL0.bed"
 
 elif [ "$1" == "hg19male" ]
 then
