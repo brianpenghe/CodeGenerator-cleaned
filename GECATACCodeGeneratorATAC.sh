@@ -29,7 +29,6 @@ while read line
         SampleMeta=$(echo $line | cut -d' ' -f$k- | sed -r "s/[/\ #;&~]/_/g" )
         path=$(echo $CurrentLo"/"$SampleID$SampleMeta)
         printf $path"\n" >> testFolderPath
-        printf "mkdir "$path" && " >> testcode
         k=1
         while [[ $(echo $line | cut -d' ' -f$k | cut -c1-4) == "http" ]]
             do
