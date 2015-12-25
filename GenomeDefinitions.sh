@@ -49,13 +49,20 @@ then
     chromsizes="/woldlab/castor/home/georgi/genomes/hg19/hg19-female-single-cell-NIST-fixed-spikes.chrom.sizes"
     blacklist="/woldlab/castor/home/phe/genomes/hg19/blacklist/wgEncodeDacMapabilityConsensusExcludable.bed"
     mitoblack="/woldlab/castor/home/phe/genomes/hg19/blacklist/blacklist_.hg19male.30merlS50000mD50s150fL0.bed"
-elif [ "$1" == "hg38" ]
+elif [ "$1" == "hg38full" ]
 then
     fa="/woldlab/castor/proj/genome/bowtie-indexes/hg38.fa"
     bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/hg38"
     chromsizes="/woldlab/castor/home/phe/genomes/hg38/hg38.chrom.sizes"
     blacklist="/woldlab/castor/home/phe/genomes/hg38/hg19blacklist_liftedovertohg38.bed"
     mitoblack="/woldlab/castor/home/phe/genomes/hg38/chrM30merschrM30mers.hg38.30merlS50000mD50s150fL0.bed"
+elif [ "$1" == "hg38" ]
+then
+fa="/woldlab/castor/home/phe/genomes/hg38/hg38male.fa"
+bowtieindex="/woldlab/castor/home/phe/genomes/hg38/hg38male"
+chromsizes="/woldlab/castor/home/phe/genomes/hg38/hg38male.chrom.sizes"
+blacklist="/woldlab/castor/home/phe/genomes/hg38/hg19blacklist_liftedovertohg38.bed"
+mitoblack="/woldlab/castor/home/phe/genomes/hg38/chrM30merschrM30mers.hg38.30merlS50000mD50s150fL0.bed"
 fi
 
 
