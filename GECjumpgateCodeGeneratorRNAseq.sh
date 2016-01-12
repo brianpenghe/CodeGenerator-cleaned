@@ -44,7 +44,7 @@ done <testSampleList
 
 /woldlab/castor/home/phe/programs/TophatCodeGenerator.sh testFolderPath $2 $3
 
-/woldlab/castor/home/phe/programs/eRangeCode.sh testFolderPath $2 $3"mer"
+/woldlab/castor/home/phe/programs/RNAseQC.sh testFolderPath $2 $3"mer"
 
 /woldlab/castor/home/phe/programs/HOMERCode.sh testFolderPath $2 $3"mer"
 
