@@ -96,5 +96,10 @@ printf '
     done <'$1'
 ' >> testcode
 
-
+printf '
+    python /woldlab/castor/home/georgi/code/combineIntoTable.py CufflinksgeneFPKMs CufflinksgeneFPKMs.table
+    python /woldlab/castor/home/georgi/code/combineIntoTable.py CufflinksgeneConflows CufflinksgeneConflows.table
+    python /woldlab/castor/home/georgi/code/combineIntoTable.py CufflinksisoformFPKMs CufflinksisoformFPKMs.table
+    python /woldlab/castor/home/georgi/code/combineIntoTable.py CufflinksisoformConflows CufflinksisoformConflows.table
+' >> testcode
 
