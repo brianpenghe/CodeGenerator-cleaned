@@ -48,7 +48,7 @@ done <testSampleList
 
 /woldlab/castor/home/phe/programs/TophatbigWigCode.sh testFolderPath $2 $3"mer"
 
-/woldlab/castor/home/phe/programs/FseqCode.sh testFolderPath $2 $3"mer"
+/woldlab/castor/home/phe/programs/CufflinksCode.sh testFolderPath $2 $3"mer"
 
 /woldlab/castor/home/phe/programs/TrackSummary.sh bigWig
 
