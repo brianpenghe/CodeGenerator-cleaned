@@ -35,7 +35,7 @@ request_disk = 0
 
 Requirements = (Machine == "pongo.cacr.caltech.edu" || Machine == "myogenin.cacr.caltech.edu" || Machine == "mondom.cacr.caltech.edu" || Machine == "trog.caltech.edu" || Machine == "wold-clst-3.woldlab" || Machine == "wold-clst-4.woldlab" || Machine == "myostatin.cacr.caltech.edu")
 
-''' >> tophat$tophatdate".condor"
+''' >> tophat$tophatdate.condor
 
 
 while read path
