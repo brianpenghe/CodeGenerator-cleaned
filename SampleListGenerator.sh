@@ -24,8 +24,8 @@ while read line
                                             then
                                                 project=$(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox/$SubFlow$label -q -O - | grep $line | cut -d"\"" -f8)
                                                 printf https://jumpgate.caltech.edu/runfolders/volvox/$SubFlow$label$project"Sample_"$line"/ " >> $2
-                                                printf " got in "$label
-                                                printf " got in "$label >> SampleListGenerator.log
+                                                printf " got in "$SubFlow$label
+                                                printf " got in "$SubFlow$label >> SampleListGenerator.log
                                                 FlowN=$FlowN+1
                                         fi
                                     done<SubFlowcell
@@ -45,4 +45,4 @@ while read line
             printf " no Flowcells found\n" >> SampleListGenerator.log
         fi
     done <$1
-rm Flowcell
+rm Flowcell SubFlowcell
