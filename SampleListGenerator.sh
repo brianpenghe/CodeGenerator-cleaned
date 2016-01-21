@@ -15,22 +15,25 @@ while read line
                         printf $Flow
                         printf $Flow >> SampleListGenerator.log
                         declare -i FlowN=0
-                        folder=$(grep $Flow index.html | grep -v $Flow"_temp" | cut -d"\"" -f8)
+                        grep $Flow index.html | grep -v $Flow"_temp" | cut -d"\"" -f8 > SubFlowcell
                         for label in "Unaligned/" "Unaligned.dualIndex/" "Unaligned.singleIndex/"
                             do
-                                if [ $(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox/$folder$label -q -O - | grep $line | wc -l) != 0 ]
-                                    then
-                                        project=$(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox/$folder$label -q -O - | grep $line | cut -d"\"" -f8)
-                                        printf https://jumpgate.caltech.edu/runfolders/volvox/$folder$label$project"Sample_"$line"/ " >> $2
-                                        printf " got in "$label
-                                        printf " got in "$label >> SampleListGenerator.log
-                                        FlowN=$FlowN+1
-                                fi
+                                while read SubFlow
+                                    do
+                                        if [ $(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox/$SubFlow$label -q -O - | grep $line | wc -l) != 0 ]
+                                            then
+                                                project=$(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox/$SubFlow$label -q -O - | grep $line | cut -d"\"" -f8)
+                                                printf https://jumpgate.caltech.edu/runfolders/volvox/$SubFlow$label$project"Sample_"$line"/ " >> $2
+                                                printf " got in "$label
+                                                printf " got in "$label >> SampleListGenerator.log
+                                                FlowN=$FlowN+1
+                                        fi
+                                    done<SubFlowcell
                             done
                         if [ $FlowN == 0 ]
                             then
-                                printf " Not found"
-                                printf " Not found" >> SampleListGenerator.log
+                                printf " Not found in Volvox"
+                                printf " Not found in Volvox" >> SampleListGenerator.log
                         fi
                         printf "\n"
                         printf "\n" >> SampleListGenerator.log
