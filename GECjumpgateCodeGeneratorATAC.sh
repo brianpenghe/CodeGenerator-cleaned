@@ -10,7 +10,7 @@ CurrentLo=$(pwd)
 /woldlab/castor/home/phe/programs/SampleListGenerator.sh $1 testSampleList
 source /woldlab/castor/home/phe/programs/GenomeDefinitions.sh $2
 /woldlab/castor/home/phe/programs/DownloadFolder.sh testSampleList
-source /woldlab/castor/home/phe/programs/GECrefolder.sh
+source /woldlab/castor/home/phe/programs/GECrefolder.sh $4
 
 /woldlab/castor/home/phe/programs/BowtieCodeGenerator.sh testFolderPath $2 $3
 

@@ -1,10 +1,15 @@
 #!/bin/bash
-#SampleListGenerator.sh input output
+#GECrefolder.sh PE
 echo '' >> testcode
 echo "******take a break***********" >> testcode
 echo "refolder,unzip and FastQC codes:" >> testcode
 echo "********(checkout bowtie condor file)*********" >> testcode
-    while read line
+if [[ "$1" != "SE" && "$1" != "PE" ]]
+    then
+        printf "single end(SE) or paired end(PE)?"
+        exit 1 
+fi
+while read line
         do
             declare -i k
             k=1
@@ -22,11 +27,27 @@ echo "********(checkout bowtie condor file)*********" >> testcode
             while [[ $(echo $line | cut -d' ' -f$k | cut -c1-4) == "http" ]]
                 do
                     OldDataPath=$(echo $CurrentLo${Folder[$k]}"/"$SampleID)
-                    printf "gunzip -c "$OldDataPath"/*.fastq.gz | cat > "$path$k".fastq && " >> testcode
+                    if [[ "$1" == "PE" ]]
+                        then
+                            printf "gunzip -c "$OldDataPath"/*_R1_*.fastq.gz | cat > "$path$k".R1.fastq && " >> testcode
+                            printf "gunzip -c "$OldDataPath"/*_R2_*.fastq.gz | cat > "$path$k".R2.fastq && " >> testcode
+                    elif [[ "$1" == "SE" ]]
+                        then
+                            printf "gunzip -c "$OldDataPath"/*.fastq.gz | cat > "$path$k".fastq && " >> testcode
+                    fi
                     k=$k+1
                 done
             printf "mkdir "$path"FastQCk6 && " >> testcode
-            printf "cat "$path"*.fastq > "$path"allfastq && " >> testcode
+            if [[ "$1" == "PE" ]]
+                then
+                    printf "cat "$path"*R1.fastq > "$path"R1allfastq && " >> testcode
+                    printf "cat "$path"*R2.fastq > "$path"R2allfastq && " >> testcode
+                    printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"R1allfastq -o "$path"FastQCk6R1 -k 6 & \n" >> testcode
+                    printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"R2allfastq -o "$path"FastQCk6R2 -k 6 & \n" >> testcode
+            elif [[ "$1" == "SE" ]]
+                then
+                    printf "cat "$path"*.fastq > "$path"allfastq && " >> testcode
+                    printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"allfastq -o "$path"FastQCk6 -k 6 & \n" >> testcode
+            fi
             printf "rm "$path"*.fastq && " >> testcode
-            printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"allfastq -o "$path"FastQCk6 -k 6 & \n" >> testcode
         done <testSampleList

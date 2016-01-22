@@ -1,7 +1,7 @@
 #!/bin/bash
 #Run these codes in the current SERVER directory
 #it generates three testfiles: testcode, testFolderPath and testSampleList
-#usage: ~/programs/GECCodeGeneratorRNAseq.sh test mm9 36
+#usage: ~/programs/GECCodeGeneratorRNAseq.sh test mm9 36 PE
 #test file is just a list of library ID(number)s.
 #this script enables combining multiple flowcells.
 
@@ -10,7 +10,7 @@ CurrentLo=$(pwd)
 /woldlab/castor/home/phe/programs/SampleListGenerator.sh $1 testSampleList
 source /woldlab/castor/home/phe/programs/GenomeDefinitions.sh $2
 /woldlab/castor/home/phe/programs/DownloadFolder.sh testSampleList
-source /woldlab/castor/home/phe/programs/GECrefolder.sh
+source /woldlab/castor/home/phe/programs/GECrefolder.sh $4
 
 
 /woldlab/castor/home/phe/programs/TophatCodeGenerator.sh testFolderPath $2 $3
