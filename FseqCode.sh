@@ -14,7 +14,6 @@ echo "*****************" >> testcodeFseq
 
 while read line
     do
-        echo $line
         printf "condor_run \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view "$line"."$2"."$3".unique.bam | egrep -v chrM | /woldlab/castor/proj/programs/samtools-0.1.8/samtools view -bT "$fa" - -o "$line"."$2"."$3".unique.nochrM.bam \" && " >> testcodeFseq
         printf "condor_run \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index "$line"."$2"."$3".unique.nochrM.bam \" && " >> testcodeFseq
         printf "condor_run \" /woldlab/castor/proj/programs/BEDTools-Version-2.10.1/bin/bamToBed -i "$line"."$2"."$3".unique.nochrM.bam > "$line"."$2"."$3".unique.nochrM.bed \" && " >> testcodeFseq
