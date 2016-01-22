@@ -58,11 +58,14 @@ then
     mitoblack="/woldlab/castor/home/phe/genomes/hg38/chrM30merschrM30mers.hg38.30merlS50000mD50s150fL0.bed"
 elif [ "$1" == "hg38" ]
 then
-fa="/woldlab/castor/home/phe/genomes/hg38/hg38male.fa"
-bowtieindex="/woldlab/castor/home/phe/genomes/hg38/hg38male"
-chromsizes="/woldlab/castor/home/phe/genomes/hg38/hg38male.chrom.sizes"
-blacklist="/woldlab/castor/home/phe/genomes/hg38/hg19blacklist_liftedovertohg38.bed"
-mitoblack="/woldlab/castor/home/phe/genomes/hg38/chrM30merschrM30mers.hg38.30merlS50000mD50s150fL0.bed"
+    fa="/woldlab/castor/home/phe/genomes/hg38/hg38male.fa"
+    bowtieindex="/woldlab/castor/home/phe/genomes/hg38/hg38male"
+    chromsizes="/woldlab/castor/home/phe/genomes/hg38/hg38male.chrom.sizes"
+    blacklist="/woldlab/castor/home/phe/genomes/hg38/hg19blacklist_liftedovertohg38.bed"
+    mitoblack="/woldlab/castor/home/phe/genomes/hg38/chrM30merschrM30mers.hg38.30merlS50000mD50s150fL0.bed"
+else
+    printf "Genome Version not found"
+    exit 1
 fi
 
 
