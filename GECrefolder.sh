@@ -42,12 +42,12 @@ while read line
                 then
                     printf "cat "$path"*R1.fastq > "$path"R1allfastq && " >> testcode
                     printf "cat "$path"*R2.fastq > "$path"R2allfastq && " >> testcode
-                    printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"R1allfastq -o "$path"FastQCk6R1 -k 6 & \n" >> testcode
-                    printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"R2allfastq -o "$path"FastQCk6R2 -k 6 & \n" >> testcode
+                    printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"R1allfastq -o "$path"FastQCk6R1 -k 6 && " >> testcode
+                    printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"R2allfastq -o "$path"FastQCk6R2 -k 6 && " >> testcode
             elif [[ "$1" == "SE" ]]
                 then
                     printf "cat "$path"*.fastq > "$path"allfastq && " >> testcode
-                    printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"allfastq -o "$path"FastQCk6 -k 6 & \n" >> testcode
+                    printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"allfastq -o "$path"FastQCk6 -k 6 && " >> testcode
             fi
-            printf "rm "$path"*.fastq && " >> testcode
+            printf "rm "$path"*.fastq & \n" >> testcode
         done <testSampleList
