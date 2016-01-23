@@ -40,6 +40,12 @@ Requirements = (Machine == "pongo.cacr.caltech.edu" || Machine == "myogenin.cacr
 
 while read path
     do
-        printf "arguments=/woldlab/castor/proj/genome/programs/tophat-2.0.13.Linux_x86_64/tophat --bowtie1 -p 4 --GTF  /woldlab/castor/proj/genome/transcriptome-indexes/Mus_musculus.NCBIM37.67.filtered.gtf --transcriptome-index  /woldlab/castor/proj/genome/transcriptome-indexes/Mus_musculus.NCBIM37.67.filtered -o "$path"."$2"."$3"mer /woldlab/castor/home/georgi/genomes/mm9/bowtie-indexes/mm9-single-cell-NIST-fixed-spikes "$path"allfastq \nqueue\n" >> tophat$tophatdate".condor"
+        if [[ "$1" == "PE" ]]
+            then
+                printf "arguments=/woldlab/castor/proj/genome/programs/tophat-2.0.13.Linux_x86_64/tophat --bowtie1 -p 4 --GTF  /woldlab/castor/proj/genome/transcriptome-indexes/Mus_musculus.NCBIM37.67.filtered.gtf --transcriptome-index  /woldlab/castor/proj/genome/transcriptome-indexes/Mus_musculus.NCBIM37.67.filtered -o "$path"."$2"."$3"mer /woldlab/castor/home/georgi/genomes/mm9/bowtie-indexes/mm9-single-cell-NIST-fixed-spikes "$path"R1allfastq "$path"R2allfastq \nqueue\n" >> tophat$tophatdate".condor"
+        elif [[ "$1" == "SE" ]]
+            then
+                printf "arguments=/woldlab/castor/proj/genome/programs/tophat-2.0.13.Linux_x86_64/tophat --bowtie1 -p 4 --GTF  /woldlab/castor/proj/genome/transcriptome-indexes/Mus_musculus.NCBIM37.67.filtered.gtf --transcriptome-index  /woldlab/castor/proj/genome/transcriptome-indexes/Mus_musculus.NCBIM37.67.filtered -o "$path"."$2"."$3"mer /woldlab/castor/home/georgi/genomes/mm9/bowtie-indexes/mm9-single-cell-NIST-fixed-spikes "$path"allfastq \nqueue\n" >> tophat$tophatdate".condor"
+        fi
     done <$1
 
