@@ -3,6 +3,11 @@ echo '' >> testcode
 echo "******take a break***********" >> testcode
 echo "refolder,unzip and FastQC codes:" >> testcode
 echo "********(checkout bowtie condor file)*********" >> testcode
+if [[ "$1" != "SE" && "$1" != "PE" ]]
+    then
+        printf "single end(SE) or paired end(PE)?"
+        exit 1 
+fi
 while read line
     do
         Folders=$(echo $line | cut -d' ' -f1 | rev | cut -d '/' -f2- | rev)
@@ -12,7 +17,18 @@ while read line
         path=$(echo $CurrentLo"/"$SampleID$SampleMeta)
         printf "mv "$OldDataPath" "$path" && " >> testcode
         printf $path"\n" >> testFolderPath
-        printf "mkdir "$path"FastQCk6 && " >> testcode
-        printf "cat "$path"/*.fastq > "$path"allfastq && " >> testcode
-        printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"allfastq -o "$path"FastQCk6 -k 6 & \n" >> testcode
+        if [[ "$1" == "PE" ]]
+            then
+                printf "mkdir "$path"FastQCk6R1 && " >> testcode
+                printf "mkdir "$path"FastQCk6R2 && " >> testcode
+                printf "cat "$path"/*_R1_*.fastq > "$path"R1allfastq && " >> testcode
+                printf "cat "$path"/*_R2_*.fastq > "$path"R2allfastq && " >> testcode
+                printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"R1allfastq -o "$path"FastQCk6R1 -k 6 && \n" >> testcode
+                printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"R2allfastq -o "$path"FastQCk6R2 -k 6 & \n" >> testcode
+        elif [[ "$1" == "SE" ]]
+            then
+                printf "mkdir "$path"FastQCk6 && " >> testcode
+                printf "cat "$path"/*.fastq > "$path"allfastq && " >> testcode
+                printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"allfastq -o "$path"FastQCk6 -k 6 & \n" >> testcode    
+        fi
     done <$1
