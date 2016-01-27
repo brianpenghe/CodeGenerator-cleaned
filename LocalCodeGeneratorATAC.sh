@@ -8,6 +8,7 @@
 #it generates three files: bowtieXXXXXX testcode & testFolderPath
 #usage: ~/programs/GECCodeGeneratorATAC.sh test mm9 36
 
+/woldlab/castor/home/phe/programs/Cleanup.sh ATAC
 echo '' > testcode
 CurrentLo=$(pwd)
 source /woldlab/castor/home/phe/programs/GenomeDefinitions.sh $2

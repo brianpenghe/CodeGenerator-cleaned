@@ -5,6 +5,7 @@
 #test file is just a list of library ID(number)s.
 #this script enables combining multiple flowcells.
 
+/woldlab/castor/home/phe/programs/Cleanup.sh RNAseq
 echo '' > testcode
 CurrentLo=$(pwd)
 /woldlab/castor/home/phe/programs/SampleListGenerator.sh $1 testSampleList
