@@ -22,17 +22,17 @@ echo "*****************" >> testcode
 if [ "$2" == "mm9" ]
     then
         printf '
-            echo "file total_complexity nucleus_complexity eRange3x2Peaks eRange5x4Peaks F-seqPeaks HOMERpeaks processed unique failed suppressed chr1_reads chr2_reads chr3_reads chr4_reads chr5_reads chr6_reads chr7_reads chr8_reads chr9_reads chr10_reads chr11_reads chr12_reads chr13_reads chr14_reads chr15_reads chr16_reads chr17_reads chr18_reads chr19_reads chrX_reads chrY_reads chrM_reads " >> stats
+            echo "file total_complexity nucleus_complexity eRange3x2Peaks eRange5x4Peaks F-seqPeaksAll F-seqPeaks F-seqFRiP HOMERpeaksAll HOMERpeaks HOMERFRiP processed unique failed suppressed chr1_reads chr2_reads chr3_reads chr4_reads chr5_reads chr6_reads chr7_reads chr8_reads chr9_reads chr10_reads chr11_reads chr12_reads chr13_reads chr14_reads chr15_reads chr16_reads chr17_reads chr18_reads chr19_reads chrX_reads chrY_reads chrM_reads " >> stats
         ' >> testcode
 elif [ "$2" == "mm10" ]
     then
         printf '
-            echo "file total_complexity nucleus_complexity eRange3x2Peaks eRange5x4Peaks F-seqPeaks HOMERpeaks processed unique failed suppressed chr1_reads chr2_reads chr3_reads chr4_reads chr5_reads chr6_reads chr7_reads chr8_reads chr9_reads chr10_reads chr11_reads chr12_reads chr13_reads chr14_reads chr15_reads chr16_reads chr17_reads chr18_reads chr19_reads chrX_reads chrY_reads chrM_reads " >> stats
+            echo "file total_complexity nucleus_complexity eRange3x2Peaks eRange5x4Peaks F-seqPeaksAll F-seqPeaks F-seqFRiP HOMERpeaksAll HOMERpeaks HOMERFRiP processed unique failed suppressed chr1_reads chr2_reads chr3_reads chr4_reads chr5_reads chr6_reads chr7_reads chr8_reads chr9_reads chr10_reads chr11_reads chr12_reads chr13_reads chr14_reads chr15_reads chr16_reads chr17_reads chr18_reads chr19_reads chrX_reads chrY_reads chrM_reads " >> stats
         ' >> testcode
 elif [ "$2" == "hg19male" -o "$2" == "hg38" ]
     then
         printf '
-            echo "file total_complexity nucleus_complexity eRange3x2Peaks eRange5x4Peaks F-seqPeaks HOMERpeaks processed unique failed suppressed chr1_reads chr2_reads chr3_reads chr4_reads chr5_reads chr6_reads chr7_reads chr8_reads chr9_reads chr10_reads chr11_reads chr12_reads chr13_reads chr14_reads chr15_reads chr16_reads chr17_reads chr18_reads chr19_reads chr20_reads chr21_reads chr22_reads chrX_reads chrY_reads chrM_reads " >> stats
+            echo "file total_complexity nucleus_complexity eRange3x2Peaks eRange5x4Peaks F-seqPeaksAll F-seqPeaks F-seqFRiP HOMERpeaksAll HOMERpeaks HOMERFRiP processed unique failed suppressed chr1_reads chr2_reads chr3_reads chr4_reads chr5_reads chr6_reads chr7_reads chr8_reads chr9_reads chr10_reads chr11_reads chr12_reads chr13_reads chr14_reads chr15_reads chr16_reads chr17_reads chr18_reads chr19_reads chr20_reads chr21_reads chr22_reads chrX_reads chrY_reads chrM_reads " >> stats
         ' >> testcode
 elif [ "$2" == "hg19female" ]
     then
@@ -56,6 +56,7 @@ while read line
         $(if [ -e $line.'$2'.'$3'mer.unique.nochrM.5x.4RPM.bed ]; then wc -l $line.'$2'.'$3'mer.unique.nochrM.5x.4RPM.bed | cut -d" " -f1; else echo 0; fi) \
         $(if [ -e $line.'$2'.'$3'mer.unique.nochrM.Fseq.v.f0.whole.bed ]; then wc -l $line.'$2'.'$3'mer.unique.nochrM.Fseq.v.f0.whole.bed | cut -d" " -f1; else echo 0; fi) \
         $(if [ -e $line.'$2'.'$3'mer.unique.nochrM.Fseq.v.f0.bed ]; then wc -l $line.'$2'.'$3'mer.unique.nochrM.Fseq.v.f0.bed | cut -d" " -f1; else echo 0; fi) \
+        $(if [ -e $line.'$2'.'$3'mer.unique.nochrM.Fseq.v.f0.bed ]; then a=$( intersectBed -abam $line.'$2'.'$3'mer.unique.nochrM.bam -b $line.'$2'.'$3'mer.unique.nochrM.Fseq.v.f0.bed | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c - ); b=$( intersectBed -v -abam $line.'$2'.'$3'mer.unique.nochrM.bam $bam -b $line.'$2'.'$3'mer.unique.nochrM.Fseq.v.f0.whole.bed | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -F 4 -c - ); echo "($a/($a+$b))" | bc -l; else echo 0; fi) \
         $(if [ -e $line.'$2'.'$3'merlS50000mD50s150fL0.whole.bed ]; then wc -l $line.'$2'.'$3'merlS50000mD50s150fL0.whole.bed | cut -d" " -f1; else echo 0; fi) \        
         $(if [ -e $line.'$2'.'$3'merlS50000mD50s150fL0.bed ]; then wc -l $line.'$2'.'$3'merlS50000mD50s150fL0.bed | cut -d" " -f1; else echo 0; fi) \
         $(cat shell.$k.err | grep processed - | cut -d: -f2) \
