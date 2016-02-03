@@ -15,7 +15,7 @@ echo "*****************" >> testcode
 
 while read line
     do
-        printf "Rscript /woldlab/castor/home/georgi/code/spp/spp_package/run_spp.R -c="$line"."$2"."$3".unique.bam -p=4 -savp -rf -s=-0:2:400 -out="$line"."$2"."$3".unique.QC & " >> testcode
+        printf "Rscript /woldlab/castor/home/georgi/code/spp/spp_package/run_spp.R -c="$line"."$2"."$3".unique.bam -p=4 -savp -rf -s=-0:2:400 -out="$line"."$2"."$3".unique.QC & \n" >> testcode
     done <$1
 
 
