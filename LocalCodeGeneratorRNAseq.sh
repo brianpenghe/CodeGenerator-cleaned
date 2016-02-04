@@ -13,7 +13,7 @@ echo '' > testcode
 CurrentLo=$(pwd)
 source /woldlab/castor/home/phe/programs/GenomeDefinitions.sh $2
 
-source /woldlab/castor/home/phe/programs/Localrefolder.sh
+source /woldlab/castor/home/phe/programs/Localrefolder.sh $4 $2 $3
 
 /woldlab/castor/home/phe/programs/TophatCodeGenerator.sh testFolderPath $2 $3 $4
 
