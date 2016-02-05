@@ -63,6 +63,11 @@ then
     chromsizes="/woldlab/castor/home/phe/genomes/hg38/hg38male.chrom.sizes"
     blacklist="/woldlab/castor/home/phe/genomes/hg38/hg19blacklist_liftedovertohg38.bed"
     mitoblack="/woldlab/castor/home/phe/genomes/hg38/chrM30merschrM30mers.hg38.30merlS50000mD50s150fL0.bed"
+elif [ "$1" == "strPur2" ]
+then
+    fa="/woldlab/castor/proj/genome/bowtie-indexes/strPur2.fa"
+    bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/strPur2"
+    chromsizes="/woldlab/castor/proj/genome/bowtie-indexes/strPur2.chrom.sizes"
 else
     printf "Genome Version not found"
     exit 1

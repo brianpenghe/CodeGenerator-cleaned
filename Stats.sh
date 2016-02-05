@@ -39,6 +39,9 @@ elif [ "$2" == "hg19female" ]
         printf '
             echo "file total_complexity nucleus_complexity eRange3x2Peaks eRange5x4Peaks F-seqPeaksAll F-seqPeaks F-seqFRiP HOMERpeaksAll HOMERpeaks HOMERFRiP processed unique failed suppressed chr1_reads chr2_reads chr3_reads chr4_reads chr5_reads chr6_reads chr7_reads chr8_reads chr9_reads chr10_reads chr11_reads chr12_reads chr13_reads chr14_reads chr15_reads chr16_reads chr17_reads chr18_reads chr19_reads chr20_reads chr21_reads chr22_reads chrX_reads chrM_reads " >> stats
         ' >> testcode
+elif [ "$2" == "strPur2" ]
+    then
+        printf "skip stats.sh"
 else exit "error in genome version"
 fi
 
@@ -101,6 +104,9 @@ elif [ "$2" == "hg19female" ]
         printf '
             echo $chr1_reads $chr2_reads $chr3_reads $chr4_reads $chr5_reads $chr6_reads $chr7_reads $chr8_reads $chr9_reads $chr10_reads $chr11_reads $chr12_reads $chr13_reads $chr14_reads $chr15_reads $chr16_reads $chr17_reads $chr18_reads $chr19_reads $chr20_reads $chr21_reads $chr22_reads $chrX_reads $chrM_reads >> stats
         ' >> testcode
+elif [ "$2" == "strPur2" ]
+    then
+        printf "skip stats.sh"
 else exit "error in genome version"
 fi
 
