@@ -50,6 +50,18 @@ fi
 #creating the body
 printf '
 declare -i k=0
+declare -a FseqFRiP HOMERFRiP
+## this part is for fast FRiP calculation
+while read line
+    do
+        FseqFRiP[$k]=$(if [ -e $line.'$2'.'$3'mer.unique.nochrM.Fseq.v.f0.bed ]; then a=$( intersectBed -abam $line.'$2'.'$3'mer.unique.nochrM.bam -b $line.'$2'.'$3'mer.unique.nochrM.Fseq.v.f0.bed | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c - ); b=$( intersectBed -v -abam $line.'$2'.'$3'mer.unique.nochrM.bam $bam -b $line.'$2'.'$3'mer.unique.nochrM.Fseq.v.f0.whole.bed | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -F 4 -c - ); echo "($a/($a+$b))" | bc -l; else echo 0; fi) &
+        HOMERFRiP[$k]=$(if [ -e $line.'$2'.'$3'merlS50000mD50s150fL0.bed ]; then a=$( intersectBed -abam $line.'$2'.'$3'mer.unique.nochrM.bam -b $line.'$2'.'$3'merlS50000mD50s150fL0.bed | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c - ); b=$( intersectBed -v -abam $line.'$2'.'$3'mer.unique.nochrM.bam $bam -b $line.'$2'.'$3'merlS50000mD50s150fL0.whole.bed | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -F 4 -c - ); echo "($a/($a+$b))" | bc -l; else echo 0; fi) &
+        k=$k+1
+    done <'$1'
+
+declare -i k=0
+
+
 while read line
     do
         echo -n $line.'$2'.'$3' \
@@ -59,9 +71,10 @@ while read line
         $(if [ -e $line.'$2'.'$3'mer.unique.nochrM.5x.4RPM.bed ]; then wc -l $line.'$2'.'$3'mer.unique.nochrM.5x.4RPM.bed | cut -d" " -f1; else echo 0; fi) \
         $(if [ -e $line.'$2'.'$3'mer.unique.nochrM.Fseq.v.f0.whole.bed ]; then wc -l $line.'$2'.'$3'mer.unique.nochrM.Fseq.v.f0.whole.bed | cut -d" " -f1; else echo 0; fi) \
         $(if [ -e $line.'$2'.'$3'mer.unique.nochrM.Fseq.v.f0.bed ]; then wc -l $line.'$2'.'$3'mer.unique.nochrM.Fseq.v.f0.bed | cut -d" " -f1; else echo 0; fi) \
-        $(if [ -e $line.'$2'.'$3'mer.unique.nochrM.Fseq.v.f0.bed ]; then a=$( intersectBed -abam $line.'$2'.'$3'mer.unique.nochrM.bam -b $line.'$2'.'$3'mer.unique.nochrM.Fseq.v.f0.bed | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c - ); b=$( intersectBed -v -abam $line.'$2'.'$3'mer.unique.nochrM.bam $bam -b $line.'$2'.'$3'mer.unique.nochrM.Fseq.v.f0.whole.bed | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -F 4 -c - ); echo "($a/($a+$b))" | bc -l; else echo 0; fi) \
+        ${FseqFRiP[$k]} \
         $(if [ -e $line.'$2'.'$3'merlS50000mD50s150fL0.whole.bed ]; then wc -l $line.'$2'.'$3'merlS50000mD50s150fL0.whole.bed | cut -d" " -f1; else echo 0; fi) \        
         $(if [ -e $line.'$2'.'$3'merlS50000mD50s150fL0.bed ]; then wc -l $line.'$2'.'$3'merlS50000mD50s150fL0.bed | cut -d" " -f1; else echo 0; fi) \
+        ${HOMERFRiP[$k]} \
         $(cat shell.$k.err | grep processed - | cut -d: -f2) \
         $(cat shell.$k.err | grep least - | cut -d: -f2 | cut -d"(" -f1 ) \
         $(cat shell.$k.err | grep failed - | cut -d: -f2 | cut -d"(" -f1 ) \
