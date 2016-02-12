@@ -22,7 +22,11 @@ while read line
         printf "cat "$line"."$2"."$3"FseqResults/*.bed | awk '{print \$1\"\\\t\"\$2\"\\\t\"\$3\"\\\t\"\$4\"\\\t225\\\t+\"}' - | sort -k 1d,1 -k 2n,2 > "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.whole.bed && " >> testcodeFseq
         printf "grep -v chrM "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.whole.bed | intersectBed -a - -b "$mitoblack" -v | intersectBed -a - -b "$blacklist" -v > "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.bed && " >> testcodeFseq
         printf "/woldlab/castor/proj/programs/x86_64/bedToBigBed "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.bed "$chromsizes" "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.bigBed && " >> testcodeFseq
-        printf "/woldlab/castor/proj/programs/x86_64/bedToBigBed "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.whole.bed "$chromsizes" "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.whole.bigBed & \n" >> testcodeFseq
+        printf "/woldlab/castor/proj/programs/x86_64/bedToBigBed "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.whole.bed "$chromsizes" "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.whole.bigBed && " >> testcodeFseq
+        printf "echo 'RiP:' \$(intersectBed -abam $line."$2"."$3"mer.unique.bam -b $line."$2"."$3"mer.unique.nochrM.Fseq.v.f0.bed | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c - ) >> "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.stats && " >> testcodeFseq
+        printf "echo 'RiPwhole:' \$(intersectBed -abam $line."$2"."$3"mer.unique.bam -b $line."$2"."$3"mer.unique.nochrM.Fseq.v.f0.whole.bed | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c - ) >> "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.stats && " >> testcodeFseq
+        printf "echo 'RiChrM:' \$(/woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view chrM -c $line."$2"."$3"mer.unique.bam ) >> "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.stats && " >> testcodeFseq
+        printf "echo 'Rtotal:' \$(/woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c $line."$2"."$3"mer.unique.bam ) >> "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.stats & \n" >> testcodeFseq
     done <$1
 
 
