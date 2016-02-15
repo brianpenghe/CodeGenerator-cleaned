@@ -3,7 +3,24 @@
 
 #usage: ./GenomeDefinitions.sh mm9
 CurrentLo=$(pwd)
-if [ "$1" == "mm9full" ]
+if [ "$1" == "galGal4" ]
+then
+    fa="/woldlab/castor/home/phe/genomes/galGal4.fa"
+    bowtieindex="/woldlab/castor/home/phe/genomes/galGal4"
+    chromsizes="/woldlab/castor/home/phe/genomes/galGal4.chrom.sizes"
+    blacklist=""
+    mitoblack=""
+
+elif [ "$1" == "Spur4.2" ]
+then
+    fa="/woldlab/castor/home/phe/genomes/Spur4.2_scaffolds.fa"
+    bowtieindex="/woldlab/castor/home/phe/genomes/Spur4.2_scaffolds"
+    chromsizes="/woldlab/castor/home/phe/genomes/Spur4.2_scaffolds.chrom.sizes"
+    blacklist=""
+    mitoblack=""
+
+
+elif [ "$1" == "mm9full" ]
 then
     fa="/woldlab/castor/proj/genome/bowtie-indexes/mm9.fa"
     bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/mm9"
