@@ -9,7 +9,7 @@ wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpga
 while read line
     do
         ID=$(echo $line | cut -f1)
-        wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/library/?affiliations__id__exact=$ID -q -O - | grep "libns:library_id" | wc -l >> testLibs
+        wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/library/?affiliations__id__exact=$ID -q -O - | grep "libraries" | grep -v "libraries)" | cut -f1 >> testLibs
     done < testIDs
 
 
