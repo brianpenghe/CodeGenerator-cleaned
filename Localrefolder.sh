@@ -3,7 +3,7 @@ echo '' >> testcode
 echo "******take a break***********" >> testcode
 echo "refolder,unzip and FastQC codes:" >> testcode
 echo "********(checkout bowtie condor file)*********" >> testcode
-if [[ "$1" != "SE" && "$1" != "PE" ]]
+if [[ "$4" != "SE" && "$4" != "PE" ]]
     then
         printf "single end(SE) or paired end(PE)?"
         exit 1 
@@ -17,7 +17,7 @@ while read line
         path=$(echo $CurrentLo"/"$SampleID$SampleMeta)
         printf "mv "$OldDataPath" "$path" && " >> testcode
         printf $path"\n" >> testFolderPath
-        if [[ "$1" == "PE" ]]
+        if [[ "$4" == "PE" ]]
             then
                 printf "mkdir "$path"FastQCk6R1 && " >> testcode
                 printf "mkdir "$path"FastQCk6R2 && " >> testcode
@@ -27,7 +27,7 @@ while read line
                 printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"R2allfastq -o "$path"FastQCk6R2 -k 6 && " >> testcode
                 printf "python /woldlab/castor/home/georgi/code/trimfastq.py "$path"R1allfastq "$3" -stdout > "$path"R1allfastq"$3" && " >> testcode
                 printf "python /woldlab/castor/home/georgi/code/trimfastq.py "$path"R2allfastq "$3" -stdout > "$path"R2allfastq"$3" && " >> testcode
-        elif [[ "$1" == "SE" ]]
+        elif [[ "$4" == "SE" ]]
             then
                 printf "mkdir "$path"FastQCk6 && " >> testcode
                 printf "cat "$path"/*.fastq > "$path"allfastq && " >> testcode
