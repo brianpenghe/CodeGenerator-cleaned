@@ -7,10 +7,9 @@ echo '' >> testcodeFseq
 CurrentLo=$(pwd)
 source ~/programs/GenomeDefinitions.sh $2
 
-echo '' >> testcodeFseq
-echo "******take a break***********" >> testcodeFseq
-echo "make bed, Peak calling and combine to bed(with score) codes:" >> testcodeFseq
-echo "*****************" >> testcodeFseq
+echo "#!/bin/bash" >> testcodeFseq
+echo "#make bed, Peak calling and combine to bed(with score) codes:" >> testcodeFseq
+echo "#*****************" >> testcodeFseq
 
 while read line
     do
@@ -29,7 +28,7 @@ while read line
         printf "echo 'Rtotal:' \$(/woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c $line."$2"."$3".unique.bam ) >> "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.stats & \n" >> testcodeFseq
     done <$1
 
-
+chmod a+x testcodeFseq
 
 
 
