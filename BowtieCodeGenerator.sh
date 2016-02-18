@@ -8,13 +8,6 @@ CurrentLo=$(pwd)
 source ~/programs/GenomeDefinitions.sh $2
 
 
-
-
-echo '' >> testcode
-echo "******take a break***********" >> testcode
-echo "bowtie.condor codes:" >> testcode
-echo "********(checkout bowtie condor file)*********" >> testcode
-
 bowtiedate=$(date +"%y%m%d")
 printf '''
 universe=vanilla
