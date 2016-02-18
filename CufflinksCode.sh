@@ -9,10 +9,9 @@ echo '' >> testcodeCufflinks
 CurrentLo=$(pwd)
 source ~/programs/GenomeDefinitions.sh $2
 
-echo '' >> testcodeCufflinks
-echo "******take a break***********" >> testcodeCufflinks
-echo "Cufflinks (Run Cufflinks, sort isoform and gene tables) codes:" >> testcodeCufflinks
-echo "*****************" >> testcodeCufflinks
+echo "#!/bin/bash" >> testcodeCufflinks
+echo "#Cufflinks (Run Cufflinks, sort isoform and gene tables) codes:" >> testcodeCufflinks
+echo "#*****************" >> testcodeCufflinks
 
 printf "export PYTHONPATH=/woldlab/castor/home/hamrhein/src/python/packages \n" >> testcodeCufflinks
 while read line
@@ -26,4 +25,4 @@ while read line
         printf $(echo $line | rev | cut -d/ -f1 | rev)"\t"$line"."$2"."$3"Cufflinks2.2.1/isoforms.fpkm_trackingSorted\t0,3,4,6,7\t10\n" >> CufflinksisoformConflows
     done <$1
 
-
+chmod a+x testcodeCufflinks
