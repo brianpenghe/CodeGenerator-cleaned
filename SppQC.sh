@@ -4,21 +4,20 @@
 #usage: ~/programs/SppQC.sh testFolderPath mm9 30mers
 #this has to be done after Tophat
 
-echo '' >> testcode
+echo '' > testcodeSpp
 CurrentLo=$(pwd)
 
-echo '' >> testcode
-echo "******take a break***********" >> testcode
-echo "SppQC codes:" >> testcode
-echo "*****************" >> testcode
+echo "#!/bin/bash" >> testcodeSpp
+echo "#SppQC codes:" >> testcodeSpp
+echo "#*****************" >> testcodeSpp
 
 
 while read line
     do
-        printf "Rscript /woldlab/castor/home/georgi/code/spp/spp_package/run_spp.R -c="$line"."$2"."$3".unique.bam -p=4 -savp -rf -s=-0:2:400 -out="$line"."$2"."$3".unique.QC & \n" >> testcode
+        printf "Rscript /woldlab/castor/home/georgi/code/spp/spp_package/run_spp.R -c="$line"."$2"."$3".unique.bam -p=4 -savp -rf -s=-0:2:400 -out="$line"."$2"."$3".unique.QC & \n" >> testcodeSpp
     done <$1
 
-
+chmod a+x testcodeSpp
 
 
 
