@@ -8,13 +8,6 @@ CurrentLo=$(pwd)
 source ~/programs/GenomeDefinitions.sh $2
 
 
-
-
-echo '' >> testcode
-echo "******take a break***********" >> testcode
-echo "tophat.condor codes:" >> testcode
-echo "********(checkout tophat condor file)*********" >> testcode
-
 tophatdate=$(date +"%y%m%d")
 printf '''
 universe=vanilla
