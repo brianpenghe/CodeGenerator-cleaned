@@ -9,10 +9,9 @@ echo '' >> testcodebigWig
 CurrentLo=$(pwd)
 source ~/programs/GenomeDefinitions.sh $2
 
-echo '' >> testcodebigWig
-echo "******take a break***********" >> testcodebigWig
-echo "bigWig (Index, SAMstats, idxstats, bedgraph, make5prime, wigToBigwig) codes:" >> testcodebigWig
-echo "*****************" >> testcodebigWig
+echo "#!/bin/bash" >> testcodebigWig
+echo "#bigWig (Index, SAMstats, idxstats, bedgraph, make5prime, wigToBigwig) codes:" >> testcodebigWig
+echo "#*****************" >> testcodebigWig
 
 printf "export PYTHONPATH=/woldlab/castor/home/hamrhein/src/python/packages \n" >> testcodebigWig
 while read line
@@ -24,4 +23,4 @@ while read line
         printf "condor_run \"/woldlab/castor/proj/genome/programs/x86_64/wigToBigWig "$line"."$2"."$3".unique.bg4 "$chromsizes" "$line"."$2"."$3".unique.bigWig\" & \n" >> testcodebigWig
     done <$1
 
-
+chmod a+x testcodebigWig
