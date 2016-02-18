@@ -7,10 +7,9 @@ echo '' >> testcodeHOMER
 CurrentLo=$(pwd)
 source ~/programs/GenomeDefinitions.sh $2
 
-echo '' >> testcodeHOMER
-echo "******take a break***********" >> testcodeHOMER
-echo "HOMER prepare reads, Peak calling and convert to bed(no score) codes:" >> testcodeHOMER
-echo "*****************" >> testcodeHOMER
+echo "#!/bin/bash" >> testcodeHOMER
+echo "#HOMER prepare reads, Peak calling and convert to bed(no score) codes:" >> testcodeHOMER
+echo "#*****************" >> testcodeHOMER
 
 echo "export PATH=$PATH:/proj/programs/weblogo:/proj/programs/x86_64/blat/:/proj/programs/homer-4.7/bin" >> testcodeHOMER
 
@@ -31,8 +30,7 @@ while read line
         printf "echo 'Rtotal:' \$(/woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c $line."$2"."$3".unique.bam ) >> "$line"."$2"."$3".lS50000mD50s150fL0.stats & \n" >> testcodeHOMER
     done <$1
 
-
-
+chmod a+x testcodeHOMER
 
 
 
