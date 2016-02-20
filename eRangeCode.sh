@@ -7,10 +7,9 @@ echo '' >> testcodeeRange
 CurrentLo=$(pwd)
 source ~/programs/GenomeDefinitions.sh $2
 
-echo '' >> testcodeeRange
-echo "******take a break***********" >> testcodeeRange
-echo "eRange(chrM-Removal, filtermulti, index, SAMstats, makeRds, findall, regiontobed, bedtobigbed) codes:" >> testcodeeRange
-echo "*****************" >> testcodeeRange
+echo "#!/bin/bash" >> testcodeeRange
+echo "#eRange(chrM-Removal, filtermulti, index, SAMstats, makeRds, findall, regiontobed, bedtobigbed) codes:" >> testcodeeRange
+echo "#*****************" >> testcodeeRange
 
 
 while read line
@@ -29,7 +28,6 @@ while read line
         printf "/woldlab/castor/proj/programs/x86_64/bedToBigBed "$line"."$2"."$3".unique.nochrM.5x.4RPM.bed "$chromsizes" "$line"."$2"."$3".unique.nochrM.5x.4RPM.bigBed & \n" >> testcodeeRange
     done <$1
 
-
-
+chmod a+x testcodeeRange
 
 
