@@ -3,7 +3,7 @@
 
 #usage: ./GenomeDefinitions.sh mm9
 CurrentLo=$(pwd)
-if [ "$1" == "galGal4" ]
+if [ "$1" == "galGal4full" ]
 then
     fa="/woldlab/castor/home/phe/genomes/galGal4/galGal4.fa"
     bowtieindex="/woldlab/castor/home/phe/genomes/galGal4/galGal4"
@@ -11,6 +11,14 @@ then
     blacklist="/woldlab/castor/home/phe/genomes/galGal4/galGal4.chrM30merslS50000mD50s150fL0.bed"
     mitoblack="/woldlab/castor/home/phe/genomes/galGal4/galGal4.chrM30merslS50000mD50s150fL0.bed"
 
+elif [ "$1" == "galGal4" ]
+then
+    fa="/woldlab/castor/home/phe/genomes/galGal4/galGal4.clean.fa"
+    bowtieindex="/woldlab/castor/home/phe/genomes/galGal4/galGal4.clean"
+    chromsizes="/woldlab/castor/home/phe/genomes/galGal4/galGal4.clean.chrom.sizes"
+    blacklist="/woldlab/castor/home/phe/genomes/galGal4/galGal4.chrM30merslS50000mD50s150fL0.bed"
+    mitoblack="/woldlab/castor/home/phe/genomes/galGal4/galGal4.chrM30merslS50000mD50s150fL0.bed"	
+	
 elif [ "$1" == "Spur4.2" ]
 then
     fa="/woldlab/castor/home/phe/genomes/Spur4.2/Spur4.2_scaffolds.fa"
@@ -18,7 +26,12 @@ then
     chromsizes="/woldlab/castor/home/phe/genomes/Spur4.2/Spur4.2_scaffolds.chrom.sizes"
     blacklist=""
     mitoblack=""
-
+	
+elif [ "$1" == "strPur2" ]
+then
+    fa="/woldlab/castor/proj/genome/bowtie-indexes/strPur2.fa"
+    bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/strPur2"
+    chromsizes="/woldlab/castor/proj/genome/bowtie-indexes/strPur2.chrom.sizes"
 
 elif [ "$1" == "mm9full" ]
 then
@@ -80,11 +93,7 @@ then
     chromsizes="/woldlab/castor/home/phe/genomes/hg38/hg38male.chrom.sizes"
     blacklist="/woldlab/castor/home/phe/genomes/hg38/hg19blacklist_liftedovertohg38.bed"
     mitoblack="hg38male.chrM30merslS50000mD50s150fL0.bed"
-elif [ "$1" == "strPur2" ]
-then
-    fa="/woldlab/castor/proj/genome/bowtie-indexes/strPur2.fa"
-    bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/strPur2"
-    chromsizes="/woldlab/castor/proj/genome/bowtie-indexes/strPur2.chrom.sizes"
+
 else
     printf "Genome Version not found"
     exit 1
