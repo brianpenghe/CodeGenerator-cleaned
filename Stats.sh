@@ -104,7 +104,18 @@ elif [ "$2" == "hg19female" ]
         printf '
             echo $chr1_reads $chr2_reads $chr3_reads $chr4_reads $chr5_reads $chr6_reads $chr7_reads $chr8_reads $chr9_reads $chr10_reads $chr11_reads $chr12_reads $chr13_reads $chr14_reads $chr15_reads $chr16_reads $chr17_reads $chr18_reads $chr19_reads $chr20_reads $chr21_reads $chr22_reads $chrX_reads $chrM_reads >> stats
         ' >> testcodeStats
-elif [ "$2" == "strPur2" -o "$2" == "galGal4" ]
+
+elif [ "$2" == "galGal4" ]
+    then
+        for i in {1..28} 32 'W' 'Z' 'M' 'LGE64'
+            do
+                echo "        chr"$i"_reads=\$(egrep -w 'chr"$i"' "\$line"."$2"."$3"mer.idxstats | cut -f3 | awk '{sum+=\$1} END {print sum}')" >> testcodeStats
+            done
+        printf '
+            echo $chr1_reads $chr2_reads $chr3_reads $chr4_reads $chr5_reads $chr6_reads $chr7_reads $chr8_reads $chr9_reads $chr10_reads $chr11_reads $chr12_reads $chr13_reads $chr14_reads $chr15_reads $chr16_reads $chr17_reads $chr18_reads $chr19_reads $chr20_reads $chr21_reads $chr22_reads $chr23_reads $chr24_reads $chr25_reads $chr26_reads $chr27_reads $chr28_reads $chr32_reads $chrW_reads $chrZ_reads $chrM_reads $chrLGE64_reads >> stats
+        ' >> testcodeStats
+
+elif [ "$2" == "strPur2" -o "$2" == "galGal4full" ]
     then
         printf "skip stats.sh"
 else exit "error in genome version"
