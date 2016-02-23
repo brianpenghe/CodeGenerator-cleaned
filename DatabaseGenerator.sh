@@ -17,5 +17,4 @@ while read line
     done < testIDs
 
 
-paste testIDs testnames testPIs testLibs| column -s $'\t' -t | sort -k 1n,1 > IgorCustomers.table
-
+paste testIDs testnames testPIs testLibs | column -s $'\t' -t | sed "s/\<\/a//g" | sed  "s/Angela_Stathopoulos/Stathopoulos/g" | sed  "s/Ariel_Chen/Aravin/g" | sed  "s/Alexei_Aravin/Aravin/g" | sed  "s/Barbara_Wold/Wold/g" | sed  "s/Bruce_Hay/Hay/g" | sed  "s/David_Chan/Chan/g" | sed  "s/Elliot_Meyerowitz/Meyerowitz/g" | sed  "s/Ellen_Rothenberg/Rothenberg/g" | sed  "s/Eric_Davidson/Davidson/g" | sed  "s/Miao_Cui/Davidson/g" | sed  "s/John_Allman/Allman/g" | sed  "s/Nancy_Speck/Speck/g" | sed  "s/Pamela_Bjorkman/Bjorkman/g" | sed  "s/Paul_Sternberg/Sternberg/g" | sed  "s/Sarkis_Mazmanian/Mazmanian/g" | sed  "s/Victoria_Orphan/Orphan/g" | sort -k 1n,1 > IgorCustomers.table
