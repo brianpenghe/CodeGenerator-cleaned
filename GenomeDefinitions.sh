@@ -48,6 +48,7 @@ then
     chromsizes="/woldlab/castor/home/phe/genomes/mm9/male.mm9.chrom.sizes"
     blacklist="/woldlab/castor/home/phe/genomes/mm9/mm9-blacklist.bed"
     mitoblack="/woldlab/castor/home/phe/genomes/mm9/male.mm9.chrM30merslS50000mD50s150fL0.bed"
+	GTF="/woldlab/castor/proj/genome/transcriptome-indexes/Mus_musculus.NCBIM37.67.filtered.gtf"
 
 elif [ "$1" == "mm10full" ]
 then
