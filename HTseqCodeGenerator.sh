@@ -3,7 +3,7 @@
 #the file $test has two columns, link and name, only one space allowed
 
 
-#usage: ./tophatCodeGenerator.sh testFolderPath mm9 30mer PE
+#usage: ./HTseqCodeGenerator.sh testFolderPath mm9 30mer PE
 CurrentLo=$(pwd)
 source ~/programs/GenomeDefinitions.sh $2
 

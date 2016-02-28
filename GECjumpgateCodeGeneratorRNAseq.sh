@@ -20,6 +20,8 @@ source /woldlab/castor/home/phe/programs/GECrefolder.sh $4 $2 $3
 
 /woldlab/castor/home/phe/programs/TophatbigWigCode.sh testFolderPath $2 $3"mer"
 
+/woldlab/castor/home/phe/programs/HTseqCodeGenerator.sh testFolderPath $2 $3 $4
+
 /woldlab/castor/home/phe/programs/CufflinksCode.sh testFolderPath $2 $3"mer"
 
 /woldlab/castor/home/phe/programs/TrackSummary.sh bigWig
