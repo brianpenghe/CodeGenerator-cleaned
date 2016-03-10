@@ -13,9 +13,9 @@ while read line
 				SRRlink=$(wget $SRXlink/ -q -O - | grep SRR | cut -d\" -f2)
 				SRAlink=$(wget $SRRlink/ -q -O - | grep .sra\" | cut -d\" -f2)
 				
-				printf $SRAlink" "$metadata"\n" >> $2
-				printf " found "$(echo $SRAlink | rev | cut -d. -f2 | rev )"\n"
-				printf " found "$(echo $SRAlink | rev | cut -d. -f2 | rev )"\n" >> SampleListGenerator.log
+				printf $SRAlink" "$line"_"$metadata"\n" >> $2
+				printf " found "$(echo $SRAlink | rev | cut -d/ -f1 | rev )"\n"
+				printf " found "$(echo $SRAlink | rev | cut -d/ -f1 | rev )"\n" >> SampleListGenerator.log
         else
             printf " no sra found "
             printf " no sra found " >> SampleListGenerator.log
