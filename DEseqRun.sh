@@ -4,6 +4,7 @@
 
 
 #usage: ./DEseqRun.sh Gm2694 Gm2694 Control Control Gm2694 Gm11019
+printf "It's your own responsibility to make sure your condition keys match/correpsond to the file names"
 CurrentLo=$(pwd)
 ls *.count > Countlist
 vector_len=$(ls *.count | wc -l)
@@ -36,6 +37,8 @@ while read key
 		grep ","$key HTseqWhole.csv >> HTseq$key.csv
 		grep Control HTseqWhole.csv >> HTseq$key.csv
 		Rscript ~/programs/deseq2.Rscript HTseq$key.csv Control DEseq$key
+		awk -F',' '{if ($3 < 0) print $0 }'  DEseq$key | grep -v ",0,NA,NA,NA,NA,NA" | sort -t"," -k 6g,6 > DEseq$key.down
+		awk -F',' '{if ($3 > 0) print $0 }'  DEseq$key | grep -v ",0,NA,NA,NA,NA,NA" | sort -t"," -k 6g,6 > DEseq$key.up
 	done < test.HTdictuniq
 rm test.HTdict test.HTdictuniq HTseqWhole.csv
 
