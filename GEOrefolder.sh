@@ -35,9 +35,9 @@ while read line
                 do
                     if [[ "$1" == "PE" ]]
                         then
-                            printf "woldlab/castor/home/georgi/programs/sratoolkit.2.3.1-ubuntu64/bin/fastq-dump.2.3.1 -Z "${Folder[$k]}" --split-3 && " >> testcode
+                            printf "/woldlab/castor/home/georgi/programs/sratoolkit.2.3.1-ubuntu64/bin/fastq-dump.2.3.1 "${Folder[$k]}" --split-3 && " >> testcode
 							printf "mv "$(echo ${Folder[$k]} | sed "s/.sra//g")"_1.fastq "$path$k".R1.fastq && " >> testcode
-							printf "mv "$(echo ${Folder[$k]} | sed "s/.sra//g")"_2.fastq "$path$k".R1.fastq && " >> testcode
+							printf "mv "$(echo ${Folder[$k]} | sed "s/.sra//g")"_2.fastq "$path$k".R2.fastq && " >> testcode
                             
                     elif [[ "$1" == "SE" ]]
                         then
