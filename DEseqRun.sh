@@ -34,11 +34,18 @@ while read key
 		fi
 		echo $key
 		echo "sampleName,fileName,condition" > HTseq$key.csv
+		echo "sampleName,fileName,condition" > HTseqAll$key.csv
 		grep ","$key HTseqWhole.csv >> HTseq$key.csv
+		grep ","$key HTseqWhole.csv >> HTseqAll$key.csv
+		grep -v ","$key HTseqWhole.csv | awk -F',' '{print $1","$2",Control"}' >> HTseqAll$key.csv
 		grep Control HTseqWhole.csv >> HTseq$key.csv
+	
 		Rscript ~/programs/deseq2.Rscript HTseq$key.csv Control DEseq$key
+		Rscript ~/programs/deseq2.Rscript HTseqAll$key.csv Control DEseqAll$key
 		awk -F',' '{if ($3 < 0) print $0 }'  DEseq$key | grep -v ",0,NA,NA,NA,NA,NA" | sort -t"," -k 6g,6 > DEseq$key.down
 		awk -F',' '{if ($3 > 0) print $0 }'  DEseq$key | grep -v ",0,NA,NA,NA,NA,NA" | sort -t"," -k 6g,6 > DEseq$key.up
+		awk -F',' '{if ($3 < 0) print $0 }'  DEseqAll$key | grep -v ",0,NA,NA,NA,NA,NA" | sort -t"," -k 6g,6 > DEseqAll$key.down
+		awk -F',' '{if ($3 > 0) print $0 }'  DEseqAll$key | grep -v ",0,NA,NA,NA,NA,NA" | sort -t"," -k 6g,6 > DEseqAll$key.up
 	done < test.HTdictuniq
 rm test.HTdict test.HTdictuniq HTseqWhole.csv
 
