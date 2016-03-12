@@ -30,10 +30,10 @@ while read path
     do
         if [[ "$4" == "PE" ]]
             then
-                printf "arguments=\"-c '/usr/bin/samtools view -h -f 3 "$path"."$2"."$3"mer/accepted_hits.bam | /woldlab/castor/home/phe/.local/bin/htseq-count -s no -q - "$GTF" > "$path"."$2"."$3"mer.count ' \" \nqueue\n" >> HTseq$HTseqdate".condor"
+                printf "arguments=\"-c '/usr/bin/samtools view -h -f 3 "$path"."$2"."$3"mer/accepted_hits.bam | /woldlab/castor/home/phe/.local/bin/htseq-count -s no -m intersection-strict -q - "$GTF" > "$path"."$2"."$3"mer.count ' \" \nqueue\n" >> HTseq$HTseqdate".condor"
         elif [[ "$4" == "SE" ]]
             then
-                printf "arguments=\"-c '/usr/bin/samtools view -h -f 2 "$path"."$2"."$3"mer/accepted_hits.bam | /woldlab/castor/home/phe/.local/bin/htseq-count -s no -q - "$GTF" > "$path"."$2"."$3"mer.count ' \" \nqueue\n" >> HTseq$HTseqdate".condor"
+                printf "arguments=\"-c '/usr/bin/samtools view -h -f 2 "$path"."$2"."$3"mer/accepted_hits.bam | /woldlab/castor/home/phe/.local/bin/htseq-count -s no -m intersection-strict -q - "$GTF" > "$path"."$2"."$3"mer.count ' \" \nqueue\n" >> HTseq$HTseqdate".condor"
         fi
 		printf $(echo $path | rev | cut -d/ -f1 | rev)"\t"$path"."$2"."$3"mer.count\t0\t1\n" >> HTseqTable
     done <$1
