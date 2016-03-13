@@ -42,10 +42,10 @@ while read key
 	
 		Rscript ~/programs/deseq2.Rscript HTseq$key.csv Control DEseq$key
 		Rscript ~/programs/deseq2.Rscript HTseqAll$key.csv Control DEseqAll$key
-		awk -F',' '{if ($3 < 0) print $1"\t"$2"\t"$3"\t"$4"\t"$5"\t"$6"\t"$7 }'  DEseq$key | sort -k 1d,1 | sed 's/"//g' | join -1 1 -2 5 - ~/genomes/mm9/Mus_musculus.NCBIM37.67.filtered.gene.sorted | sort -k 6g,6 > DEseq$key.down
-		awk -F',' '{if ($3 > 0) print $1"\t"$2"\t"$3"\t"$4"\t"$5"\t"$6"\t"$7 }'  DEseq$key | sort -k 1d,1 | sed 's/"//g' | join -1 1 -2 5 - ~/genomes/mm9/Mus_musculus.NCBIM37.67.filtered.gene.sorted | sort -k 6g,6 > DEseq$key.up
-		awk -F',' '{if ($3 < 0) print $1"\t"$2"\t"$3"\t"$4"\t"$5"\t"$6"\t"$7 }'  DEseqAll$key | sort -k 1d,1 | sed 's/"//g' | join -1 1 -2 5 - ~/genomes/mm9/Mus_musculus.NCBIM37.67.filtered.gene.sorted | sort -k 6g,6 > DEseqAll$key.down
-		awk -F',' '{if ($3 > 0) print $1"\t"$2"\t"$3"\t"$4"\t"$5"\t"$6"\t"$7 }'  DEseqAll$key | sort -k 1d,1 | sed 's/"//g' | join -1 1 -2 5 - ~/genomes/mm9/Mus_musculus.NCBIM37.67.filtered.gene.sorted | sort -k 6g,6 > DEseqAll$key.up
+		awk -F',' '{if ( $3 < 0 && $6 != "NA" ) print $1"\t"$2"\t"$3"\t"$4"\t"$5"\t"$6"\t"$7 }'  DEseq$key | sort -k 1d,1 | sed 's/"//g' | join -1 1 -2 5 - ~/genomes/mm9/Mus_musculus.NCBIM37.67.filtered.gene.sorted | sort -k 6g,6 > DEseq$key.down
+		awk -F',' '{if ( $3 > 0 && $6 != "NA" ) print $1"\t"$2"\t"$3"\t"$4"\t"$5"\t"$6"\t"$7 }'  DEseq$key | sort -k 1d,1 | sed 's/"//g' | join -1 1 -2 5 - ~/genomes/mm9/Mus_musculus.NCBIM37.67.filtered.gene.sorted | sort -k 6g,6 > DEseq$key.up
+		awk -F',' '{if ( $3 < 0 && $6 != "NA" ) print $1"\t"$2"\t"$3"\t"$4"\t"$5"\t"$6"\t"$7 }'  DEseqAll$key | sort -k 1d,1 | sed 's/"//g' | join -1 1 -2 5 - ~/genomes/mm9/Mus_musculus.NCBIM37.67.filtered.gene.sorted | sort -k 6g,6 > DEseqAll$key.down
+		awk -F',' '{if ( $3 > 0 && $6 != "NA" ) print $1"\t"$2"\t"$3"\t"$4"\t"$5"\t"$6"\t"$7 }'  DEseqAll$key | sort -k 1d,1 | sed 's/"//g' | join -1 1 -2 5 - ~/genomes/mm9/Mus_musculus.NCBIM37.67.filtered.gene.sorted | sort -k 6g,6 > DEseqAll$key.up
 	done < test.HTdictuniq
 rm test.HTdict test.HTdictuniq HTseqWhole.csv
 
