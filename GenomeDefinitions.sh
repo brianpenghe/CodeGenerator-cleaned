@@ -35,9 +35,9 @@ then
 	
 elif [ "$1" == "Spur3.1" ]
 then
-    fa=" /woldlab/castor/home/phe/genomes/Spur3.1/Spur_v3.1_assembly/LinearScaffolds/Spur_3.1.LinearScaffold.fa"
-    bowtieindex=" /woldlab/castor/home/phe/genomes/Spur3.1/Spur_v3.1_assembly/LinearScaffolds/Spur_3.1.LinearScaffold"
-    chromsizes=" /woldlab/castor/home/phe/genomes/Spur3.1/Spur_v3.1_assembly/LinearScaffolds/Spur_3.1.LinearScaffold.chrom.sizes"
+    fa="/woldlab/castor/home/phe/genomes/Spur3.1/Spur_v3.1_assembly/LinearScaffolds/Spur_3.1.LinearScaffold.fa"
+    bowtieindex="/woldlab/castor/home/phe/genomes/Spur3.1/Spur_v3.1_assembly/LinearScaffolds/Spur_3.1.LinearScaffold"
+    chromsizes="/woldlab/castor/home/phe/genomes/Spur3.1/Spur_v3.1_assembly/LinearScaffolds/Spur_3.1.LinearScaffold.chrom.sizes"
 
 elif [ "$1" == "mm9full" ]
 then
