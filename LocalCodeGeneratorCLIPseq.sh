@@ -5,7 +5,8 @@
 #each experiment folder contains a set of unzipped fastq files belonging to the same library
 #delete the testFolderPath file
 #it generates three files: bowtieXXXXXX testcode & testFolderPath
-#usage: ~/programs/GECCodeGeneratorATAC.sh test mm9 36 PE
+#usage: ~/programs/GECCodeGeneratorATAC.sh test mm9 34 PE
+#34 is the full length of the reads
 
 /woldlab/castor/home/phe/programs/Cleanup.sh CLIPseq
 echo '' > testcode
