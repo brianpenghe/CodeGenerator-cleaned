@@ -28,8 +28,8 @@ while read line
 				printf ""$path"R1allfastq\n" >> $path"FastUniqInput"
 				printf ""$path"R2allfastq\n" >> $path"FastUniqInput"
 				printf "~/programs/FastUniq/source/fastuniq -i "$path"FastUniqInput -t q -o "$path"R1allfastquniq -p "$path"R2allfastquniq && rm "$path"FastUniqInput && " >> testcode
-                printf "python /woldlab/castor/home/georgi/code/trimfastq.py "$path"R1allfastquniq "$3" -stdout > "$path"R1allfastq"$3" && " >> testcode
-                printf "python /woldlab/castor/home/georgi/code/trimfastq.py "$path"R2allfastquniq "$(echo $3 - 10 | bc)" -trim5 10 -stdout > "$path"R2allfastq"$3" && " >> testcode
+                printf "python /woldlab/castor/home/georgi/code/trimfastq.py "$path"R1allfastquniq "$3" -stdout > "$path"R1allfastq"$3" && rm "$path"R1allfastquniq && " >> testcode
+                printf "python /woldlab/castor/home/georgi/code/trimfastq.py "$path"R2allfastquniq "$(echo $3 - 10 | bc)" -trim5 10 -stdout > "$path"R2allfastq"$3" && rm "$path"R2allfastquniq && " >> testcode
         elif [[ "$4" == "SE" ]]
             then
                 printf "mkdir "$path"FastQCk6 && " >> testcode
