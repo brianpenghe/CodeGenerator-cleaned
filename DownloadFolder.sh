@@ -1,7 +1,9 @@
 #!/bin/bash
 #Run these codes in the current SERVER directory
-#the file $test has two columns, link and name, only one space allowed
-#usage: ./DownloadFolder.sh test
+#Thie script needs a file named testSampleList
+#this file contains links to the data to aggregate and its metadata
+#e.g each line can be http://jumpgate.caltech.edu/runfolders/volvox/141121_SN787_0295_BHBE3UADXX/Unaligned/Project_15160_indexN707-N505/Sample_15160/ http://jumpgate.caltech.edu/runfolders/volvox/141110_SN787_0290_AHCCNNADXX/Unaligned/Project_15160_indexN707-N505/Sample_15160/  Sample15160
+#usage: ./DownloadFolder.sh test testSampleList
 
 echo "wget codes:" >> testcode
 echo "****************" >> testcode
