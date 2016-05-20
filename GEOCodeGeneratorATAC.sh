@@ -2,7 +2,7 @@
 #Run these codes in the current SERVER directory
 #it generates three testfiles: testcode, testFolderPath and testSampleList
 #usage: ~/programs/GECCodeGeneratorATAC.sh test mm9 36
-#test file is just a list of library ID(number)s.
+#test file is just a list of GSM ID(number)s.
 #this script enables combining multiple flowcells.
 
 /woldlab/castor/home/phe/programs/Cleanup.sh ATAC
