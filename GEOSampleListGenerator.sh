@@ -1,6 +1,6 @@
 #!/bin/bash
 #SampleListGenerator.sh input output
-printf '' > $2
+printf '' > $2e
 printf '' > SampleListGenerator.log
 while read line
     do
@@ -8,7 +8,7 @@ while read line
         printf $line":" >> SampleListGenerator.log
         if [ $(wget --no-check-certificate https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=$line -q -O - | grep 'ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByExp/sra' | wc -l) != 0 ]
             then
-				metadata=$(wget --no-check-certificate https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=$line -q -O - | grep -A 1 Title | grep justify | cut -d\> -f2 | cut -d\< -f1)
+				metadata=$(wget --no-check-certificate https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=$line -q -O - | grep -A 1 Title | grep justify | cut -d\> -f2 | cut -d\< -f1 | sed -r "s/[/\ #;&~]/_/g")
                 SRXlink=$(wget --no-check-certificate https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=$line -q -O - | grep 'ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByExp/sra' | cut -d\" -f4)
 				wget $SRXlink/ -q -O - | grep SRR | cut -d\" -f2 > SRRlinks
                 while read SRRlink

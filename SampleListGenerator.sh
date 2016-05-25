@@ -39,7 +39,7 @@ while read line
                         printf "\n" >> SampleListGenerator.log
 
                     done<Flowcell
-                wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/library/$line/ -q -O - | grep libns:name | cut -d"<" -f2 | cut -d">" -f2 >> $2
+                wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/library/$line/ -q -O - | grep libns:name | cut -d"<" -f2 | cut -d">" -f2 | sed -r "s/[/\ #;&~]/_/g" >> $2
         else
             printf " no Flowcells found\n"
             printf " no Flowcells found\n" >> SampleListGenerator.log
