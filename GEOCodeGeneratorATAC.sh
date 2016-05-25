@@ -1,7 +1,7 @@
 #!/bin/bash
 #Run these codes in the current SERVER directory
 #it generates three testfiles: testcode, testFolderPath and testSampleList
-#usage: ~/programs/GECCodeGeneratorATAC.sh test mm9 36
+#usage: ~/programs/GECCodeGeneratorATAC.sh test mm9 36 PE
 #test file is just a list of GSM ID(number)s.
 #this script enables combining multiple flowcells.
 
