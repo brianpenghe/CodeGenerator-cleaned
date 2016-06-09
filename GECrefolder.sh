@@ -24,7 +24,7 @@ while read line
                     Folder[$k]=$(echo $line | cut -d' ' -f$k | sed "s/https:\///g" | rev | cut -d '/' -f3- | rev)
                     k=$k+1
                 done
-            SampleMeta=$(echo $line | cut -d' ' -f$k- | sed -r "s/[/\ #;&~]/_/g" )
+            SampleMeta=$(echo $line | cut -d' ' -f$k- | sed -r "s/[/\ #;,&~]/_/g" )
             path=$(echo $CurrentLo"/"$SampleID$SampleMeta)
             printf $path"\n" >> testFolderPath
             k=1
