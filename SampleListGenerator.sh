@@ -2,8 +2,7 @@
 #SampleListGenerator.sh input output
 printf '' > $2
 printf '' > SampleListGenerator.log
-wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox/ -q -O - > index.html
-wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox02/ -q -O - > index02.html
+
 while read line
     do
         printf $line":"
@@ -18,6 +17,7 @@ while read line
                         declare -i FlowN=0
                         for label in "Unaligned/" "Unaligned.dualIndex/" "Unaligned.singleIndex/"
                             do
+								wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox/ -q -O - > index.html
 								grep $Flow index.html | grep -v $Flow"_temp" | cut -d"\"" -f8 > SubFlowcell
                                 while read SubFlow
                                     do
