@@ -3,6 +3,7 @@
 printf '' > $2
 printf '' > SampleListGenerator.log
 wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox/ -q -O - > index.html
+wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox02/ -q -O - > index02.html
 while read line
     do
         printf $line":"
@@ -15,11 +16,12 @@ while read line
                         printf $Flow
                         printf $Flow >> SampleListGenerator.log
                         declare -i FlowN=0
-                        grep $Flow index.html | grep -v $Flow"_temp" | cut -d"\"" -f8 > SubFlowcell
                         for label in "Unaligned/" "Unaligned.dualIndex/" "Unaligned.singleIndex/"
                             do
+								grep $Flow index.html | grep -v $Flow"_temp" | cut -d"\"" -f8 > SubFlowcell
                                 while read SubFlow
                                     do
+										
                                         if [ $(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox/$SubFlow$label -q -O - | grep $line | wc -l) != 0 ]
                                             then
                                                 project=$(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox/$SubFlow$label -q -O - | grep $line | cut -d"\"" -f8)
