@@ -14,11 +14,12 @@ while read line
                     do
                         printf $Flow
                         printf $Flow >> SampleListGenerator.log
-                        declare -i FlowN=0
+						wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox/ -q -O - > index.html
+						grep $Flow index.html | grep -v $Flow"_temp" | cut -d"\"" -f8 > SubFlowcell
+						declare -i FlowN=0
                         for label in "Unaligned/" "Unaligned.dualIndex/" "Unaligned.singleIndex/"
                             do
-								wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox/ -q -O - > index.html
-								grep $Flow index.html | grep -v $Flow"_temp" | cut -d"\"" -f8 > SubFlowcell
+
                                 while read SubFlow
                                     do
 										
@@ -32,11 +33,11 @@ while read line
                                         fi
                                     done<SubFlowcell
                             done
-                        if [ $FlowN == 0 ]
-                            then
-                                printf " Not found in Volvox"
-                                printf " Not found in Volvox" >> SampleListGenerator.log
-                        fi
+						if [ $FlowN == 0 ]
+							then
+								printf " Not found in Volvox"
+								printf " Not found in Volvox" >> SampleListGenerator.log
+						fi
                         printf "\n"
                         printf "\n" >> SampleListGenerator.log
 
