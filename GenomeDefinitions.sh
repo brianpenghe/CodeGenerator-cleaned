@@ -18,6 +18,18 @@ then
     chromsizes="/woldlab/castor/home/phe/genomes/galGal4/galGal4.clean.chrom.sizes"
     blacklist="/woldlab/castor/home/phe/genomes/galGal4/galGal4.chrM30merslS50000mD50s150fL0.bed"
     mitoblack="/woldlab/castor/home/phe/genomes/galGal4/galGal4.chrM30merslS50000mD50s150fL0.bed"	
+
+elif [ "$1" == "MG1655" ]
+then
+	fa="/woldlab/castor/home/phe/genomes/K-12MG1655/K-12MG1655.fa"
+	bowtieindex="/woldlab/castor/home/phe/genomes/K-12MG1655/bowtie1-index/K-12MG1655"
+	chromsizes="/woldlab/castor/home/phe/genomes/K-12MG1655/bowtie1-index/K-12MG1655.chrom.sizes"
+	
+elif [ "$1" == "MC4100" ]	
+then
+	fa="/woldlab/castor/home/phe/genomes/K-12MC4100/K-12MC4100.fa"
+	bowtieindex="/woldlab/castor/home/phe/genomes/K-12MC4100/bowtie1-index/K-12MC4100"
+	chromsizes="/woldlab/castor/home/phe/genomes/K-12MC4100/bowtie1-index/K-12MC4100.chrom.sizes"
 	
 elif [ "$1" == "Spur4.2" ]
 then
