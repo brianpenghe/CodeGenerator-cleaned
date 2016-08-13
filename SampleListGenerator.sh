@@ -30,16 +30,16 @@ while read line
 													then
 														project=$(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox$database$SubFlow$label -q -O - | grep $line | cut -d"\"" -f8)
 														printf https://jumpgate.caltech.edu/runfolders/volvox$database$SubFlow$label$project"Sample_"$line"/ " >> $2
-														printf " got in "$SubFlow$label
-														printf " got in "$SubFlow$label >> SampleListGenerator.log
+														printf " got in volvox"$database$SubFlow$label
+														printf " got in volvox"$database$SubFlow$label >> SampleListGenerator.log
 														FlowN=$FlowN+1
 												fi
 											done<SubFlowcell
 									done
 								if [ $FlowN == 0 ]
 									then
-										printf " Not found in Volvox$database"
-										printf " Not found in Volvox$database" >> SampleListGenerator.log
+										printf " Not found in volvox"$database
+										printf " Not found in volvox"$database >> SampleListGenerator.log
 								fi
 							done
                         printf "\n"
