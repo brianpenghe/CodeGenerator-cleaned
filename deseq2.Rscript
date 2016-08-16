@@ -1,0 +1,24 @@
+#!/usr/bin/Rscript --vanilla
+
+cat("loading DESeq2...")
+suppressMessages(library(DESeq2))
+cat("done\n")
+
+args <- commandArgs(TRUE)
+directory <- getwd()
+
+cat("loading sample table\n")
+sampleTable <- read.csv(args[1])
+
+cat("loading count files\n")
+dds <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable, directory = directory, design = ~ condition)
+
+dds$condition <- relevel(dds$condition, args[2])
+
+dds <- DESeq(dds)
+res <- results(dds)
+
+resOrdered <- res[order(res$padj),]
+
+cat("writing output file\n")
+write.csv(resOrdered, args[3])
