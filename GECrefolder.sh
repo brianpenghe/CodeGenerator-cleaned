@@ -50,14 +50,25 @@ while read line
                     printf "mkdir "$path"FastQCk6R2 && " >> testcode
                     printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"R1allfastq -o "$path"FastQCk6R1 -k 6 && " >> testcode
                     printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"R2allfastq -o "$path"FastQCk6R2 -k 6 && " >> testcode
-                    printf "python /woldlab/castor/home/georgi/code/trimfastq.py "$path"R1allfastq "$3" -stdout > "$path"R1allfastq"$3" && " >> testcode
-                    printf "python /woldlab/castor/home/georgi/code/trimfastq.py "$path"R2allfastq "$3" -stdout > "$path"R2allfastq"$3" && " >> testcode
+                    if [[ "$3" == "0" ]]
+                        then
+                            printf "mv "$path"R1allfastq "$path"R1allfastq"$3" && " >> testcode
+                            printf "mv "$path"R2allfastq "$path"R2allfastq"$3" && " >> testcode
+                    else
+                        printf "python /woldlab/castor/home/georgi/code/trimfastq.py "$path"R1allfastq "$3" -stdout > "$path"R1allfastq"$3" && " >> testcode
+                        printf "python /woldlab/castor/home/georgi/code/trimfastq.py "$path"R2allfastq "$3" -stdout > "$path"R2allfastq"$3" && " >> testcode
+                    fi    
             elif [[ "$1" == "SE" ]]
                 then
                     printf "cat "$path"*.fastq > "$path"allfastq && " >> testcode
                     printf "mkdir "$path"FastQCk6 && " >> testcode
                     printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"allfastq -o "$path"FastQCk6 -k 6 && " >> testcode
-                    printf "python /woldlab/castor/home/georgi/code/trimfastq.py "$path"allfastq "$3" -stdout > "$path"allfastq"$3" && " >> testcode
+                    if [[ "$3" == "0" ]]
+                        then
+                            printf "mv "$path"allfastq "$path"allfastq"$3" && " >> testcode
+                    else
+                        printf "python /woldlab/castor/home/georgi/code/trimfastq.py "$path"allfastq "$3" -stdout > "$path"allfastq"$3" && " >> testcode
+                    fi
             fi
             printf "rm "$path"*fastq & \n" >> testcode
         done <testSampleList
