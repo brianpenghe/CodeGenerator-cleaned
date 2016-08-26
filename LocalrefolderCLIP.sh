@@ -17,7 +17,7 @@ while read line
         path=$(echo $CurrentLo"/"$SampleID$SampleMeta)
         printf "mv "$OldDataPath" "$path" && " >> testcode
         printf $path"\n" >> testFolderPath
-        if [[ "$4" == "PE" ]]
+        if [[ "$1" == "PE" ]]
             then
                 printf "mkdir "$path"FastQCk6R1 && " >> testcode
                 printf "mkdir "$path"FastQCk6R2 && " >> testcode
@@ -30,7 +30,7 @@ while read line
 				printf "~/programs/FastUniq/source/fastuniq -i "$path"FastUniqInput -t q -o "$path"R1allfastquniq -p "$path"R2allfastquniq && rm "$path"FastUniqInput && " >> testcode
                 printf "python /woldlab/castor/home/georgi/code/trimfastq.py "$path"R1allfastquniq "$3" -stdout > "$path"R1allfastq"$3" && rm "$path"R1allfastquniq && " >> testcode
                 printf "python /woldlab/castor/home/georgi/code/trimfastq.py "$path"R2allfastquniq "$(echo $3 - 10 | bc)" -trim5 10 -stdout > "$path"R2allfastq"$3" && rm "$path"R2allfastquniq && " >> testcode
-        elif [[ "$4" == "SE" ]]
+        elif [[ "$1" == "SE" ]]
             then
                 printf "mkdir "$path"FastQCk6 && " >> testcode
                 printf "cat "$path"/*.fastq > "$path"allfastq && " >> testcode
