@@ -19,7 +19,7 @@ if [[ "$1" == "PE" ]]
         else
             printf "python /woldlab/castor/home/georgi/code/trimfastq.py "$2"R1allpairedfastq "$3" -stdout > "$2"R1allfastq"$3" && " >> testcode
             printf "python /woldlab/castor/home/georgi/code/trimfastq.py "$2"R2allpairedfastq "$3" -stdout > "$2"R2allfastq"$3" && " >> testcode
-    fi    
+        fi    
 elif [[ "$1" == "SE" ]]
     then
         printf "cat "$2"*.fastq > "$2"allfastq && " >> testcode
