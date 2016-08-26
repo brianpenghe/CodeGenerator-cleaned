@@ -41,39 +41,5 @@ while read line
                     fi
                     k=$k+1
                 done
-
-            if [[ "$1" == "PE" ]]
-                then
-                    printf "cat "$path"*R1.fastq > "$path"R1allfastq && " >> testcode
-                    printf "cat "$path"*R2.fastq > "$path"R2allfastq && " >> testcode
-                    printf "mkdir "$path"FastQCk6R1 && " >> testcode
-                    printf "mkdir "$path"FastQCk6R2 && " >> testcode
-                    printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"R1allfastq -o "$path"FastQCk6R1 -k 6 && " >> testcode
-                    printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"R2allfastq -o "$path"FastQCk6R2 -k 6 && " >> testcode
-                    printf "java -jar /woldlab/castor/proj/programs/Trimmomatic-0.33/trimmomatic-0.33.jar PE -threads 4 -trimlog "$path"trim.log "$path"R1allfastq "$path"R2allfastq "$path"R1allpairedfastq "$path"R1allunpairedfastq "$path"R2allpairedfastq "$path"R2allunpairedfastq ILLUMINACLIP:NexteraAdaptors.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:"$(($3==0?20:$3))" && " >> testcode
-                    printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"R1allpairedfastq -o "$path"FastQCk6R1 -k 6 && " >> testcode
-                    printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"R2allpairedfastq -o "$path"FastQCk6R2 -k 6 && " >> testcode
-                    if [[ "$3" == "0" ]]
-                        then
-                            printf "mv "$path"R1allpairedfastq "$path"R1allfastq"$3" && " >> testcode
-                            printf "mv "$path"R2allpairedfastq "$path"R2allfastq"$3" && " >> testcode
-                    else
-                        printf "python /woldlab/castor/home/georgi/code/trimfastq.py "$path"R1allpairedfastq "$3" -stdout > "$path"R1allfastq"$3" && " >> testcode
-                        printf "python /woldlab/castor/home/georgi/code/trimfastq.py "$path"R2allpairedfastq "$3" -stdout > "$path"R2allfastq"$3" && " >> testcode
-                    fi    
-            elif [[ "$1" == "SE" ]]
-                then
-                    printf "cat "$path"*.fastq > "$path"allfastq && " >> testcode
-                    printf "mkdir "$path"FastQCk6 && " >> testcode
-                    printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"allfastq -o "$path"FastQCk6 -k 6 && " >> testcode
-                    printf "java -jar /woldlab/castor/proj/programs/Trimmomatic-0.33/trimmomatic-0.33.jar SE -threads 4 -trimlog "$path"trim.log "$path"allfastq "$path"alltrimmedfastq ILLUMINACLIP:NexteraAdaptors.fa:2:30:10 MAXINFO:35:0.9 MINLEN:"$(($3==0?20:$3))" && " >> testcode
-                    printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$path"alltrimmedfastq -o "$path"FastQCk6 -k 6 && " >> testcode
-                    if [[ "$3" == "0" ]]
-                        then
-                            printf "mv "$path"alltrimmedfastq "$path"allfastq"$3" && " >> testcode
-                    else
-                        printf "python /woldlab/castor/home/georgi/code/trimfastq.py "$path"alltrimmedfastq "$3" -stdout > "$path"allfastq"$3" && " >> testcode
-                    fi
-            fi
-            printf "rm "$path"*fastq & \n" >> testcode
+            ~/programs/FastQCTrim.sh $1 $path $3
         done <testSampleList
