@@ -45,3 +45,4 @@ while read path
         printf "condor_run \"python /woldlab/castor/home/georgi/code/SAMstats.py "$line"."$2"."$3".unique.nochrM.bam "$line"."$2"."$3".unique.nochrM.SAMstats -bam "$chromsizes" /woldlab/castor/proj/programs/samtools-0.1.8/samtools \" & " >> testcodePostBowtie       
     done <$1
 
+chmod a+x testcodePostBowtie
