@@ -6,7 +6,9 @@
 #usage: ./bowtieCodeGenerator.sh testFolderPath mm9 30mer
 CurrentLo=$(pwd)
 source ~/programs/GenomeDefinitions.sh $2
-
+echo '' >> testcodePostBowtie
+echo "#!/bin/bash" >> testcodePostBowtie
+echo "#bigWig (Index, SAMstats, idxstats) codes:" >> testcodePostBowtie 
 
 bowtiedate=$(date +"%y%m%d")
 printf '''
@@ -35,5 +37,11 @@ while read path
             then
                 printf "arguments=\"-c \' /woldlab/castor/proj/genome/programs/bowtie-1.0.1+hamrhein_nh_patch/bowtie "$bowtieindex" -p 8 -v 2 -k 1 -m 3 -t --sam-nh --best -y --strata -q --sam "$path"allfastq"$3" | /woldlab/castor/proj/genome/programs/samtools-0.1.8/samtools view -bT  "$fa" - | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools sort - "$path"."$2"."$3"mer.unique \' \"\nqueue\n" >> bowtie$bowtiedate".condor"
         fi
+        printf "condor_run \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index "$line"."$2"."$3".unique.bam \" && " >> testcodePostBowtie
+        printf "condor_run \"python /woldlab/castor/home/georgi/code/SAMstats.py "$line"."$2"."$3".unique.bam "$line"."$2"."$3".SAMstats -bam "$chromsizes" /woldlab/castor/proj/programs/samtools-0.1.8/samtools \" && " >> testcodePostBowtie
+        printf "condor_run \"/woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools idxstats "$line"."$2"."$3".unique.bam > "$line"."$2"."$3".idxstats\" && " >> testcodePostBowtie
+        printf "condor_run \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view "$line"."$2"."$3".unique.bam | egrep -v chrM | /woldlab/castor/proj/programs/samtools-0.1.8/samtools view -bT "$fa" - -o "$line"."$2"."$3".unique.nochrM.bam \" && " >> testcodePostBowtie
+        printf "condor_run \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index "$line"."$2"."$3".unique.nochrM.bam \" && " >> testcodePostBowtie
+        printf "condor_run \"python /woldlab/castor/home/georgi/code/SAMstats.py "$line"."$2"."$3".unique.nochrM.bam "$line"."$2"."$3".unique.nochrM.SAMstats -bam "$chromsizes" /woldlab/castor/proj/programs/samtools-0.1.8/samtools \" & " >> testcodePostBowtie       
     done <$1
 
