@@ -11,7 +11,7 @@ echo "#!/bin/bash" >> testcodeHOMER
 echo "#HOMER prepare reads, Peak calling and convert to bed(no score) codes:" >> testcodeHOMER
 echo "#*****************" >> testcodeHOMER
 
-echo "export PATH=$PATH:/proj/programs/weblogo:/proj/programs/x86_64/blat/:/proj/programs/homer-4.7/bin" >> testcodeHOMER
+echo "export PATH=/woldlab/castor/home/phe/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/woldlab/castor/proj/programs/weblogo:/woldlab/castor/proj/programs/x86_64/blat/:/woldlab/castor/proj/programs/homer-4.7/bin" >> testcodeHOMER
 
 while read line
     do
