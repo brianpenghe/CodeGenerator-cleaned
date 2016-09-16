@@ -19,7 +19,7 @@ while read line
 						echo 'wget -r --no-parent --no-check-certificate '$Download' ' >> testcode
 				elif [[ $(echo $line | cut -d' ' -f$k | cut -c1-3) == "ftp" ]]
 					then
-						echo 'wget --no-parent --no-check-certificate '$Download' ' >> testcode
+                        echo 'sleep 1s; wget --user-agent "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.85 Safari/537.36" --no-parent --no-check-certificate '$Download' ' >> testcode
 				fi
                 k=$k+1
             done
