@@ -16,7 +16,7 @@ echo "#*****************" >> testcodeTophatCufflinksStats
 
 
 #creating the header
-printf ' echo "file total_complexity processed mapped suppressed mapped2 " >> stats
+printf ' echo -n "file total_complexity processed mapped suppressed mapped2 " >> stats
  echo "' >> testcodeTophatCufflinksStats
 declare -A genomes
 genomes["mm9"]=$(echo {1..19} 'X' 'Y' 'M')
