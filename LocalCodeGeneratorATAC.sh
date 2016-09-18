@@ -15,7 +15,7 @@ source /woldlab/castor/home/phe/programs/GenomeDefinitions.sh $2
 
 source /woldlab/castor/home/phe/programs/Localrefolder.sh $1 $2 $3 $4
 
-/woldlab/castor/home/phe/programs/BowtieCodeGenerator.sh testFolderPath $4 $2 $3
+/woldlab/castor/home/phe/programs/BowtieCodeGenerator.sh testFolderPath $2 $3 $4
 
 /woldlab/castor/home/phe/programs/eRangeCode.sh testFolderPath $2 $3"mer"
 
