@@ -78,11 +78,11 @@ then
 
 elif [ "$1" == "mm10" ]
 then
-fa="/woldlab/castor/home/phe/genomes/mm10/male.mm10.chrom.fa"
-bowtieindex="/woldlab/castor/home/phe/genomes/mm10/male.mm10.chrom"
-chromsizes="/woldlab/castor/home/phe/genomes/mm10/male.mm10.chrom.sizes"
-blacklist="/woldlab/castor/home/phe/genomes/mm10/mm10blacklist_Ricardo.bed"
-mitoblack="/woldlab/castor/home/phe/genomes/mm10/male.mm10.chrom.chrM30merslS50000mD50s150fL0.bed"
+    fa="/woldlab/castor/home/phe/genomes/mm10/male.mm10.chrom.fa"
+    bowtieindex="/woldlab/castor/home/phe/genomes/mm10/male.mm10.chrom"
+    chromsizes="/woldlab/castor/home/phe/genomes/mm10/male.mm10.chrom.sizes"
+    blacklist="/woldlab/castor/home/phe/genomes/mm10/mm10blacklist_Ricardo.bed"
+    mitoblack="/woldlab/castor/home/phe/genomes/mm10/male.mm10.chrom.chrM30merslS50000mD50s150fL0.bed"
 
 elif [ "$1" == "hg19male" ]
 then
