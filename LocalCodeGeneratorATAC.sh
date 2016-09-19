@@ -3,7 +3,7 @@
 #the files must be fastq files, no compressed forms allowed
 #the file $test has two columns, Full Location Path and name, only one space allowed
 #each experiment folder contains a set of fastq files belonging to the same library
-# for example: /woldlab/castor/home/phe/ChIPseq   test1
+# for example: /woldlab/castor/home/phe/ChIPseq/   test1
 #delete the testFolderPath file
 #it generates three files: bowtieXXXXXX testcode & testFolderPath
 #usage: ~/programs/GECCodeGeneratorATAC.sh test mm9 36
