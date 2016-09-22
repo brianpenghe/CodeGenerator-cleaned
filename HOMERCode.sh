@@ -21,10 +21,10 @@ while read line
         printf "intersectBed -a "$line"."$2"."$3"lS50000mD50s150fL0.whole.bed -b "$mitoblack" -v | intersectBed -a - -b "$blacklist" -v > "$line"."$2"."$3"lS50000mD50s150fL0.bed && " >> testcodeHOMER
         printf "/woldlab/castor/proj/programs/x86_64/bedToBigBed "$line"."$2"."$3"lS50000mD50s150fL0.bed "$chromsizes" "$line"."$2"."$3"lS50000mD50s150fL0.bigBed && " >> testcodeHOMER
         printf "/woldlab/castor/proj/programs/x86_64/bedToBigBed "$line"."$2"."$3"lS50000mD50s150fL0.whole.bed "$chromsizes" "$line"."$2"."$3"lS50000mD50s150fL0.whole.bigBed && " >> testcodeHOMER
-        printf "echo 'RiP:' \$(intersectBed -abam $line."$2"."$3".unique.bam -b $line."$2"."$3"lS50000mD50s150fL0.bed | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c - ) > "$line"."$2"."$3".lS50000mD50s150fL0.stats && " >> testcodeHOMER
-        printf "echo 'RiPwhole:' \$(intersectBed -abam $line."$2"."$3".unique.bam -b $line."$2"."$3"lS50000mD50s150fL0.whole.bed | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c - ) >> "$line"."$2"."$3".lS50000mD50s150fL0.stats && " >> testcodeHOMER
-        printf "echo 'RiChrM:' \$(/woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c $line."$2"."$3".unique.bam chrM ) >> "$line"."$2"."$3".lS50000mD50s150fL0.stats && " >> testcodeHOMER
-        printf "echo 'Rtotal:' \$(/woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c $line."$2"."$3".unique.bam ) >> "$line"."$2"."$3".lS50000mD50s150fL0.stats & \n" >> testcodeHOMER
+        printf "echo 'RiP:' \$(intersectBed -abam $line."$2"."$3".unique.dup.bam -b $line."$2"."$3"lS50000mD50s150fL0.bed | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c - ) > "$line"."$2"."$3".lS50000mD50s150fL0.stats && " >> testcodeHOMER
+        printf "echo 'RiPwhole:' \$(intersectBed -abam $line."$2"."$3".unique.dup.bam -b $line."$2"."$3"lS50000mD50s150fL0.whole.bed | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c - ) >> "$line"."$2"."$3".lS50000mD50s150fL0.stats && " >> testcodeHOMER
+        printf "echo 'RiChrM:' \$(/woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c $line."$2"."$3".unique.dup.bam chrM ) >> "$line"."$2"."$3".lS50000mD50s150fL0.stats && " >> testcodeHOMER
+        printf "echo 'Rtotal:' \$(/woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c $line."$2"."$3".unique.dup.bam ) >> "$line"."$2"."$3".lS50000mD50s150fL0.stats & \n" >> testcodeHOMER
     done <$1
 
 chmod a+x testcodeHOMER

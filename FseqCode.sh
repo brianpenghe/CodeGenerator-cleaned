@@ -20,10 +20,10 @@ while read line
         printf "grep -v chrM "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.whole.bed | intersectBed -a - -b "$mitoblack" -v | intersectBed -a - -b "$blacklist" -v > "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.bed && " >> testcodeFseq
         printf "/woldlab/castor/proj/programs/x86_64/bedToBigBed "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.bed "$chromsizes" "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.bigBed && " >> testcodeFseq
         printf "/woldlab/castor/proj/programs/x86_64/bedToBigBed "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.whole.bed "$chromsizes" "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.whole.bigBed && " >> testcodeFseq
-        printf "echo 'RiP:' \$(intersectBed -abam $line."$2"."$3".unique.bam -b $line."$2"."$3".unique.nochrM.Fseq.v.f0.bed | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c - ) > "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.stats && " >> testcodeFseq
-        printf "echo 'RiPwhole:' \$(intersectBed -abam $line."$2"."$3".unique.bam -b $line."$2"."$3".unique.nochrM.Fseq.v.f0.whole.bed | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c - ) >> "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.stats && " >> testcodeFseq
-        printf "echo 'RiChrM:' \$(/woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c $line."$2"."$3".unique.bam chrM ) >> "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.stats && " >> testcodeFseq
-        printf "echo 'Rtotal:' \$(/woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c $line."$2"."$3".unique.bam ) >> "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.stats & \n" >> testcodeFseq
+        printf "echo 'RiP:' \$(intersectBed -abam $line."$2"."$3".unique.dup.bam -b $line."$2"."$3".unique.nochrM.Fseq.v.f0.bed | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c - ) > "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.stats && " >> testcodeFseq
+        printf "echo 'RiPwhole:' \$(intersectBed -abam $line."$2"."$3".unique.dup.bam -b $line."$2"."$3".unique.nochrM.Fseq.v.f0.whole.bed | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c - ) >> "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.stats && " >> testcodeFseq
+        printf "echo 'RiChrM:' \$(/woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c $line."$2"."$3".unique.dup.bam chrM ) >> "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.stats && " >> testcodeFseq
+        printf "echo 'Rtotal:' \$(/woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view -c $line."$2"."$3".unique.dup.bam ) >> "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.stats & \n" >> testcodeFseq
     done <$1
 
 chmod a+x testcodeFseq
