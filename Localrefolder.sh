@@ -16,7 +16,7 @@ while read line
         SampleMeta=$(echo $line | cut -d' ' -f2- | sed "s/\//_/g" | sed "s/ /_/g" | sed "s/#/_/g")
         OldDataPath=$(echo $Folders"/"$SampleID)
         path=$(echo $CurrentLo"/"$SampleID$SampleMeta)
-        printf "mv "$OldDataPath" "$path" && " >> testcode
+        printf "cat "$OldDataPath"/*.fastq > "$path".fastq && " >> testcode
         printf $path"\n" >> testFolderPath
         ~/programs/FastQCTrim.sh $4 $path $3
     done <$1
