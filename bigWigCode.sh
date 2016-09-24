@@ -17,7 +17,7 @@ printf "export PYTHONPATH=/woldlab/castor/home/hamrhein/src/python/packages \n" 
 while read line
     do
         printf "condor_run \"python /woldlab/castor/home/georgi/code/makewigglefromBAM-NH.py --- "$line"."$2"."$3".unique.nochrM.bam "$chromsizes" "$line"."$2"."$3".unique.bg4 -notitle -uniqueBAM -RPM\" && " >> testcodebigWig
-        printf "condor_run \"/woldlab/castor/proj/genome/programs/x86_64/wigToBigWig "$line"."$2"."$3".unique.bg4 "$chromsizes" "$line"."$2"."$3".unique.bigWig\" & \n" >> testcodebigWig
+        printf "condor_run \"/woldlab/castor/proj/genome/programs/x86_64/wigToBigWig -clip "$line"."$2"."$3".unique.bg4 "$chromsizes" "$line"."$2"."$3".unique.bigWig\" & \n" >> testcodebigWig
     done <$1
 
 chmod a+x testcodebigWig
