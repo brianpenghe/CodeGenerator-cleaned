@@ -14,7 +14,7 @@ echo "#*****************" >> testcodeeRange
 
 while read line
     do
-        printf "condor_run \"python /woldlab/castor/home/georgi/code/erange-4.0a/MakeRdsFromBam5.py reads "$line"."$2"."$3".unique.nochrM.bam "$line"."$2"."$3".unique.nochrM.rds --index --cache=20000000\" && " >> testcodeeRange
+        printf "condor_run -a request_memory=20000 \"python /woldlab/castor/home/georgi/code/erange-4.0a/MakeRdsFromBam5.py reads "$line"."$2"."$3".unique.nochrM.bam "$line"."$2"."$3".unique.nochrM.rds --index --cache=20000000\" && " >> testcodeeRange
         printf "python /woldlab/castor/home/georgi/code/commoncode/findall.py "$line"."$2"."$3".unique.nochrM.3x.2RPM- "$line"."$2"."$3".unique.nochrM.rds "$line"."$2"."$3".unique.nochrM.3x.2RPM.hts -minimum 2 -ratio 3 -listPeak -cache 20000000 -nodirectionality 2> "$line"."$2"."$3".unique.nochrM.3x.2RPM.err && " >> testcodeeRange
         printf "python /woldlab/castor/home/georgi/code/commoncode/findall.py "$line"."$2"."$3".unique.nochrM.5x.4RPM- "$line"."$2"."$3".unique.nochrM.rds "$line"."$2"."$3".unique.nochrM.5x.4RPM.hts -minimum 4 -ratio 5 -listPeak -cache 20000000 -nodirectionality 2> "$line"."$2"."$3".unique.nochrM.5x.4RPM.err && rm "$line"."$2"."$3".unique.nochrM.rds && rm "$line"."$2"."$3".unique.nochrM.rds.log && " >> testcodeeRange
         printf "python /woldlab/castor/home/georgi/code/commoncode/regiontobed.py --- "$line"."$2"."$3".unique.nochrM.3x.2RPM.hts "$line"."$2"."$3".unique.nochrM.3x.2RPM.bed -nolabel && " >> testcodeeRange
