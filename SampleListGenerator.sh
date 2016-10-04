@@ -25,8 +25,15 @@ while read line
                                             do
                                                 if [ $(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox$database$SubFlow$label -q -O - | grep $line | wc -l) != 0 ]
                                                     then
-                                                        project=$(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox$database$SubFlow$label -q -O - | grep $line | cut -d"\"" -f8)
-                                                        printf https://jumpgate.caltech.edu/runfolders/volvox$database$SubFlow$label$project"Sample_"$line"/ " >> $2
+                                                        wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox$database$SubFlow$label -q -O - | grep $line | cut -d"\"" -f8 > projects
+                                                        while read project
+                                                            do
+                                                                printf https://jumpgate.caltech.edu/runfolders/volvox$database$SubFlow$label$project"Sample_"$line"/ " >> $2
+                                                                if [[ $(wc -l projects) > 1 ]]
+                                                                    then
+                                                                        printf $(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/library/$line/ -q -O - | grep libns:name | cut -d"<" -f2 | cut -d">" -f2 | sed -r "s/[/\ %#;&~()]/_/g")$( echo $project | cut -d/ -f1 )"\n" >> $2
+                                                                fi
+                                                            done<projects
                                                         printf " got in volvox"$database$SubFlow$label
                                                         printf " got in volvox"$database$SubFlow$label >> SampleListGenerator.log
                                                         FlowN=$FlowN+1
@@ -42,7 +49,10 @@ while read line
                         printf "\n"
                         printf "\n" >> SampleListGenerator.log
                     done<Flowcell
-                wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/library/$line/ -q -O - | grep libns:name | cut -d"<" -f2 | cut -d">" -f2 | sed -r "s/[/\ %#;&~()]/_/g" >> $2
+                if [[ $(wc -l projects | cut -d' ' -f1 ) == 1 ]]
+                    then
+                        wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/library/$line/ -q -O - | grep libns:name | cut -d"<" -f2 | cut -d">" -f2 | sed -r "s/[/\ %#;&~()]/_/g" >> $2
+                fi
         else
             printf " no Flowcells found\n"
             printf " no Flowcells found\n" >> SampleListGenerator.log
