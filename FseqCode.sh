@@ -13,7 +13,7 @@ echo "#*****************" >> testcodeFseq
 
 while read line
     do
-        printf "condor_run -a request_memory=20000 \" /woldlab/castor/proj/programs/BEDTools-Version-2.10.1/bin/bamToBed -i "$line"."$2"."$3".unique.nochrM.bam > "$line"."$2"."$3".unique.nochrM.bed \" && " >> testcodeFseq
+        printf "condor_run -a request_memory=20000 \" /woldlab/castor/proj/programs/BEDTools-Version-2.10.1/bin/bamToBed -i "$line"."$2"."$3".unique.dup.nochrM.bam > "$line"."$2"."$3".unique.nochrM.bed \" && " >> testcodeFseq
         printf "mkdir "$line"."$2"."$3"FseqResults/ && " >> testcodeFseq
         printf "condor_run -a request_memory=20000 \" /woldlab/castor/proj/programs/fseq-1.84/bin/fseq -v -of bed -f 0 -o "$line"."$2"."$3"FseqResults/ "$line"."$2"."$3".unique.nochrM.bed \" && " >> testcodeFseq
         printf "cat "$line"."$2"."$3"FseqResults/*.bed | awk '{print \$1\"\\\t\"\$2\"\\\t\"\$3\"\\\t\"\$4\"\\\t225\\\t+\"}' - | sort -k 1d,1 -k 2n,2 > "$line"."$2"."$3".unique.nochrM.Fseq.v.f0.whole.bed && " >> testcodeFseq
