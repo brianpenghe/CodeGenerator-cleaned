@@ -28,10 +28,10 @@ while read line
                                                         wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox$database$SubFlow$label -q -O - | grep $line | cut -d"\"" -f8 > projects
                                                         while read project
                                                             do
-                                                                printf https://jumpgate.caltech.edu/runfolders/volvox$database$SubFlow$label$project"Sample_"$line"/ " >> $2
-                                                                if [[ $(wc -l projects) > 1 ]]
+                                                                printf "https://jumpgate.caltech.edu/runfolders/volvox"$database$SubFlow$label$project$(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox$database$SubFlow$label$project -q -O - | grep "Sample_"$line | cut -d\" -f8 | cut -d/ -f1 )"/ " >> $2
+                                                                if [[ $(wc -l projects | cut -d' ' -f1 ) -gt 1 ]]
                                                                     then
-                                                                        printf $(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/library/$line/ -q -O - | grep libns:name | cut -d"<" -f2 | cut -d">" -f2 | sed -r "s/[/\ %#;&~()]/_/g")$( echo $project | cut -d/ -f1 )"\n" >> $2
+                                                                        printf $(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/library/$line/ -q -O - | grep libns:name | cut -d"<" -f2 | cut -d">" -f2 | sed -r "s/[/\ %#;&~()]/_/g")$( echo $project | cut -d/ -f1 )"/\n" >> $2
                                                                 fi
                                                             done<projects
                                                         printf " got in volvox"$database$SubFlow$label
