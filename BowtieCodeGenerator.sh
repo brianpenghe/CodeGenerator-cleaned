@@ -5,7 +5,7 @@
 #usage: ./bowtieCodeGenerator.sh testFolderPath mm9 30mer
 CurrentLo=$(pwd)
 source ~/programs/GenomeDefinitions.sh $2
-echo '' >> testcodePostBowtie
+echo '' > testcodePostBowtie
 echo "#!/bin/bash" >> testcodePostBowtie
 echo "#bigWig (Index, SAMstats, idxstats) codes:" >> testcodePostBowtie 
 
@@ -31,6 +31,7 @@ while read line
     do
         printf "condor_run -a request_memory=20000 \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index "$line"."$2"."$3"mer.unique.dup.bam \" && " >> testcodePostBowtie
         printf "condor_run -a request_memory=20000 \"python /woldlab/castor/home/georgi/code/SAMstats.py "$line"."$2"."$3"mer.unique.dup.bam "$line"."$2"."$3"mer.SAMstats -bam "$chromsizes" /woldlab/castor/proj/programs/samtools-0.1.8/samtools \" && " >> testcodePostBowtie
+        printf "condor_run -a request_memory=20000 \"/woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools idxstats "$line"."$2"."$3"mer.unique.dup.bam > "$line"."$2"."$3"mer.dup.idxstats\" && " >> testcodePostBowtie
 		printf "condor_run -a request_memory=20000 \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools view "$line"."$2"."$3"mer.unique.dup.bam | egrep -v chrM | /woldlab/castor/proj/programs/samtools-0.1.8/samtools view -bT "$fa" - -o "$line"."$2"."$3"mer.unique.dup.nochrM.bam \" && " >> testcodePostBowtie
 		printf "condor_run -a request_memory=20000 \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index "$line"."$2"."$3"mer.unique.dup.nochrM.bam \" && " >> testcodePostBowtie
         printf "condor_run -a request_memory=20000 \"python /woldlab/castor/home/georgi/code/SAMstats.py "$line"."$2"."$3"mer.unique.dup.nochrM.bam "$line"."$2"."$3"mer.unique.nochrM.SAMstats -bam "$chromsizes" /woldlab/castor/proj/programs/samtools-0.1.8/samtools \" && " >> testcodePostBowtie
