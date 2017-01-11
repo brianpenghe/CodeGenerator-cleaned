@@ -11,12 +11,10 @@ if [[ "$4" != "SE" && "$4" != "PE" ]]
 fi
 while read line
     do
-        Folders=$(echo $line | cut -d' ' -f1 | rev | cut -d '/' -f2- | rev)
-        SampleID=$(echo $line | cut -d' ' -f1 | rev | cut -d '/' -f1 | rev)
+        Folders=$(echo $line | cut -d' ' -f1)
         SampleMeta=$(echo $line | cut -d' ' -f2- | sed "s/\//_/g" | sed "s/ /_/g" | sed "s/#/_/g")
-        OldDataPath=$(echo $Folders"/"$SampleID)
-        path=$(echo $CurrentLo"/"$SampleID$SampleMeta)
-        printf "cat "$OldDataPath"/*.fastq > "$path".fastq && " >> testcode
+        path=$(echo $CurrentLo"/"$Folders$SampleMeta)
+        printf "cat "$Folders"/*.fastq > "$path".fastq && " >> testcode
         printf $path"\n" >> testFolderPath
         ~/programs/FastQCTrim.sh $4 $path $3
     done <$1
