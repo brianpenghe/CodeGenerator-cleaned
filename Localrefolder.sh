@@ -14,7 +14,14 @@ while read line
         Folders=$(echo $line | cut -d' ' -f1)
         SampleMeta=$(echo $line | cut -d' ' -f2- | sed "s/\//_/g" | sed "s/ /_/g" | sed "s/#/_/g")
         path=$(echo $CurrentLo"/"$Folders$SampleMeta)
-        printf "cat "$Folders"/*.fastq > "$path".fastq && " >> testcode
+		if [[ "$4" == "PE" ]]
+			then
+				printf "cat "$Folders"/*R1.fastq > "$path"R1.fastq && " >> testcode
+				printf "cat "$Folders"/*R2.fastq > "$path"R2.fastq && " >> testcode
+		elif [[ "$4" == "SE" ]]
+			then
+				printf "cat "$Folders"/*.fastq > "$path".fastq && " >> testcode
+		fi
         printf $path"\n" >> testFolderPath
         ~/programs/FastQCTrim.sh $4 $path $3
     done <$1
