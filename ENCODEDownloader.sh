@@ -16,10 +16,10 @@ while read line
                 Download=$(echo $line | cut -d' ' -f$k)
 				if [[ $(echo $line | cut -d' ' -f$k | cut -c1-4) == "http" ]]
 					then
-						echo 'sleep 1s; curl -RL -u BUFXRY6P:hv7oczhoda2i6ygz '$Download' -o '$(echo $Download | rev | cut -d/ -f1 | rev) >> testcode
+						echo 'sleep 1s; curl -RL -u BUFXRY6P:hv7oczhoda2i6ygz \"'$Download'\" -o '$(echo $Download | rev | cut -d/ -f1 | rev) >> testcode
 				elif [[ $(echo $line | cut -d' ' -f$k | cut -c1-3) == "ftp" ]]
 					then
-                        echo 'sleep 1s; curl -RL -u BUFXRY6P:hv7oczhoda2i6ygz '$Download' -o '$(echo $Download | rev | cut -d/ -f1 | rev) >> testcode
+                        echo 'sleep 1s; curl -RL -u BUFXRY6P:hv7oczhoda2i6ygz \"'$Download'\" -o '$(echo $Download | rev | cut -d/ -f1 | rev) >> testcode
 				fi
                 k=$k+1
             done
