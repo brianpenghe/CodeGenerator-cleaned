@@ -113,6 +113,13 @@ then
     blacklist="/woldlab/castor/home/phe/genomes/hg38/hg19blacklist_liftedovertohg38.bed"
     mitoblack="hg38male.chrM30merslS50000mD50s150fL0.bed"
 
+elif [ "$1" == "dm3" ]
+then
+    fa="/woldlab/castor/proj/genome/bowtie-indexes/dm3.fa"
+    bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/dm3"
+    chromsizes="/woldlab/castor/proj/genome/bowtie-indexes/dm3.chrom.sizes"
+    mitoblack="/woldlab/castor/proj/genome/bowtie-indexes/dm3.chrM30merslS50000mD50s150fL0.bed"
+
 else
     printf "Genome Version not found"
     exit 1
