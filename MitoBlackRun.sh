@@ -1,6 +1,5 @@
 #!/bin/bash
 #Run these codes in the current SERVER directory
-#the testFolderPath file contains the paths
 #usage: ~/programs/MitoBlackRun mm9
 
 CurrentLo=$(pwd)
@@ -13,4 +12,4 @@ python ~/programs/genome-to-kmer-fasta.py $bowtieindex.chrM.fa $bowtieindex.chrM
 /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index $bowtieindex.chrM30mers.bam &&
 bedtools bamtobed -i $bowtieindex.chrM30mers.bam | sort -k 1d,1 -k 2n,3 | bedtools merge -i - > $bowtieindex.chrM30merslS50000mD50s150fL0.bed
 
-rm test
+rm test $bowtieindex.chrM30mers $bowtieindex.chrM30mers.bam $bowtieindex.chrM30mers.bam.bai $bowtieindex.chrM.fa
