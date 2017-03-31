@@ -119,6 +119,7 @@ then
     bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/dm3"
     chromsizes="/woldlab/castor/proj/genome/bowtie-indexes/dm3.chrom.sizes"
     mitoblack="/woldlab/castor/proj/genome/bowtie-indexes/dm3.chrM30merslS50000mD50s150fL0.bed"
+    blacklist="/woldlab/castor/proj/genome/bowtie-indexes/dm3-blacklist.bed"
 
 else
     printf "Genome Version not found"
