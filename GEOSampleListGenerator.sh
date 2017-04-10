@@ -2,13 +2,14 @@
 #SampleListGenerator.sh input output
 printf '' > $2
 printf '' > SampleListGenerator.log
+source /woldlab/castor/home/phe/programs/NovelCharacterDefinition.sh
 while read line
     do
         printf $line":"
         printf $line":" >> SampleListGenerator.log
         if [ $(sleep 1s; wget --no-check-certificate --user-agent "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.85 Safari/537.36" https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=$line -q -O - | grep 'ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByExp/sra' | wc -l) != 0 ]
             then
-				metadata=$(sleep 1s; wget --no-check-certificate --user-agent "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.85 Safari/537.36" https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=$line -q -O - | grep -A 1 Title | grep justify | cut -d\> -f2 | cut -d\< -f1 | sed -r "s/[/\ #;-&%~]()/_/g")
+				metadata=$(sleep 1s; wget --no-check-certificate --user-agent "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.85 Safari/537.36" https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=$line -q -O - | grep -A 1 Title | grep justify | cut -d\> -f2 | cut -d\< -f1 | sed -r "$ReplaceNovel")
                 SRXlink=$(sleep 1s; wget --no-check-certificate --user-agent "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.85 Safari/537.36" https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=$line -q -O - | grep 'ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByExp/sra' | cut -d\" -f4)
 				sleep 1s; wget --user-agent "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.85 Safari/537.36" $SRXlink/ -q -O - | grep SRR | cut -d\" -f2 > SRRlinks
                 while read SRRlink

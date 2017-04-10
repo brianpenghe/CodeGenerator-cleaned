@@ -12,7 +12,7 @@ fi
 while read line
     do
         Folders=$(echo $line | cut -d' ' -f1)
-        SampleMeta=$(echo $line | cut -d' ' -f2- | sed "s/\//_/g" | sed "s/ /_/g" | sed "s/#/_/g")
+        SampleMeta=$(echo $line | cut -d' ' -f2-)
         path=$(echo $CurrentLo"/"$Folders$SampleMeta)
 		if [[ "$4" == "PE" ]]
 			then

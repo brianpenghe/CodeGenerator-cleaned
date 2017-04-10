@@ -2,7 +2,7 @@
 #SampleListGenerator.sh input output
 printf '' > $2
 printf '' > SampleListGenerator.log
-
+source /woldlab/castor/home/phe/programs/NovelCharacterDefinition.sh
 while read line
     do
         printf $line":"
@@ -31,7 +31,7 @@ while read line
                                                                 printf "https://jumpgate.caltech.edu/runfolders/volvox"$database$SubFlow$label$project$(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/runfolders/volvox$database$SubFlow$label$project -q -O - | grep "Sample_"$line | cut -d\" -f8 | cut -d/ -f1 )"/ " >> $2
                                                                 if [[ $(wc -l projects | cut -d' ' -f1 ) -gt 1 ]]
                                                                     then
-                                                                        printf $(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/library/$line/ -q -O - | grep libns:name | cut -d"<" -f2 | cut -d">" -f2 | sed -r "s/[/\ %#;&~()]/_/g")$( echo $project | cut -d/ -f1 )"/\n" >> $2
+                                                                        printf $(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/library/$line/ -q -O - | grep libns:name | cut -d"<" -f2 | cut -d">" -f2 | sed -r "$ReplaceNovel")$( echo $project | cut -d/ -f1 )"/\n" >> $2
                                                                 fi
                                                             done<projects
                                                         printf " got in volvox"$database$SubFlow$label
@@ -51,7 +51,7 @@ while read line
                     done<Flowcell
                 if [[ $(wc -l projects | cut -d' ' -f1 ) == 1 ]]
                     then
-                        wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/library/$line/ -q -O - | grep libns:name | cut -d"<" -f2 | cut -d">" -f2 | sed -r "s/[/\ %#;&~()]/_/g" >> $2
+                        wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/library/$line/ -q -O - | grep libns:name | cut -d"<" -f2 | cut -d">" -f2 | sed -r "$ReplaceNovel" >> $2
                 fi
         else
             printf " no Flowcells found\n"
