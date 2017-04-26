@@ -121,6 +121,13 @@ then
     mitoblack="/woldlab/castor/proj/genome/bowtie-indexes/dm3.chrM30merslS50000mD50s150fL0.bed"
     blacklist="/woldlab/castor/proj/genome/bowtie-indexes/dm3-blacklist.bed"
 
+elif [ "$1" == "danRer10" ]
+then
+    fa="/woldlab/castor/proj/genome/bowtie-indexes/danRer10.fa"
+    bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/danRer10"
+    chromsizes="/woldlab/castor/proj/genome/bowtie-indexes/danRer10.chrom.sizes"
+    mitoblack="/woldlab/castor/proj/genome/bowtie-indexes/danRer10.chrM30merslS50000mD50s150fL0.bed"
+    blacklist="/woldlab/castor/proj/genome/bowtie-indexes/danRer10.chrM30merslS50000mD50s150fL0.bed"
 else
     printf "Genome Version not found"
     exit 1
