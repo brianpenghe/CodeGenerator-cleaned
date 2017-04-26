@@ -50,6 +50,11 @@ elif [ "$2" == "dm3" ]
         printf '
             echo "file total_complexity nucleus_complexity eRange3x2Peaks eRange5x4Peaks F-seqPeaksAll F-seqPeaks F-seqFRiP HOMERpeaksAll HOMERpeaks HOMERFRiP processed unique failed suppressed chr2L_reads chr2LHet_reads chr2R_reads chr2RHet_reads chr3L_reads chr3LHet_reads chr3R_reads chr3RHet_reads chr4_reads chrU_reads chrUextra_reads chrX_reads chrXHet_reads chrYHet_reads chrM_reads " >> stats
         ' >> testcodeStats
+elif [ "$2" == "danRer10" ]
+    then
+        printf '
+            echo "file total_complexity nucleus_complexity eRange3x2Peaks eRange5x4Peaks F-seqPeaksAll F-seqPeaks F-seqFRiP HOMERpeaksAll HOMERpeaks HOMERFRiP processed unique failed suppressed chr1_reads chr2_reads chr3_reads chr4_reads chr5_reads chr6_reads chr7_reads chr8_reads chr9_reads chr10_reads chr11_reads chr12_reads chr13_reads chr14_reads chr15_reads chr16_reads chr17_reads chr18_reads chr19_reads chr20_reads chr21_reads chr22_reads chr23_reads chr24_reads chr25_reads chrM_reads " >> stats
+        ' >> testcodeStats
 else exit "error in genome version"
 fi
 
@@ -138,7 +143,15 @@ elif [ "$2" == "dm3" ]
         printf '
             echo $chr2L_reads $chr2LHet_reads $chr2R_reads $chr2RHet_reads $chr3L_reads $chr3LHet_reads $chr3R_reads $chr3RHet_reads $chr4_reads $chrU_reads $chrUextra_reads $chrX_reads $chrXHet_reads $chrYHet_reads $chrM_reads >> stats
         ' >> testcodeStats
-
+elif [ "$2" == "danRer10" ]
+    then
+        for i in {1..25} 'M'
+            do
+                echo "        chr"$i"_reads=\$(egrep -w 'chr"$i"' "\$line"."$2"."$3"mer.idxstats | cut -f3 | awk '{sum+=\$1} END {print sum}')" >> testcodeStats
+            done 
+        printf '
+            echo $chr1_reads $chr2_reads $chr3_reads $chr4_reads $chr5_reads $chr6_reads $chr7_reads $chr8_reads $chr9_reads $chr10_reads $chr11_reads $chr12_reads $chr13_reads $chr14_reads $chr15_reads $chr16_reads $chr17_reads $chr18_reads $chr19_reads $chr20_reads $chr21_reads $chr22_reads $chr23_reads $chr24_reads $chr25_reads $chrM_reads >> stats
+        ' >> testcodeStats
 else exit "error in genome version"
 fi
 
