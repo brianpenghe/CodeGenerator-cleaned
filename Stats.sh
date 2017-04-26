@@ -83,77 +83,25 @@ while read line
         $(cat shell.$k.err | grep suppressed - | cut -d: -f2 | cut -d"(" -f1 ) " " >> stats
 ' >> testcodeStats
 
-if [ "$2" == "mm9" ]
-    then
-        for i in {1..19} 'X' 'Y' 'M'
-            do
-                echo "        chr"$i"_reads=\$(egrep -w 'chr"$i"' "\$line"."$2"."$3"mer.idxstats | cut -f3 | awk '{sum+=\$1} END {print sum}')" >> testcodeStats
-                    done
-        printf '
-            echo $chr1_reads $chr2_reads $chr3_reads $chr4_reads $chr5_reads $chr6_reads $chr7_reads $chr8_reads $chr9_reads $chr10_reads $chr11_reads $chr12_reads $chr13_reads $chr14_reads $chr15_reads $chr16_reads $chr17_reads $chr18_reads $chr19_reads $chrX_reads $chrY_reads $chrM_reads >> stats
-        ' >> testcodeStats
-elif [ "$2" == "mm10" ]
-    then
-        for i in {1..19} 'X' 'Y' 'M'
-            do
-                echo "        chr"$i"_reads=\$(egrep -w 'chr"$i"' "\$line"."$2"."$3"mer.idxstats | cut -f3 | awk '{sum+=\$1} END {print sum}')" >> testcodeStats
-            done
-        printf '
-            echo $chr1_reads $chr2_reads $chr3_reads $chr4_reads $chr5_reads $chr6_reads $chr7_reads $chr8_reads $chr9_reads $chr10_reads $chr11_reads $chr12_reads $chr13_reads $chr14_reads $chr15_reads $chr16_reads $chr17_reads $chr18_reads $chr19_reads $chrX_reads $chrY_reads $chrM_reads >> stats
-        ' >> testcodeStats
-elif [ "$2" == "hg19male" -o "$2" == "hg38" ]
-    then
-        for i in {1..22} 'X' 'Y' 'M'
-            do
-                echo "        chr"$i"_reads=\$(egrep -w 'chr"$i"' "\$line"."$2"."$3"mer.idxstats | cut -f3 | awk '{sum+=\$1} END {print sum}')" >> testcodeStats
-            done
-        printf '
-            echo $chr1_reads $chr2_reads $chr3_reads $chr4_reads $chr5_reads $chr6_reads $chr7_reads $chr8_reads $chr9_reads $chr10_reads $chr11_reads $chr12_reads $chr13_reads $chr14_reads $chr15_reads $chr16_reads $chr17_reads $chr18_reads $chr19_reads $chr20_reads $chr21_reads $chr22_reads $chrX_reads $chrY_reads $chrM_reads >> stats
-        ' >> testcodeStats
+declare -A genomes
+genomes["mm9"]=$(echo {1..19} 'X' 'Y' 'M')
+genomes["mm9full"]=$(echo {1..19} 'X' 'Y' 'M')
+genomes["mm10"]=$(echo {1..19} 'X' 'Y' 'M')
+genomes["mm10full"]=$(echo {1..19} 'X' 'Y' 'M')
+genomes["hg19male"]=$(echo {1..19} 'X' 'Y' 'M')
+genomes["hg19female"]=$(echo {1..22} 'X' 'M')
+genomes["hg38"]=$(echo {1..22} 'X' 'Y' 'M')
+genomes["galGal4"]=$(echo {1..28} 32 'W' 'Z' 'M' 'LGE64')
+genomes["galGal4full"]=$(echo {1..28} 32 'W' 'Z' 'M' 'LGE64')
+genomes["dm3"]=$(echo '2L' '2LHet' '2R' '2RHet' '3L' '3LHet' '3R' '3RHet' '4' 'U' 'Uextra' 'X' 'XHet' 'YHet' 'M')
+genomes["danRer10"]=$(echo {1..25} 'M')
 
-elif [ "$2" == "hg19female" ]
-    then
-        for i in {1..22} 'X' 'M'
-            do
-                echo "        chr"$i"_reads=\$(egrep -w 'chr"$i"' "\$line"."$2"."$3"mer.idxstats | cut -f3 | awk '{sum+=\$1} END {print sum}')" >> testcodeStats
-            done
-        printf '
-            echo $chr1_reads $chr2_reads $chr3_reads $chr4_reads $chr5_reads $chr6_reads $chr7_reads $chr8_reads $chr9_reads $chr10_reads $chr11_reads $chr12_reads $chr13_reads $chr14_reads $chr15_reads $chr16_reads $chr17_reads $chr18_reads $chr19_reads $chr20_reads $chr21_reads $chr22_reads $chrX_reads $chrM_reads >> stats
-        ' >> testcodeStats
-
-elif [ "$2" == "galGal4" ]
-    then
-        for i in {1..28} 32 'W' 'Z' 'M' 'LGE64'
-            do
-                echo "        chr"$i"_reads=\$(egrep -w 'chr"$i"' "\$line"."$2"."$3"mer.idxstats | cut -f3 | awk '{sum+=\$1} END {print sum}')" >> testcodeStats
-            done
-        printf '
-            echo $chr1_reads $chr2_reads $chr3_reads $chr4_reads $chr5_reads $chr6_reads $chr7_reads $chr8_reads $chr9_reads $chr10_reads $chr11_reads $chr12_reads $chr13_reads $chr14_reads $chr15_reads $chr16_reads $chr17_reads $chr18_reads $chr19_reads $chr20_reads $chr21_reads $chr22_reads $chr23_reads $chr24_reads $chr25_reads $chr26_reads $chr27_reads $chr28_reads $chr32_reads $chrW_reads $chrZ_reads $chrM_reads $chrLGE64_reads >> stats
-        ' >> testcodeStats
-
-elif [ "$2" == "strPur2" -o "$2" == "galGal4full" ]
-    then
-        printf "skip stats.sh"
-elif [ "$2" == "dm3" ]
-    then
-        for i in '2L' '2LHet' '2R' '2RHet' '3L' '3LHet' '3R' '3RHet' '4' 'U' 'Uextra' 'X' 'XHet' 'YHet' 'M'
-            do
-                echo "        chr"$i"_reads=\$(egrep -w 'chr"$i"' "\$line"."$2"."$3"mer.idxstats | cut -f3 | awk '{sum+=\$1} END {print sum}')" >> testcodeStats
-            done 
-        printf '
-            echo $chr2L_reads $chr2LHet_reads $chr2R_reads $chr2RHet_reads $chr3L_reads $chr3LHet_reads $chr3R_reads $chr3RHet_reads $chr4_reads $chrU_reads $chrUextra_reads $chrX_reads $chrXHet_reads $chrYHet_reads $chrM_reads >> stats
-        ' >> testcodeStats
-elif [ "$2" == "danRer10" ]
-    then
-        for i in {1..25} 'M'
-            do
-                echo "        chr"$i"_reads=\$(egrep -w 'chr"$i"' "\$line"."$2"."$3"mer.idxstats | cut -f3 | awk '{sum+=\$1} END {print sum}')" >> testcodeStats
-            done 
-        printf '
-            echo $chr1_reads $chr2_reads $chr3_reads $chr4_reads $chr5_reads $chr6_reads $chr7_reads $chr8_reads $chr9_reads $chr10_reads $chr11_reads $chr12_reads $chr13_reads $chr14_reads $chr15_reads $chr16_reads $chr17_reads $chr18_reads $chr19_reads $chr20_reads $chr21_reads $chr22_reads $chr23_reads $chr24_reads $chr25_reads $chrM_reads >> stats
-        ' >> testcodeStats
-else exit "error in genome version"
-fi
+printf "echo -n" >> testcodeStats 
+for i in $(echo "${genomes[$2]}")
+    do
+        echo -n " \$(egrep -w 'chr"$i"' "\$line"."$2"."$3"mer.idxstats | cut -f3 | awk '{sum+=\$1} END {print sum}')" >> testcodeStats
+    done
+printf " >> stats\n" >> testcodeStats
 
 printf '
     k=$k+1
