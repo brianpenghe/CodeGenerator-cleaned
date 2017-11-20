@@ -2,7 +2,7 @@
 #Run these codes in the current SERVER directory
 #the file $test has two columns, link and name, only one space allowed
 
-#usage: ./STARCodeGenerator.sh testFolderPath mm9 30mer PE
+#usage: ./STARCodeGenerator.sh testFolderPath mm9 30 PE
 CurrentLo=$(pwd)
 source ~/programs/GenomeDefinitions.sh $2
 
@@ -40,7 +40,7 @@ while read path
                 READ2=""
                 EXTRA_ARGS="--outSAMstrandField intronMotif"
         fi
-        echo -e 'arguments="--genomeDir /woldlab/castor/home/diane/proj/genome/mm10-M4-male' \
+        echo -e 'arguments="--genomeDir' $genomeDir \
             '--readFilesIn' $READ1 $READ2 \
             '--readFilesCommand zcat' \
             '--runThreadN' 8 \
@@ -62,7 +62,7 @@ while read path
             '--quantMode TranscriptomeSAM GeneCounts' \
             '--sjdbScore 1' \
             '--limitBAMsortRAM 30000000000' \
-            "--outFileNamePrefix "$path"."$2"."$3 \
+            "--outFileNamePrefix "$path"."$2"."$3"mer" \
             $EXTRA_ARGS \
             '"\nqueue\n' >> STAR$STARdate.condor
     done <$1

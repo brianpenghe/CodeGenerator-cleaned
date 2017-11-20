@@ -83,6 +83,7 @@ then
     chromsizes="/woldlab/castor/home/phe/genomes/mm10/male.mm10.chrom.sizes"
     blacklist="/woldlab/castor/home/phe/genomes/mm10/mm10blacklist_Ricardo.bed"
     mitoblack="/woldlab/castor/home/phe/genomes/mm10/male.mm10.chrom.chrM30merslS50000mD50s150fL0.bed"
+    genomeDir="/woldlab/castor/home/diane/proj/genome/mm10-M4-male"
 
 elif [ "$1" == "hg19male" ]
 then
@@ -91,6 +92,8 @@ then
     chromsizes="/woldlab/castor/home/georgi/genomes/hg19/hg19-male-single-cell-NIST-fixed-spikes.chrom.sizes"
     blacklist="/woldlab/castor/home/phe/genomes/hg19/blacklist/wgEncodeDacMapabilityConsensusExcludable.bed"
     mitoblack="/woldlab/castor/home/phe/genomes/hg19/blacklist/ENCFF001RGR+spikes.chrM30merslS50000mD50s150fL0.bed"
+    genomeDir="/woldlab/castor/home/diane/proj/genome/hg19-V19-male"
+
 elif [ "$1" == "hg19female" ]
 then
     fa="/woldlab/castor/proj/genome/bowtie-indexes/ENCFF001RGS+spikes.fa"
