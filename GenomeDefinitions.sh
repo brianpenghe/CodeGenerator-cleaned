@@ -83,7 +83,8 @@ then
     chromsizes="/woldlab/castor/home/phe/genomes/mm10/male.mm10.chrom.sizes"
     blacklist="/woldlab/castor/home/phe/genomes/mm10/mm10blacklist_Ricardo.bed"
     mitoblack="/woldlab/castor/home/phe/genomes/mm10/male.mm10.chrom.chrM30merslS50000mD50s150fL0.bed"
-    genomeDir="/woldlab/castor/home/diane/proj/genome/mm10-M4-male"
+    STARDir="/woldlab/castor/home/diane/proj/genome/mm10-M4-male"
+    RsemDir="/woldlab/castor/home/diane/proj/genome/mm10-M4-male/rsem"
 
 elif [ "$1" == "hg19male" ]
 then
@@ -92,7 +93,8 @@ then
     chromsizes="/woldlab/castor/home/georgi/genomes/hg19/hg19-male-single-cell-NIST-fixed-spikes.chrom.sizes"
     blacklist="/woldlab/castor/home/phe/genomes/hg19/blacklist/wgEncodeDacMapabilityConsensusExcludable.bed"
     mitoblack="/woldlab/castor/home/phe/genomes/hg19/blacklist/ENCFF001RGR+spikes.chrM30merslS50000mD50s150fL0.bed"
-    genomeDir="/woldlab/castor/home/diane/proj/genome/hg19-V19-male"
+    STARDir="/woldlab/castor/home/diane/proj/genome/hg19-V19-male"
+    RsemDir="/woldlab/castor/home/diane/proj/genome/hg19-V19-male/rsem"
 
 elif [ "$1" == "hg19female" ]
 then
@@ -131,6 +133,9 @@ then
     chromsizes="/woldlab/castor/proj/genome/bowtie-indexes/danRer10.chrom.sizes"
     mitoblack="/woldlab/castor/proj/genome/bowtie-indexes/danRer10.chrM30merslS50000mD50s150fL0.bed"
     blacklist="/woldlab/castor/proj/genome/bowtie-indexes/danRer10.chrM30merslS50000mD50s150fL0.bed"
+    STARDir="/woldlab/castor/home/phe/genomes/danRer10"
+    RsemDir="/woldlab/castor/home/phe/genomes/danRer10/rsem"
+
 else
     printf "Genome Version not found"
     exit 1
