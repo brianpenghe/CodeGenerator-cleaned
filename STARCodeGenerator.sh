@@ -40,9 +40,8 @@ while read path
                 READ2=""
                 EXTRA_ARGS="--outSAMstrandField intronMotif"
         fi
-        echo -e 'arguments="--genomeDir' $genomeDir \
+        echo -e 'arguments="--genomeDir' $STARDir \
             '--readFilesIn' $READ1 $READ2 \
-            '--readFilesCommand zcat' \
             '--runThreadN' 8 \
             '--genomeLoad NoSharedMemory' \
             '--outFilterMultimapNmax 20' \
