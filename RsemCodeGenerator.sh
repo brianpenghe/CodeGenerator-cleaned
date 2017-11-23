@@ -34,14 +34,15 @@ while read path
                 echo -e 'arguments="--bam --estimate-rspd --calc-ci' --seed 12345 -p 8 \
                     '--no-bam-output --ci-memory 30000 --paired-end --forward-prob 0.5 ' \
                     '--temporary-folder' $CurrentLo/temp \
-                    $path"."$2"."$3"mer_anno.bam" $RsemDir $path"."$2"."$3"mer_anno_rsem" >> Rsem$Rsemdate.condor
+                    $path"."$2"."$3"merAligned.toTranscriptome.out.bam" $RsemDir $path"."$2"."$3"merAligned.toTranscriptome.out.rsem" \
+                    '"\nqueue\n'>> Rsem$Rsemdate.condor
 
         elif [[ "$4" == "SE" ]]
             then
                 echo -e 'arguments="--bam --estimate-rspd --calc-ci' --seed 12345 -p 8 \
                     '--no-bam-output --ci-memory 30000' \
                     '--temporary-folder' $CurrentLo/temp \
-                    $path"."$2"."$3"mer_anno.bam" $RsemDir $path"."$2"."$3"mer_anno_rsem" >> Rsem$Rsemdate.condor
+                    $path"."$2"."$3"merAligned.toTranscriptome.out.bam" $RsemDir $path"."$2"."$3"merAligned.toTranscriptome.out.rsem" \
+                    '"\nqueue\n'>> Rsem$Rsemdate.condor
         fi
-        echo -e '"\nqueue\n' >> Rsem$Rsemdate.condor
     done <$1
