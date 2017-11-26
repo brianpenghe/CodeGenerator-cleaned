@@ -133,8 +133,8 @@ then
     chromsizes="/woldlab/castor/proj/genome/bowtie-indexes/danRer10.chrom.sizes"
     mitoblack="/woldlab/castor/proj/genome/bowtie-indexes/danRer10.chrM30merslS50000mD50s150fL0.bed"
     blacklist="/woldlab/castor/proj/genome/bowtie-indexes/danRer10.chrM30merslS50000mD50s150fL0.bed"
-    STARDir="/woldlab/castor/home/phe/genomes/danRer10"
-    RsemDir="/woldlab/castor/home/phe/genomes/danRer10/rsem"
+    STARDir="/woldlab/castor/home/phe/genomes/danRer10-UCSC"
+    RsemDir="/woldlab/castor/home/phe/genomes/danRer10-UCSC/rsem"
 
 else
     printf "Genome Version not found"
