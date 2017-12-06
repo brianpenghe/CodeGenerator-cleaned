@@ -19,12 +19,15 @@ echo "#*****************" >> testcodeTophatCufflinksStats
 printf ' echo -n "file total_complexity processed mapped suppressed mapped2 " >> stats
  echo "' >> testcodeTophatCufflinksStats
 declare -A genomes
+declare -A minigenomes
 genomes["mm9"]=$(echo {1..19} 'X' 'Y' 'M')
+genomes["mm9full"]=$(echo {1..19} 'X' 'Y' 'M')
 genomes["mm10"]=$(echo {1..19} 'X' 'Y' 'M')
-genomes["hg19male"]=$(echo {1..19} 'X' 'Y' 'M')
-genomes["hg19female"]=$(echo {1..22} 'X' 'Y' 'M')
-genomes["hg38"]=$(echo {1..19} 'X' 'Y' 'M')
-
+genomes["mm10full"]=$(echo {1..19} 'X' 'Y' 'M')
+genomes["hg19male"]=$(echo {1..22} 'X' 'Y' 'M')
+genomes["hg19female"]=$(echo {1..22} 'X' 'M')
+genomes["hg38"]=$(echo {1..22} 'X' 'Y' 'M')
+genomes["danRer10"]=$(echo {1..25} 'M')
 
 if [[ "$(echo "${genomes[$2]}")" == "" ]]
     then echo "error in genome version"
