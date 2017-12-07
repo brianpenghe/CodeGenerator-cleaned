@@ -3,8 +3,8 @@
 #the file testFolderPath has the list of file locations
 
 
-#usage: ~/programs/Stats.sh testFolderPath mm9 30mer
-
+#usage: ~/programs/Stats.sh testFolderPath mm9 30
+#This version considers reads before duplication-removal. If you want to check stats after removal, please use *mer.idxstat files
 echo '' > testcodeStats
 
 CurrentLo=$(pwd)
@@ -99,7 +99,7 @@ genomes["danRer10"]=$(echo {1..25} 'M')
 printf "echo -n" >> testcodeStats 
 for i in $(echo "${genomes[$2]}")
     do
-        echo -n " \$(egrep -w 'chr"$i"' "\$line"."$2"."$3"mer.idxstats | cut -f3 | awk '{sum+=\$1} END {print sum}')" >> testcodeStats
+        echo -n " \$(egrep -w 'chr"$i"' "\$line"."$2"."$3"mer.dup.idxstats | cut -f3 | awk '{sum+=\$1} END {print sum}')" >> testcodeStats
     done
 printf " >> stats\n" >> testcodeStats
 
