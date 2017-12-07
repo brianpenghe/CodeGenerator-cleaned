@@ -136,6 +136,12 @@ then
     STARDir="/woldlab/castor/home/phe/genomes/danRer10-UCSC"
     RsemDir="/woldlab/castor/home/phe/genomes/danRer10-UCSC/rsem"
 
+elif [ "$1" == "W3110" ]
+then
+    fa="/woldlab/castor/home/phe/genomes/K-12W3110/K-12W3110.fasta"
+    bowtieindex="/woldlab/castor/home/phe/genomes/K-12W3110/bowtie1-index/K-12W3110"
+    chromsizes="/woldlab/castor/home/phe/genomes/K-12W3110/bowtie1-index/K-12W3110.chrom.sizes"
+
 else
     printf "Genome Version not found"
     exit 1
