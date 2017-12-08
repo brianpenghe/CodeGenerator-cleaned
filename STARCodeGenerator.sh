@@ -9,6 +9,7 @@ source ~/programs/GenomeDefinitions.sh $2
 STARdate=$(date +"%y%m%d")
 
 echo '' > STAR$STARdate.condor
+echo '' > STARtranscriptomebams
 printf '''
 universe=vanilla
 log=align-star-$(Process).log
@@ -24,6 +25,10 @@ request_disk = 60G
 executable=$(STAR_DIR)STAR
 transfer_executable=false
 should_transfer_files=IF_NEEDED
+
+should_transfer_files=Always
+when_to_transfer_output=ON_EXIT
+transfer_input_files=/woldlab/castor/home/phe/programs/SamtoolsSort.sh
 
 ''' >> STAR$STARdate.condor
 
@@ -62,6 +67,7 @@ while read path
             '--sjdbScore 1' \
             '--limitBAMsortRAM 30000000000' \
             "--outFileNamePrefix "$path"."$2"."$3"mer" \
-            $EXTRA_ARGS \
-            '"\nqueue\n' >> STAR$STARdate.condor
+            $EXTRA_ARGS' "' >> STAR$STARdate.condor
+        echo -e '+PostCmd="SamtoolsSort.sh"\n+PostArguments="'$path'.'$2'.'$3'merAligned.toTranscriptome.out.bam"\nqueue\n'>> STAR$STARdate.condor
     done <$1
+
