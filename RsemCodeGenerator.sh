@@ -2,7 +2,7 @@
 #Run these codes in the current SERVER directory
 #the file $test has two columns, link and name, only one space allowed
 
-#usage: ./STARCodeGenerator.sh testFolderPath mm9 30 PE
+#usage: ./RsemCodeGenerator.sh testFolderPath mm9 30 PE
 CurrentLo=$(pwd)
 source ~/programs/GenomeDefinitions.sh $2
 
@@ -27,22 +27,19 @@ should_transfer_files=IF_NEEDED
 
 ''' >> Rsem$Rsemdate.condor
 echo "initialdir="$CurrentLo >> Rsem$Rsemdate.condor
+if [[ "$4" == "PE" ]]
+    then
+        PEparameter="--paired-end --forward-prob 0.5"
+elif [[ "$4" == "SE" ]]
+    then
+        PEparameter=""
+fi
+
 while read path
     do
-        if [[ "$4" == "PE" ]]
-            then
-                echo -e 'arguments="--bam --estimate-rspd --calc-ci' --seed 12345 -p 8 \
-                    '--no-bam-output --ci-memory 30000 --paired-end --forward-prob 0.5 ' \
-                    '--temporary-folder' $CurrentLo/temp \
-                    $path"."$2"."$3"merAligned.toTranscriptome.out.bam" $RsemDir $path"."$2"."$3"merAligned.toTranscriptome.out.rsem" \
-                    '"\nqueue\n'>> Rsem$Rsemdate.condor
-
-        elif [[ "$4" == "SE" ]]
-            then
-                echo -e 'arguments="--bam --estimate-rspd --calc-ci' --seed 12345 -p 8 \
-                    '--no-bam-output --ci-memory 30000' \
-                    '--temporary-folder' $CurrentLo/temp \
-                    $path"."$2"."$3"merAligned.toTranscriptome.out.bam" $RsemDir $path"."$2"."$3"merAligned.toTranscriptome.out.rsem" \
-                    '"\nqueue\n'>> Rsem$Rsemdate.condor
-        fi
+        echo -e 'arguments="--bam --estimate-rspd --calc-ci' --seed 12345 -p 8 \
+                '--no-bam-output --ci-memory 30000 '$PEparameter \
+                '--temporary-folder' $CurrentLo/temp \
+                $path"."$2"."$3"merAligned.toTranscriptome.out.sorted.bam" $RsemDir $path"."$2"."$3"merAligned.toTranscriptome.out.sorted.rsem" \
+                '"\nqueue\n'>> Rsem$Rsemdate.condor
     done <$1
