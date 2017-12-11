@@ -1,28 +1,42 @@
 #!/bin/bash
 #Run these codes in the current SERVER directory
-#the file testFolderPath has the list of file locations
+#the file $test has two columns, link and name, only one space allowed
 
-
-#usage: ~/programs/STARbigWigCoverageCode.sh testFolderpath mm9 36mer
-
-echo '' >> testcodeSTARbigWig
+#usage: ./STARCodeGenerator.sh testFolderPath mm9 30
 CurrentLo=$(pwd)
 source ~/programs/GenomeDefinitions.sh $2
 
-echo "#!/bin/bash" >> testcodeSTARbigWig
-echo "#bigWig (Index, SAMstats, idxstats, bedgraph, make5prime, wigToBigwig) codes:" >> testcodeSTARbigWig
-echo "#*****************" >> testcodeSTARbigWig
+STARdate=$(date +"%y%m%d")
 
-printf "export PYTHONPATH=/woldlab/castor/home/hamrhein/src/python/packages \n" >> testcodeSTARbigWig
-while read line
+echo '' > bedgraph$STARdate.condor
+printf '''
+universe=vanilla
+log=bedgraph-star-$(Process).log
+output=bedgraph-star-$(Process).out
+error=bedgraph-star-$(Process).err
+
+STAR_DIR=/woldlab/castor/proj/programs/STAR-2.5.2a/bin/Linux_x86_64/
+
+request_cpus = 1
+request_memory = 4G
+
+executable=$(STAR_DIR)STAR
+transfer_executable=false
+should_transfer_files=IF_NEEDED
+
+#should_transfer_files=Always
+#when_to_transfer_output=ON_EXIT
+#transfer_input_files=/woldlab/castor/home/phe/programs/SamtoolsSort.sh
+
+''' >> bedgraph$STARdate.condor
+
+while read path
     do
-        printf "/woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index "$line"."$2"."$3"Aligned.sortedByCoord.out.bam &&  " >> testcodeSTARbigWig
-        printf "python /woldlab/castor/home/georgi/code/SAMstats.py "$line"."$2"."$3"Aligned.sortedByCoord.out.bam "$line"."$2"."$3".SAMstats -bam "$chromsizes" /woldlab/castor/proj/programs/samtools-0.1.8/samtools && " >> testcodeSTARbigWig
-        printf "/woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools idxstats "$line"."$2"."$3"Aligned.sortedByCoord.out.bam > "$line"."$2"."$3".idxstats && " >> testcodeSTARbigWig
-        printf "python /woldlab/castor/home/hamrhein/bin/bamToBedGraph.py --match --unique --splice --chromonly --normalize --verbose "$line"."$2"."$3"Aligned.sortedByCoord.out.bam "$line"."$2"."$3".STAR.wig && " >> testcodeSTARbigWig
-        printf "python /woldlab/castor/home/georgi/code/makewigglefromBAM-NH.py --- "$line"."$2"."$3"Aligned.sortedByCoord.out.bam "$chromsizes" "$line"."$2"."$3".STAR.All.wig -notitle -RPM && " >> testcodeSTARbigWig
-        printf "/woldlab/castor/proj/genome/programs/x86_64/wigToBigWig -clip "$line"."$2"."$3".STAR.wig "$chromsizes" "$line"."$2"."$3".STAR.bigWig && " >> testcodeSTARbigWig
-        printf "/woldlab/castor/proj/genome/programs/x86_64/wigToBigWig -clip "$line"."$2"."$3".STAR.All.wig "$chromsizes" "$line"."$2"."$3".STAR.All.bigWig & \n" >> testcodeSTARbigWig
+        echo -e 'arguments="--runMode inputAlignmentsFromBAM' \
+        '--inputBAMfile '$path'.'$2'.'$3'merAligned.sortedByCoord.out.bam ' \
+        '--outWigType bedGraph' \
+        '--outWigStrand Unstranded' \
+        '--outWigReferencesPrefix chr' \
+        '"\nqueue\n' >> bedgraph$STARdate.condor
+#echo -e '+PostCmd="SamtoolsSort.sh"\n+PostArguments="'$path'.'$2'.'$3'merAligned.toTranscriptome.out.bam"\nqueue\n'>> bedgraph$STARdate.condor
     done <$1
-
-chmod a+x testcodeSTARbigWig
