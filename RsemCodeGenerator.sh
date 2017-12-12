@@ -39,7 +39,9 @@ while read path
     do
         echo -e 'arguments="--bam --estimate-rspd --calc-ci' --seed 12345 -p 8 \
                 '--no-bam-output --ci-memory 30000 '$PEparameter \
-                '--temporary-folder' $CurrentLo/temp \
-                $path"."$2"."$3"merAligned.toTranscriptome.out.sorted.bam" $RsemDir $path"."$2"."$3"merAligned.toTranscriptome.out.sorted.rsem" \
+                '--temporary-folder' $path"FastQCk6/temp" \
+                $path"FastQCk6/"$2"."$3"merAligned.toTranscriptome.out.sorted.bam" \
+                $RsemDir \
+                $path"FastQCk6/"$2"."$3"merAligned.toTranscriptome.out.sorted.rsem" \
                 '"\nqueue\n'>> Rsem$Rsemdate.condor
     done <$1

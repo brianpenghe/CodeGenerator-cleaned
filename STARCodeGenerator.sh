@@ -24,7 +24,6 @@ request_disk = 60G
 
 executable=$(STAR_DIR)STAR
 transfer_executable=false
-should_transfer_files=IF_NEEDED
 
 should_transfer_files=Always
 when_to_transfer_output=ON_EXIT
@@ -66,8 +65,8 @@ while read path
             '--quantMode TranscriptomeSAM GeneCounts' \
             '--sjdbScore 1' \
             '--limitBAMsortRAM 30000000000' \
-            "--outFileNamePrefix "$path"."$2"."$3"mer" \
+            '--outFileNamePrefix '$path'FastQCk6/'$2'.'$3'mer' \
             $EXTRA_ARGS' "' >> STAR$STARdate.condor
-        echo -e '+PostCmd="SamtoolsSort.sh"\n+PostArguments="'$path'.'$2'.'$3'merAligned.toTranscriptome.out.bam"\nqueue\n'>> STAR$STARdate.condor
+        echo -e '+PostCmd="SamtoolsSort.sh"\n+PostArguments="'$path'FastQCk6/'$2'.'$3'merAligned.toTranscriptome.out.bam"\nqueue\n'>> STAR$STARdate.condor
     done <$1
 
