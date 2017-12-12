@@ -24,19 +24,19 @@ executable=$(STAR_DIR)STAR
 transfer_executable=false
 should_transfer_files=IF_NEEDED
 
-#should_transfer_files=Always
-#when_to_transfer_output=ON_EXIT
-#transfer_input_files=/woldlab/castor/home/phe/programs/SamtoolsSort.sh
+should_transfer_files=Always
+when_to_transfer_output=ON_EXIT
+transfer_input_files=/woldlab/castor/home/phe/programs/cd.sh
 
 ''' >> bedgraph$STARdate.condor
 
 while read path
     do
-        echo -e 'arguments="--runMode inputAlignmentsFromBAM' \
-        '--inputBAMfile '$path'.'$2'.'$3'merAligned.sortedByCoord.out.bam ' \
+        echo -e 'initialdir='$path'FastQCk6/'\
+        '\narguments="--runMode inputAlignmentsFromBAM' \
+        '--inputBAMfile '$path'FastQCk6/'$2'.'$3'merAligned.sortedByCoord.out.bam ' \
         '--outWigType bedGraph' \
         '--outWigStrand Unstranded' \
-        '--outWigReferencesPrefix chr' \
-        '"\nqueue\n' >> bedgraph$STARdate.condor
-#echo -e '+PostCmd="SamtoolsSort.sh"\n+PostArguments="'$path'.'$2'.'$3'merAligned.toTranscriptome.out.bam"\nqueue\n'>> bedgraph$STARdate.condor
+        '--outWigReferencesPrefix chr"\nqueue\n' >> bedgraph$STARdate.condor
+#        echo -e '+PostCmd="CoverageBigWig.sh"\n+PostArguments="'$path'FastQCk6/'$2'.'$3'merAligned.toTranscriptome.out.bam"\nqueue\n'>> bedgraph$STARdate.condor
     done <$1
