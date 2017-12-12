@@ -38,6 +38,6 @@ while read path
         '--outWigType bedGraph' \
         '--outWigStrand Unstranded' \
         '--outFileNamePrefix '$path'FastQCk6/'$2'.'$3'merAligned.sortedByCoord' \
-        '--outWigReferencesPrefix chr"\nqueue\n' >> bedgraph$STARdate.condor
-#       '\n+PostCmd="CoverageBigWig.sh"\n+PostArguments="'$path'FastQCk6/'$2'.'$3'merAligned.sortedByCoord"\nqueue\n'>> bedgraph$STARdate.condor
+        '--outWigReferencesPrefix chr"' \
+        '\n+PostCmd="CoverageBigWig.sh"\n+PostArguments="'$path'FastQCk6/'$2'.'$3'merAligned.sortedByCoord '$gtf'"\nqueue\n '>> bedgraph$STARdate.condor
     done <$1
