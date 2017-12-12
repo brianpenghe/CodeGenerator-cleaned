@@ -26,7 +26,7 @@ should_transfer_files=IF_NEEDED
 
 should_transfer_files=Always
 when_to_transfer_output=ON_EXIT
-transfer_input_files=/woldlab/castor/home/phe/programs/cd.sh
+transfer_input_files=/woldlab/castor/home/phe/programs/CoverageBigWig.sh
 
 ''' >> bedgraph$STARdate.condor
 
@@ -37,6 +37,7 @@ while read path
         '--inputBAMfile '$path'FastQCk6/'$2'.'$3'merAligned.sortedByCoord.out.bam ' \
         '--outWigType bedGraph' \
         '--outWigStrand Unstranded' \
+        '--outFileNamePrefix '$path'FastQCk6/'$2'.'$3'merAligned.sortedByCoord' \
         '--outWigReferencesPrefix chr"\nqueue\n' >> bedgraph$STARdate.condor
-#        echo -e '+PostCmd="CoverageBigWig.sh"\n+PostArguments="'$path'FastQCk6/'$2'.'$3'merAligned.toTranscriptome.out.bam"\nqueue\n'>> bedgraph$STARdate.condor
+#       '\n+PostCmd="CoverageBigWig.sh"\n+PostArguments="'$path'FastQCk6/'$2'.'$3'merAligned.sortedByCoord"\nqueue\n'>> bedgraph$STARdate.condor
     done <$1
