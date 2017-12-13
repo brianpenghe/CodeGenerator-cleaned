@@ -16,6 +16,12 @@ source /woldlab/castor/home/phe/programs/GEOrefolder.sh $4 $2 $3
 
 /woldlab/castor/home/phe/programs/TophatCodeGenerator.sh testFolderPath $2 $3 $4
 
+/woldlab/castor/home/phe/programs/STARCodeGenerator.sh testFolderPath $2 $3 $4
+
+/woldlab/castor/home/phe/programs/RsemCodeGenerator.sh testFolderPath $2 $3 $4
+
+/woldlab/castor/home/phe/programs/STARbigWigCoverageCode.sh testFolderPath $2 $3
+
 /woldlab/castor/home/phe/programs/RNAseQC.sh testFolderPath $2 $3"mer"
 
 /woldlab/castor/home/phe/programs/TophatbigWigCode.sh testFolderPath $2 $3"mer"
