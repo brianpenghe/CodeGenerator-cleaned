@@ -85,6 +85,7 @@ then
     mitoblack="/woldlab/castor/home/phe/genomes/mm10/male.mm10.chrom.chrM30merslS50000mD50s150fL0.bed"
     STARDir="/woldlab/castor/home/diane/proj/genome/mm10-M4-male"
     RsemDir="/woldlab/castor/home/diane/proj/genome/mm10-M4-male/rsem"
+    gtf="/woldlab/castor/home/diane/proj/genome/mm10-M4-male/gencode.vM4-tRNAs-ERCC.gff"
 
 elif [ "$1" == "hg19male" ]
 then
@@ -95,6 +96,7 @@ then
     mitoblack="/woldlab/castor/home/phe/genomes/hg19/blacklist/ENCFF001RGR+spikes.chrM30merslS50000mD50s150fL0.bed"
     STARDir="/woldlab/castor/home/diane/proj/genome/hg19-V19-male"
     RsemDir="/woldlab/castor/home/diane/proj/genome/hg19-V19-male/rsem"
+    gtf="/woldlab/castor/home/diane/proj/genome/hg19-V19-male/gencode.vV19-tRNAs-ERCC.gff"
 
 elif [ "$1" == "hg19female" ]
 then
@@ -135,6 +137,7 @@ then
     blacklist="/woldlab/castor/proj/genome/bowtie-indexes/danRer10.chrM30merslS50000mD50s150fL0.bed"
     STARDir="/woldlab/castor/home/phe/genomes/danRer10-UCSC"
     RsemDir="/woldlab/castor/home/phe/genomes/danRer10-UCSC/rsem"
+    gtf="/woldlab/castor/home/phe/genomes/danRer10-UCSC/danRer10ENSEMBL89.gtf"
 
 elif [ "$1" == "W3110" ]
 then
