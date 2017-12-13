@@ -39,5 +39,5 @@ while read path
         '--outWigStrand Unstranded' \
         '--outFileNamePrefix '$path'FastQCk6/'$2'.'$3'merAligned.sortedByCoord' \
         '--outWigReferencesPrefix chr"' \
-        '\n+PostCmd="CoverageBigWig.sh"\n+PostArguments="'$path'FastQCk6/'$2'.'$3'merAligned.sortedByCoord '$gtf'"\nqueue\n '>> bedgraph$STARdate.condor
+        '\n+PostCmd="CoverageBigWig.sh"\n+PostArguments="'$path'FastQCk6/'$2'.'$3'merAligned.sortedByCoord '$gtf' '$chromsizes'"\nqueue\n '>> bedgraph$STARdate.condor
     done <$1
