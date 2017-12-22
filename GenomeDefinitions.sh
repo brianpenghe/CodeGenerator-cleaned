@@ -73,7 +73,7 @@ then
     fa="/woldlab/castor/proj/genome/bowtie-indexes/mm10.fa"
     bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/mm10"
     chromsizes="/woldlab/castor/home/georgi/genomes/mm10/mm10.chrom.sizes"
-    blacklist="/woldlab/castor/home/phe/genomes/mm10/mm10blacklist_Ricardo.bed"
+    blacklist="/woldlab/castor/home/phe/genomes/mm10/mm10.blacklist.bed"
     mitoblack="/woldlab/castor/home/phe/genomes/mm10/male.mm10.chrom.chrM30merslS50000mD50s150fL0.bed"
 
 elif [ "$1" == "mm10" ]
@@ -81,7 +81,7 @@ then
     fa="/woldlab/castor/home/phe/genomes/mm10/male.mm10.chrom.fa"
     bowtieindex="/woldlab/castor/home/phe/genomes/mm10/male.mm10.chrom"
     chromsizes="/woldlab/castor/home/phe/genomes/mm10/male.mm10.chrom.sizes"
-    blacklist="/woldlab/castor/home/phe/genomes/mm10/mm10blacklist_Ricardo.bed"
+    blacklist="/woldlab/castor/home/phe/genomes/mm10/mm10.blacklist.bed"
     mitoblack="/woldlab/castor/home/phe/genomes/mm10/male.mm10.chrom.chrM30merslS50000mD50s150fL0.bed"
     STARDir="/woldlab/castor/home/diane/proj/genome/mm10-M4-male"
     RsemDir="/woldlab/castor/home/diane/proj/genome/mm10-M4-male/rsem"
@@ -110,14 +110,14 @@ then
     fa="/woldlab/castor/proj/genome/bowtie-indexes/hg38.fa"
     bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/hg38"
     chromsizes="/woldlab/castor/home/phe/genomes/hg38/hg38.chrom.sizes"
-    blacklist="/woldlab/castor/home/phe/genomes/hg38/hg19blacklist_liftedovertohg38.bed"
+    blacklist="/woldlab/castor/home/phe/genomes/hg38/hg38.blacklist.bed"
     mitoblack="hg38male.chrM30merslS50000mD50s150fL0.bed"
 elif [ "$1" == "hg38" ]
 then
     fa="/woldlab/castor/home/phe/genomes/hg38/hg38male.fa"
     bowtieindex="/woldlab/castor/home/phe/genomes/hg38/hg38male"
     chromsizes="/woldlab/castor/home/phe/genomes/hg38/hg38male.chrom.sizes"
-    blacklist="/woldlab/castor/home/phe/genomes/hg38/hg19blacklist_liftedovertohg38.bed"
+    blacklist="/woldlab/castor/home/phe/genomes/hg38/hg38.blacklist.bed"
     mitoblack="hg38male.chrM30merslS50000mD50s150fL0.bed"
 
 elif [ "$1" == "dm3" ]
