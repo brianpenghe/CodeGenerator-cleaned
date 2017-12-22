@@ -80,7 +80,7 @@ while read line
         $(cat shell.$k.err | grep processed - | cut -d: -f2) \
         $(cat shell.$k.err | grep least - | cut -d: -f2 | cut -d"(" -f1 ) \
         $(cat shell.$k.err | grep failed - | cut -d: -f2 | cut -d"(" -f1 ) \
-        $(cat shell.$k.err | grep suppressed - | cut -d: -f2 | cut -d"(" -f1 ) " " >> stats
+        $(cat shell.$k.err | grep suppressed - | cut -d: -f2 | cut -d"(" -f1 ) >> stats
 ' >> testcodeStats
 
 declare -A genomes
@@ -95,8 +95,8 @@ genomes["galGal4"]=$(echo {1..28} 32 'W' 'Z' 'M' 'LGE64')
 genomes["galGal4full"]=$(echo {1..28} 32 'W' 'Z' 'M' 'LGE64')
 genomes["dm3"]=$(echo '2L' '2LHet' '2R' '2RHet' '3L' '3LHet' '3R' '3RHet' '4' 'U' 'Uextra' 'X' 'XHet' 'YHet' 'M')
 genomes["danRer10"]=$(echo {1..25} 'M')
-
-printf "echo -n" >> testcodeStats 
+printf "printf \" \" >> stats\n" >> testcodeStats
+printf "echo -n " >> testcodeStats 
 for i in $(echo "${genomes[$2]}")
     do
         echo -n " \$(egrep -w 'chr"$i"' "\$line"."$2"."$3"mer.dup.idxstats | cut -f3 | awk '{sum+=\$1} END {print sum}')" >> testcodeStats
