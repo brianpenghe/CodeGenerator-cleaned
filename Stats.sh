@@ -102,6 +102,7 @@ for i in $(echo "${genomes[$2]}")
         echo -n " \$(egrep -w 'chr"$i"' "\$line"."$2"."$3"mer.dup.idxstats | cut -f3 | awk '{sum+=\$1} END {print sum}')" >> testcodeStats
     done
 printf " >> stats\n" >> testcodeStats
+printf "echo -e \"\" >> stats\n" >> testcodeStats
 
 printf '
     k=$k+1
