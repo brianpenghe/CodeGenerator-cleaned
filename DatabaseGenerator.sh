@@ -1,16 +1,17 @@
 #!/bin/bash
 #SampleListGenerator.sh
+source /woldlab/castor/home/phe/programs/GECjumpgatePasswords.sh
 echo -n '' > testLibs 
-wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/library/ -q -O - | grep "?affiliations__id__exact=" | grep -v "?affiliations__id__exact=60&amp" | cut -d= -f3 | cut -d\" -f1 > testIDs
-wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/library/ -q -O - | grep "?affiliations__id__exact=" | grep -v "?affiliations__id__exact=60&amp" | cut -d= -f3 | cut -d\> -f2 | cut -d\( -f1 | sed "s/ /_/g" > testnames
-wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/library/ -q -O - | grep "?affiliations__id__exact=" | grep -v "?affiliations__id__exact=60&amp" | cut -d= -f3 | cut -d\> -f2 | cut -d\( -f2 | cut -d\) -f1 | sed "s/ /_/g" > testPIs
+wget --user=$USER --password="$PSWD" --no-check-certificate https://jumpgate.caltech.edu/library/ -q -O - | grep "?affiliations__id__exact=" | grep -v "?affiliations__id__exact=60&amp" | cut -d= -f3 | cut -d\" -f1 > testIDs
+wget --user=$USER --password="$PSWD" --no-check-certificate https://jumpgate.caltech.edu/library/ -q -O - | grep "?affiliations__id__exact=" | grep -v "?affiliations__id__exact=60&amp" | cut -d= -f3 | cut -d\> -f2 | cut -d\( -f1 | sed "s/ /_/g" > testnames
+wget --user=$USER --password="$PSWD" --no-check-certificate https://jumpgate.caltech.edu/library/ -q -O - | grep "?affiliations__id__exact=" | grep -v "?affiliations__id__exact=60&amp" | cut -d= -f3 | cut -d\> -f2 | cut -d\( -f2 | cut -d\) -f1 | sed "s/ /_/g" > testPIs
 
 
 while read line
     do
         ID=$(echo $line | cut -f1)
-        wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/library/?affiliations__id__exact=$ID -q -O - | grep "libraries" | grep -v "libraries)" | grep -v "span" | cut -d ' ' -f1 >> testLibs
-        if [ $(wget --user=gec --password=gecilluminadata --no-check-certificate https://jumpgate.caltech.edu/library/?affiliations__id__exact=$ID -q -O - | grep "libraries" | grep -v "libraries)" | grep -v "span" | wc -l) != 1 ]
+        wget --user=$USER --password="$PSWD" --no-check-certificate https://jumpgate.caltech.edu/library/?affiliations__id__exact=$ID -q -O - | grep "libraries" | grep -v "libraries)" | grep -v "span" | cut -d ' ' -f1 >> testLibs
+        if [ $(wget --user=$USER --password="$PSWD" --no-check-certificate https://jumpgate.caltech.edu/library/?affiliations__id__exact=$ID -q -O - | grep "libraries" | grep -v "libraries)" | grep -v "span" | wc -l) != 1 ]
             then
                 echo $ID
         fi
