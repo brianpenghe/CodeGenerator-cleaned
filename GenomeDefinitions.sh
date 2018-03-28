@@ -94,7 +94,7 @@ then
     chromsizes="/woldlab/castor/home/georgi/genomes/hg19/hg19-male-single-cell-NIST-fixed-spikes.chrom.sizes"
     blacklist="/woldlab/castor/home/phe/genomes/hg19/blacklist/wgEncodeDacMapabilityConsensusExcludable.bed"
     mitoblack="/woldlab/castor/home/phe/genomes/hg19/blacklist/ENCFF001RGR+spikes.chrM30merslS50000mD50s150fL0.bed"
-    STARDir="/woldlab/castor/home/diane/proj/genome/hg19-V19-male"
+    STARDir="/woldlab/castor/home/diane/proj/genome/hg19-V19-male.STAR2.5.2a"
     RsemDir="/woldlab/castor/home/diane/proj/genome/hg19-V19-male/rsem"
     gtf="/woldlab/castor/home/diane/proj/genome/hg19-V19-male/gencode.vV19-tRNAs-ERCC.gff"
 
