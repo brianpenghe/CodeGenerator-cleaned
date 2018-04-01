@@ -96,7 +96,7 @@ then
     mitoblack="/woldlab/castor/home/phe/genomes/hg19/blacklist/ENCFF001RGR+spikes.chrM30merslS50000mD50s150fL0.bed"
     STARDir="/woldlab/castor/home/diane/proj/genome/hg19-V19-male.STAR2.5.2a"
     RsemDir="/woldlab/castor/home/diane/proj/genome/hg19-V19-male.encode/rsem"
-    gtf="/woldlab/castor/home/diane/proj/genome/hg19-V19-male/gencode.vV19-tRNAs-ERCC.gff"
+    gtf="/woldlab/castor/home/diane/proj/genome/hg19-V19-male.encode/gencode.vV19-tRNAs-ERCC.gff"
 
 elif [ "$1" == "hg19female" ]
 then
