@@ -40,6 +40,8 @@ elif [[ "$1" == "SE" ]]
         printf "python ~/171102ShuaiWangRibo/SupplementaryNote6.py "$2"all.trimmed_filtered.pos "$2"all.trimmed_filtered.neg "$2"all.trimmed_filtered.readcount "$2"all.trimmed_filtered.posRPM "$2"all.trimmed_filtered.negRPM && " >> testcode
         printf "python ~/171102ShuaiWangRibo/SupplementaryNote7.py "$2"all.trimmed_filtered.posRPM "$2"all.trimmed_filtered.negRPM "$2"all.trimmed_filtered.posRPMcomplete "$2"all.trimmed_filtered.negRPMcomplete && " >> testcode
         printf "python ~/171102ShuaiWangRibo/SupplementaryNote8.py "$2"all.trimmed_filtered.posRPMcomplete "$2"all.trimmed_filtered.negRPMcomplete ~/171102ShuaiWangRibo/GenesPos ~/171102ShuaiWangRibo/GenesNeg "$2"all.trimmed_filtered.posRPMcompleteGene "$2"all.trimmed_filtered.negRPMcompleteGene && " >> testcode
+        printf "python ~/171102ShuaiWangRibo/SupplementaryNote12.py "$2"all.trimmed_filtered.pos "$2"all.trimmed_filtered.neg ~/171102ShuaiWangRibo/GenesPos ~/171102ShuaiWangRibo/GenesNeg "$2"all.trimmed_filtered.ave && " >> testcode
+        printf "python ~/171102ShuaiWangRibo/SupplementaryNote13.py "$2"all.trimmed_filtered.pos "$2"all.trimmed_filtered.neg ~/171102ShuaiWangRibo/GenesPos ~/171102ShuaiWangRibo/GenesNeg "$2"all.trimmed_filtered.avestop && " >> testcode
 fi
 printf "rm "$2"*fastq & \n" >> testcode
 
