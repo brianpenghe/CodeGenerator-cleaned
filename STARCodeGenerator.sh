@@ -27,7 +27,7 @@ transfer_executable=false
 
 should_transfer_files=Always
 when_to_transfer_output=ON_EXIT
-transfer_input_files=/woldlab/castor/home/phe/programs/SamtoolsSort.sh
+transfer_input_files=/woldlab/loxcyc/home/phe/programs/SamtoolsSort.sh
 
 ''' >> STAR$STARdate.condor
 

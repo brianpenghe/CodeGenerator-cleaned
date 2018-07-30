@@ -26,7 +26,7 @@ should_transfer_files=IF_NEEDED
 
 should_transfer_files=Always
 when_to_transfer_output=ON_EXIT
-transfer_input_files=/woldlab/castor/home/phe/programs/CoverageBigWig.sh
+transfer_input_files=/woldlab/loxcyc/home/phe/programs/CoverageBigWig.sh
 
 ''' >> bedgraph$STARdate.condor
 
