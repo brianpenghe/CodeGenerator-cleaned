@@ -7,6 +7,7 @@ if [[ "$1" == "PE" ]]
         printf "cat "$2"*R2.fastq > "$2"R2all.fastq && " >> testcode
         printf "mkdir -p "$2"FastQCk6R1 && " >> testcode
         printf "mkdir -p "$2"FastQCk6R2 && " >> testcode
+        printf "mkdir -p "$2"FastQCk6 && " >> testcode
         printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$2"R1all.fastq -o "$2"FastQCk6R1 -k 6 && " >> testcode
         printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$2"R2all.fastq -o "$2"FastQCk6R2 -k 6 && " >> testcode
         printf "~/.local/bin/cutadapt -a CTGTCTCTTATACAC "$2"R1all.fastq | ~/.local/bin/cutadapt -a CGTATGCCGTCTTCTGCTTG - | ~/.local/bin/cutadapt -g TGCCGTCTTCTGCTTG - | ~/.local/bin/cutadapt -g GGTAACTTTGTGTTT - | ~/.local/bin/cutadapt -g CTTTGTGTTTGA - | ~/.local/bin/cutadapt -a CACTCGTCGGCAGCGTTAGATGTGTATAAG - > "$2"R1trimmedfastq && " >> testcode
