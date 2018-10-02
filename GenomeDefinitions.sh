@@ -85,6 +85,7 @@ then
     mitoblack="/woldlab/castor/home/phe/genomes/mm10/male.mm10.chrom.chrM30merslS50000mD50s150fL0.bed"
     STARDir="/woldlab/castor/home/diane/proj/genome/mm10-M4-male"
     RsemDir="/woldlab/castor/home/diane/proj/genome/mm10-M4-male/rsem"
+    GeneNames="/woldlab/castor/home/phe/genomes/mm10/mm10GeneNames"
     gtf="/woldlab/castor/home/diane/proj/genome/mm10-M4-male/gencode.vM4-tRNAs-ERCC.gff"
 
 elif [ "$1" == "hg19male" ]
