@@ -3,7 +3,7 @@
 
 if [ "$1" == "RNAseq" ]
     then
-        rm testcode* testFolderPath testSampleList HTseq*.condor HTseqTable tophat*.condor index.html Cufflinks*s SampleListGenerator.log tophat2.*.*
+        rm testcode* testFolderPath testSampleList *.condor HTseqTable index.html Cufflinks*s SampleListGenerator.log tophat2.*.*
 elif [ "$1" == "CLIPseq" ]
     then
         rm testcode* testFolderPath testSampleList HTseq*.condor HTseqTable tophat*.condor index.html Cufflinks*s SampleListGenerator.log tophat2.*.* *FastUniqInput		
