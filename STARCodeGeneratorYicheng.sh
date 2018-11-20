@@ -97,3 +97,7 @@ while read path
 #        echo -e '+PostCmd="SamtoolsSort.sh"\n+PostArguments="'$path'FastQCk6/Multi'$2'.'$3'merAligned.toTranscriptome.out.bam"\nqueue\n'>> STAR$STARdate.condor
     done <$1
 
+printf "ls *k6/Unique/*ReadsPerGene.out.tab > STAR.genes.list\n" >> testcode
+printf "awk '{print \$1}' \$(head -1 STAR.genes.list) > ReadsPerGenes\n" >> testcode
+printf "while read ReadsPerGene; do paste ReadsPerGenes <(awk '{print \$4}' \$ReadsPerGene) > temp; mv temp ReadsPerGenes; done<STAR.genes.list\n" >> testcode
+printf "paste <(echo \"SampleName\";echo ) <(cat testFolderPath | paste -s) | cat - ReadsPerGenes > temp && mv temp ReadsPerGenes\n" >> testcode
