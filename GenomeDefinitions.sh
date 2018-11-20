@@ -128,6 +128,10 @@ then
     chromsizes="/woldlab/castor/proj/genome/bowtie-indexes/dm3.chrom.sizes"
     mitoblack="/woldlab/castor/proj/genome/bowtie-indexes/dm3.chrM30merslS50000mD50s150fL0.bed"
     blacklist="/woldlab/castor/proj/genome/bowtie-indexes/dm3-blacklist.bed"
+    STARDir="/woldlab/castor/home/phe/genomes/dm3/"
+    RsemDir="/woldlab/castor/home/phe/genomes/dm3/"
+    gtf="/woldlab/castor/home/phe/genomes/dm3/refGene.20150212.dm3.gtf"
+    rRNAbowtieindex="/woldlab/castor/home/phe/genomes/rRNA/MariaDrosophila/dmel_rRNA_unit"
 
 elif [ "$1" == "danRer10" ]
 then
