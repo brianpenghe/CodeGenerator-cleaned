@@ -100,4 +100,7 @@ while read path
 printf "ls *k6/Unique/*ReadsPerGene.out.tab > STAR.genes.list\n" >> testcode
 printf "awk '{print \$1}' \$(head -1 STAR.genes.list) > ReadsPerGenes\n" >> testcode
 printf "while read ReadsPerGene; do paste ReadsPerGenes <(awk '{print \$4}' \$ReadsPerGene) > temp; mv temp ReadsPerGenes; done<STAR.genes.list\n" >> testcode
-printf "paste <(echo \"SampleName\";echo ) <(cat testFolderPath | paste -s) | cat - ReadsPerGenes > temp && mv temp ReadsPerGenes\n" >> testcode
+printf "paste <(echo \"SampleName\") <(cat testFolderPath | paste -s) | cat - ReadsPerGenes > temp && mv temp ReadsPerGenes\n" >> testcode
+printf "ls *rRNA.*.err > STAR.err.list\n" >> testcode
+printf "paste <(echo \"Sequenced\";echo \"rRNA\";echo \"NonrRNA\") > BowtieStats\n" >> testcode
+printf "while read BowtieStat; do paste BowtieStats <(grep \"#\" \$BowtieStat | cut -d: -f2) > temp; mv temp BowtieStats; done<STAR.err.list\n" >> testcode
