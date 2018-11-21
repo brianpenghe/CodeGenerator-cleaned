@@ -99,11 +99,11 @@ while read path
 
 printf "ls *k6/Unique/*ReadsPerGene.out.tab > STAR.genes.list\n" >> testcode
 printf "awk '{print \$1}' \$(head -1 STAR.genes.list) > ReadsPerGenes\n" >> testcode
-printf "while read ReadsPerGene; do paste ReadsPerGenes <(awk '{print \$4}' \$ReadsPerGene) > temp; mv temp ReadsPerGenes; done<STAR.genes.list\n" >> testcode
-printf "paste <(echo \"SampleName\") <(cat testFolderPath | paste -s) | cat - ReadsPerGenes > temp && mv temp ReadsPerGenes\n" >> testcode
+printf "while read ReadsPerGene; do paste -d \"|\" ReadsPerGenes <(awk '{print \$4}' \$ReadsPerGene) > temp; mv temp ReadsPerGenes; done<STAR.genes.list\n" >> testcode
+printf "paste -d \"|\" <(echo \"SampleName\") <(cat testFolderPath | paste -s -d \"|\") | cat - ReadsPerGenes > temp && mv temp ReadsPerGenes\n" >> testcode
 printf "ls *rRNA.*.err > Bowtie.err.list\n" >> testcode
 printf "paste <(echo \"Sequenced\";echo \"rRNA\";echo \"NonrRNA\") > BowtieStats\n" >> testcode
-printf "while read BowtieStat; do paste BowtieStats <(grep \"#\" \$BowtieStat | cut -d: -f2) > temp; mv temp BowtieStats; done<Bowtie.err.list\n" >> testcode
+printf "while read BowtieStat; do paste -d \"|\" BowtieStats <(grep \"#\" \$BowtieStat | cut -d: -f2) > temp; mv temp BowtieStats; done<Bowtie.err.list\n" >> testcode
 printf "ls *k6/Unique/dm3.50merLog.final.out > STAR.stats.list\n" >> testcode
 printf "cut -d \"|\" -f1 \$(head -1 STAR.stats.list) > STARstats\n" >> testcode
-printf "while read STARstat; do paste STARstats <(cut -d \"|\" -f2 \$STARstat ) > temp; mv temp STARstats; done<STAR.stats.list\n" >> testcode
+printf "while read STARstat; do paste -d \"|\" STARstats <(cut -d \"|\" -f2 \$STARstat ) > temp; mv temp STARstats; done<STAR.stats.list\n" >> testcode
