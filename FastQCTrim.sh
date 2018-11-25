@@ -1,6 +1,8 @@
 #!/bin/bash
 #this script is part of the refolder scripts which trims reads and runs fastQC
 #FastQCTrim.sh PE $path 30
+#FastQCTrim.sh PE $path 0 
+#FastQCTrim.sh PE $path 0 23 29
 if [[ "$1" == "PE" ]]
     then
         printf "cat "$2"*R1.fastq > "$2"R1all.fastq && " >> testcode
@@ -19,8 +21,20 @@ if [[ "$1" == "PE" ]]
         printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$2"R2allpairedfastq -o "$2"FastQCk6R2 -k 6 && " >> testcode
         if [[ "$3" == "0" ]]
             then
-                printf "mv "$2"R1allpairedfastq "$2"R1allfastq"$3" && " >> testcode
-                printf "mv "$2"R2allpairedfastq "$2"R2allfastq"$3" && " >> testcode
+                if [ -z "$4" ]
+                    then
+                        printf "mv "$2"R1allpairedfastq "$2"R1allfastq"$3" && " >> testcode
+                        printf "mv "$2"R2allpairedfastq "$2"R2allfastq"$3" && " >> testcode
+                else
+                    printf "cat "$2"R1allpairedfastq | paste - - - - | awk -F\"\\\t\" 'length(\$2) >= "$4" && length(\$2) <= "$5"' | sed 's/\\\t/\\\n/g' > "$2"R1allfastq"$4"_"$5" && " >> testcode
+                    printf "cat "$2"R2allpairedfastq | paste - - - - | awk -F\"\\\t\" 'length(\$2) >= "$4" && length(\$2) <= "$5"' | sed 's/\\\t/\\\n/g' > "$2"R2allfastq"$4"_"$5" && " >> testcode
+                    printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$2"R1allfastq"$4"_"$5" -o "$2"FastQCk6R1 -k 6 && " >> testcode
+                    printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$2"R2allfastq"$4"_"$5" -o "$2"FastQCk6R2 -k 6 && " >> testcode
+                    printf "cat "$2"R1allpairedfastq | paste - - - - | awk -F\"\\\t\" 'length(\$2) >= 21 && length(\$2) <= 21' | sed 's/\\\t/\\\n/g' > "$2"R1allfastq21_21 && " >> testcode
+                    printf "cat "$2"R2allpairedfastq | paste - - - - | awk -F\"\\\t\" 'length(\$2) >= "$4" && length(\$2) <= 21' | sed 's/\\\t/\\\n/g' > "$2"R2allfastq21_21 && " >> testcode
+                    printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$2"R1allfastq21_21 -o "$2"FastQCk6R1 -k 6 && " >> testcode
+                    printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$2"R2allfastq21_21 -o "$2"FastQCk6R2 -k 6 && " >> testcode
+                fi
         else
             printf "python /woldlab/castor/home/georgi/code/trimfastq.py "$2"R1allpairedfastq "$3" -stdout > "$2"R1allfastq"$3" && " >> testcode
             printf "python /woldlab/castor/home/georgi/code/trimfastq.py "$2"R2allpairedfastq "$3" -stdout > "$2"R2allfastq"$3" && " >> testcode
@@ -37,7 +51,15 @@ elif [[ "$1" == "SE" ]]
         printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$2"alltrimmedfastq -o "$2"FastQCk6 -k 6 && " >> testcode
         if [[ "$3" == "0" ]]
             then
-                printf "mv "$2"alltrimmedfastq "$2"allfastq"$3" && " >> testcode
+                if [ -z "$4" ]
+                    then
+                        printf "mv "$2"alltrimmedfastq "$2"allfastq"$3" && " >> testcode
+                else
+                    printf "cat "$2"alltrimmedfastq | paste - - - - | awk -F\"\\\t\" 'length(\$2) >= "$4" && length(\$2) <= "$5"' | sed 's/\\\t/\\\n/g' > "$2"allfastq"$4"_"$5" && " >> testcode
+                    printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$2"allfastq"$4"_"$5" -o "$2"FastQCk6 -k 6 && " >> testcode
+                    printf "cat "$2"alltrimmedfastq | paste - - - - | awk -F\"\\\t\" 'length(\$2) >= 21 && length(\$2) <= 21' | sed 's/\\\t/\\\n/g' > "$2"allfastq21_21 && " >> testcode
+                    printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$2"allfastq21_21 -o "$2"FastQCk6 -k 6 && " >> testcode
+                fi
         else
             printf "python /woldlab/castor/home/georgi/code/trimfastq.py "$2"alltrimmedfastq "$3" -stdout > "$2"allfastq"$3" && " >> testcode
         fi
