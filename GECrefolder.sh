@@ -41,5 +41,10 @@ while read line
                     fi
                     k=$k+1
                 done
-            ~/programs/FastQCTrim.sh $1 $path $3
+            if [ -z "$4" ]
+                then
+                    ~/programs/FastQCTrim.sh $1 $path $3
+            else
+                ~/programs/FastQCTrim.sh $1 $path $3 $4 $5
+            fi
         done <testSampleList
