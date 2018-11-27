@@ -11,15 +11,11 @@ echo "#!/bin/bash" >> testcodePostBowtie2
 echo "#bigWig (Index, SAMstats, idxstats) codes:" >> testcodePostBowtie 
 echo "#bigWig (Index, SAMstats, idxstats) codes:" >> testcodePostBowtie2
 
-bowtiedate=$(date +"%y%m%d")
+bowtiedate=$(date +"%y%m%d.%H.%M.%S.%N")
 printf '''
 universe=vanilla
 
 executable=/bin/sh
-
-log=shell.$(Process).log
-output=shell.$(Process).out
-error=shell.$(Process).err
 
 request_cpus = 8
 request_memory = 4000
@@ -27,24 +23,13 @@ request_disk = 0
 
 Requirements = (Machine == "pongo.caltech.edu" || Machine == "myogenin.caltech.edu" || Machine == "mondom.caltech.edu" || Machine == "trog.caltech.edu" || Machine == "wold-clst-3.woldlab" || Machine == "wold-clst-4.woldlab" || Machine == "myostatin.caltech.edu")
 
-''' >> bowtie$bowtiedate".condor"
-
-printf '''
-universe=vanilla
-
-executable=/bin/sh
-
-log=shell2.$(Process).log
-output=shell2.$(Process).out
-error=shell2.$(Process).err
-
-request_cpus = 8
-request_memory = 4000
-request_disk = 0
-
-Requirements = (Machine == "pongo.caltech.edu" || Machine == "myogenin.caltech.edu" || Machine == "mondom.caltech.edu" || Machine == "trog.caltech.edu" || Machine == "wold-clst-3.woldlab" || Machine == "wold-clst-4.woldlab" || Machine == "myostatin.caltech.edu")
-
-''' >> bowtie$bowtiedate".2.condor"
+''' | tee bowtie$bowtiedate".condor" bowtie$bowtiedate".2.condor"
+echo "log=shell.$bowtiedate.\$(Process).log" >> bowtie$bowtiedate".condor"
+echo "log=shell2.$bowtiedate.\$(Process).log" >> bowtie$bowtiedate".2.condor"
+echo "output=shell.$bowtiedate.\$(Process).out" >> bowtie$bowtiedate".condor"
+echo "output=shell2.$bowtiedate.\$(Process).out" >> bowtie$bowtiedate".2.condor"
+echo "error=shell.$bowtiedate.\$(Process).err" >> bowtie$bowtiedate".condor"
+echo "error=shell2.$bowtiedate.\$(Process).err" >> bowtie$bowtiedate".2.condor"
 
 while read line
     do
