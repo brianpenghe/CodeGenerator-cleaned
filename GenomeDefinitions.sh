@@ -132,8 +132,8 @@ then
     RsemDir="/woldlab/castor/home/phe/genomes/dm3/"
     gtf="/woldlab/castor/home/phe/genomes/dm3/refGene.20150212.dm3.gtf"
     rRNAbowtieindex="/woldlab/castor/home/phe/genomes/rRNA/MariaDrosophila/dmel_rRNA_unit"
-    hotspot_chrom_sizes="/woldlab/castor/home/phe/dm3/chrom_sizes.bed"
-    hotspot_center_sites="/woldlab/castor/home/phe/dm3/center_sites.starch"
+    hotspot_chrom_sizes="/woldlab/castor/home/phe/genomes/hotspot2files/dm3/chrom_sizes.bed"
+    hotspot_center_sites="/woldlab/castor/home/phe/genomes/hotspot2files/dm3/center_sites.starch"
 
 elif [ "$1" == "danRer10" ]
 then
@@ -156,5 +156,3 @@ else
     printf "Genome Version not found"
     exit 1
 fi
-
-
