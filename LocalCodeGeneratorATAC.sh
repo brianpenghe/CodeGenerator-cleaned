@@ -25,6 +25,8 @@ source /woldlab/castor/home/phe/programs/Localrefolder.sh $1 $2 $3 $4
 
 /woldlab/castor/home/phe/programs/FseqCode.sh testFolderPath $2 $3"mer"
 
+/woldlab/castor/home/phe/programs/hotspot2Code.sh testFolderPath $2 $3"mer"
+
 /woldlab/castor/home/phe/programs/TrackSummary.sh bigWig
 
 /woldlab/castor/home/phe/programs/TrackSummary.sh bigBed
