@@ -60,5 +60,8 @@ while read line
         printf "condor_run -a request_memory=20000 \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index "$line"."$2"."$3"mer.66A_UBIG.unique.dup.bam \" & \n " >> testcodePostBowtie2
     done <$1
 
+cat bowtie$bowtiedate".2.condor" | sed -e 's/.dm3.23_29_unmapped.fastq/allfastq23_29/g' | sed -e 's/.dm3.21_21_unmapped.fastq/allfastq21_21/g' | sed -e 's/unique/vectoronly/g' | sed -e 's/shell2/shell3/g' > bowtie$bowtiedate".3.condor"
+cat testcodePostBowtie2 | sed -e 's/unique/vectoronly/g' > testcodePostBowtie3
 chmod a+x testcodePostBowtie
 chmod a+x testcodePostBowtie2
+chmod a+x testcodePostBowtie3
