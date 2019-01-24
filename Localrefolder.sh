@@ -23,5 +23,10 @@ while read line
 				printf "cat "$Folders"/*.fastq > "$path".fastq && " >> testcode
 		fi
         printf $path"\n" >> testFolderPath
-        ~/programs/FastQCTrim.sh $4 $path $3
+        if [ -z "$5" ]
+            then
+                ~/programs/FastQCTrim.sh $1 $path $3
+        else
+            ~/programs/FastQCTrim.sh $1 $path $3 $5 $6
+        fi
     done <$1
