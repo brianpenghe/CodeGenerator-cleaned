@@ -17,6 +17,7 @@ echo "export PATH=\$PATH:/woldlab/loxcyc/proj/genome/programs/hotspot2-2.1.1/bin
 
 while read line
     do
+        printf "mkdir -p "$line"."$2"."$3"Out/ && " >> testcodehotspot2
         printf " /woldlab/loxcyc/proj/genome/programs/hotspot2-2.1.1/scripts/hotspot2.sh -f 0.1 -F 0.1 -c "$hotspot_chrom_sizes" -C "$hotspot_center_sites" "$line"."$2"."$3".unique.dup.nochrM.bam "$line"."$2"."$3"Out/ && " >> testcodehotspot2
         printf " /woldlab/loxcyc/proj/genome/programs/hotspot2-2.1.1/scripts/hsmerge.sh -f 0.05 "$line"."$2"."$3"Out/"$(echo $line | rev | cut -d/ -f1 | rev)"."$2"."$3".unique.dup.nochrM.allcalls.starch "$line"."$2"."$3"Out/"$(echo $line | rev | cut -d/ -f1 | rev)"."$2"."$3".unique.dup.nochrM.hotspots.fdr0.05.starch && " >> testcodehotspot2
         printf "unstarch "$line"."$2"."$3"Out/"$(echo $line | rev | cut -d/ -f1 | rev)"."$2"."$3".unique.dup.nochrM.hotspots.fdr0.1.starch | grep -v chrM - | intersectBed -a - -b "$mitoblack" -v | intersectBed -a - -b "$blacklist" -v > "$line"."$2"."$3"Out/"$(echo $line | rev | cut -d/ -f1 | rev)"."$2"."$3".unique.dup.nochrM.hotspots.fdr0.1.bed && " >> testcodehotspot2
