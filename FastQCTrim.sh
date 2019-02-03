@@ -63,6 +63,10 @@ elif [[ "$1" == "SE" ]]
         else
             printf "python /woldlab/castor/home/georgi/code/trimfastq.py "$2"alltrimmedfastq "$3" -stdout > "$2"allfastq"$3" && " >> testcode
         fi
+else
+    echo $4
+    printf "single end(SE) or paired end(PE)?"
+    exit 1
 fi
 printf "rm "$2"*fastq & \n" >> testcode
 
