@@ -56,7 +56,7 @@ while read line
         printf "condor_run -a request_memory=20000 \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index "$line"."$2"."$3"mer.unique.nochrM.bam \" & \n " >> testcodePostBowtie
         printf "condor_run -a request_memory=20000 \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index "$line"."$2"."$3"mer.UBIG.unique.dup.bam \" && " >> testcodePostBowtie2
         printf "condor_run -a request_memory=20000 \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index "$line"."$2"."$3"mer.HSP70-G.unique.dup.bam \" && " >> testcodePostBowtie2
-        printf "condor_run -a request_memory=20000 \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index "$line"."$2"."$3"mer.ACTIN-G.unique.dup.bam \" && " >> testcodePostBowtie2
+        printf "condor_run -a request_memory=20000 \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index "$line"."$2"."$3"mer.ACTIN-G.unique.dup.bam \" & \n" >> testcodePostBowtie2
     done <$1
 
 cat bowtie$bowtiedate".2.condor" | sed -e 's/.dm3.23_29_unmapped.fastq/allfastq23_29/g' | sed -e 's/.dm3.21_21_unmapped.fastq/allfastq21_21/g' | sed -e 's/unique/vectoronly/g' | sed -e 's/shell2/shell3/g' > bowtie$bowtiedate".3.condor"
