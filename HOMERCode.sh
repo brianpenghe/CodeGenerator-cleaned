@@ -42,7 +42,7 @@ while read line
         printf "echo 'RiP:' \$(intersectBed -abam "$line"."$2"."$3".unique.dup.bam -b "$line"."$2"."$3"lS50000mD50s150fL0.HOMER.bed | /woldlab/loxcyc/proj/genome/programs/samtools-0.1.16/bin/samtools view -c - ) > "$line"."$2"."$3".lS50000mD50s150fL0.HOMER.stats && " >> testcodeHOMER
         printf "echo 'RiPwhole:' \$(intersectBed -abam "$line"."$2"."$3".unique.dup.bam -b "$line"."$2"."$3"lS50000mD50s150fL0.HOMER.whole.bed | /woldlab/loxcyc/proj/genome/programs/samtools-0.1.16/bin/samtools view -c - ) >> "$line"."$2"."$3".lS50000mD50s150fL0.HOMER.stats && " >> testcodeHOMER
         printf "echo 'RiChrM:' \$(/woldlab/loxcyc/proj/genome/programs/samtools-0.1.16/bin/samtools view -c "$line"."$2"."$3".unique.dup.bam chrM ) >> "$line"."$2"."$3".lS50000mD50s150fL0.HOMER.stats && " >> testcodeHOMER
-        printf "echo 'Rtotal:' \$(/woldlab/loxcyc/proj/genome/programs/samtools-0.1.16/bin/samtools view -c "$line"."$2"."$3".unique.dup.bam ) >> "$line"."$2"."$3".lS50000mD50s150fL0.HOMER.stats & \n" >> testcodeHOMER
+        printf "echo 'Rtotal:' \$(/woldlab/loxcyc/proj/genome/programs/samtools-0.1.16/bin/samtools view -c "$line"."$2"."$3".unique.dup.bam ) >> "$line"."$2"."$3".lS50000mD50s150fL0.HOMER.stats \n" >> testcodeHOMER
     done <$1
 
 chmod a+x testcodeHOMER
