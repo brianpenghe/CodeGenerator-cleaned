@@ -47,7 +47,7 @@ while read path
     done <$1
 
 printf "ls *k6/*genes.results > rsem.genes.results.list\n" >> testcode
-printf "ls *k6/*genes.results > rsem.isoforms.results.list\n" >> testcode
+printf "ls *k6/*isoforms.results > rsem.isoforms.results.list\n" >> testcode
 printf "awk '{print \$1\"\\\t\"\$2\"\\\t\"}' \$(head -1 rsem.genes.results.list) > FPKM.genes\n" >> testcode
 printf "awk '{print \$1\"\\\t\"\$2\"\\\t\"}' \$(head -1 rsem.isoforms.results.list) > FPKM.isoforms\n" >> testcode
 printf "awk '{print \$1\"\\\t\"\$2\"\\\t\"}' \$(head -1 rsem.genes.results.list) > count.genes\n" >> testcode
