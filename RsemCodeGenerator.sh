@@ -56,7 +56,7 @@ printf "while read rsem; do paste FPKM.genes <(awk '{print \$7}' \$rsem) > temp;
 printf "while read rsem; do paste count.genes <(awk '{print \$5}' \$rsem) > temp; mv temp count.genes; done<rsem.genes.results.list\n" >> testcode
 printf "while read rsem; do paste FPKM.isoforms <(awk '{print \$7}' \$rsem) > temp; mv temp FPKM.isoforms; done<rsem.isoforms.results.list\n" >> testcode
 printf "while read rsem; do paste count.isoforms <(awk '{print \$5}' \$rsem) > temp; mv temp count.isoforms; done<rsem.isoforms.results.list\n" >> testcode
-printf "paste <(head -1 FPKM.genes | awk '{print \$1\"\\\t\"\$2\"\\\t\"}') <(cat testFolderPath | paste -s) | cat - <(tail -n +2 FPKM.genes) | paste $GeneNames - > temp && mv temp FPKM.genes\n" >> testcode
-printf "paste <(head -1 count.genes | awk '{print \$1\"\\\t\"\$2\"\\\t\"}') <(cat testFolderPath | paste -s) | cat - <(tail -n +2 count.genes) | paste $GeneNames - > temp && mv temp count.genes\n" >> testcode
-printf "paste <(head -1 FPKM.isoforms | awk '{print \$1\"\\\t\"\$2\"\\\t\"}') <(cat testFolderPath | paste -s) | cat - <(tail -n +2 FPKM.isoforms) > temp && mv temp FPKM.isoforms\n" >> testcode
-printf "paste <(head -1 count.isoforms | awk '{print \$1\"\\\t\"\$2\"\\\t\"}') <(cat testFolderPath | paste -s) | cat - <(tail -n +2 count.isoforms) > temp && mv temp count.isoforms\n" >> testcode
+printf "paste <(head -1 FPKM.genes | awk '{print \$1\"\\\t\"\$2\"\\\t\"}') <(cat rsem.genes.results.list | paste -s) | cat - <(tail -n +2 FPKM.genes) | paste $GeneNames - > temp && mv temp FPKM.genes\n" >> testcode
+printf "paste <(head -1 count.genes | awk '{print \$1\"\\\t\"\$2\"\\\t\"}') <(cat rsem.genes.results.list | paste -s) | cat - <(tail -n +2 count.genes) | paste $GeneNames - > temp && mv temp count.genes\n" >> testcode
+printf "paste <(head -1 FPKM.isoforms | awk '{print \$1\"\\\t\"\$2\"\\\t\"}') <(cat rsem.isoforms.results.list | paste -s) | cat - <(tail -n +2 FPKM.isoforms) > temp && mv temp FPKM.isoforms\n" >> testcode
+printf "paste <(head -1 count.isoforms | awk '{print \$1\"\\\t\"\$2\"\\\t\"}') <(cat rsem.isoforms.results.list | paste -s) | cat - <(tail -n +2 count.isoforms) > temp && mv temp count.isoforms\n" >> testcode
