@@ -5,6 +5,7 @@
 #usage: ./bowtieCodeGenerator.sh testFolderPath dm3 23_29
 CurrentLo=$(pwd)
 source ~/programs/GenomeDefinitions.sh $2
+plasmids=( 'Pld_42AB_Jing_ACTIN-G_anti-sense' 'Pld_42AB_Jing_HSP70-G_anti-sense' 'Pld_42AB_Jing_UASG' 'Pld_42AB_Jing_ACTIN-G_sense' 'Pld_42AB_Jing_HSP70-G_sense' 'Pld_42AB_Jing_UBIG' )
 
 echo "#!/bin/bash" >> testcodePostBowtie
 echo "#!/bin/bash" >> testcodePostBowtie2
@@ -49,13 +50,13 @@ while read line
             then
                 printf "arguments=\"-c \' /woldlab/castor/proj/genome/programs/bowtie-1.0.1+hamrhein_nh_patch/bowtie "$bowtieindex" -p 8 --chunkmbs 1024 -v 0 -a -m 1 -t --sam-nh --best --strata -q --sam "$line"allfastq"$3" --al "$line"."$2"."$3"mer.unique.fastq --un "$line"."$2"."$3"_unmapped.fastq --max "$line"."$2"."$3"_multi.fastq | /woldlab/castor/proj/genome/programs/samtools-0.1.8/samtools view -bT  "$fa" - | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools sort - "$line"."$2"."$3"mer.unique.dup \' \"\nqueue\n" >> bowtie$bowtiedate".condor"
                 printf "condor_run -a request_memory=20000 \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools rmdup -s "$line"."$2"."$3"mer.unique.dup.nochrM.bam "$line"."$2"."$3"mer.unique.nochrM.bam \" && " >> testcodePostBowtie
-                for plasmid in 'Pld_42AB_Jing_ACTIN-G_anti-sense' 'Pld_42AB_Jing_HSP70-G_anti-sense' 'Pld_42AB_Jing_UASG' 'Pld_42AB_Jing_ACTIN-G_sense' 'Pld_42AB_Jing_HSP70-G_sense' 'Pld_42AB_Jing_UBIG'
+                for plasmid in "${plasmids[@]}"
                     do
                         printf "arguments=\"-c \' /woldlab/castor/proj/genome/programs/bowtie-1.0.1+hamrhein_nh_patch/bowtie /woldlab/loxcyc/home/phe/genomes/YichengVectors/"$plasmid" -p 8 --chunkmbs 1024 -v 0 -a -m 1 -t --sam-nh --best --strata -q --sam "$line"."$2"."$3"_unmapped.fastq --al "$line"."$2"."$3"mer."$plasmid".unique.fastq | /woldlab/castor/proj/genome/programs/samtools-0.1.8/samtools view -bT /woldlab/loxcyc/home/phe/genomes/YichengVectors/"$plasmid".fa - | /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools sort - "$line"."$2"."$3"mer."$plasmid".unique.dup \' \"\nqueue\n" >> bowtie$bowtiedate".2.condor"
                     done
         fi
         printf "condor_run -a request_memory=20000 \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index "$line"."$2"."$3"mer.unique.nochrM.bam \" & \n " >> testcodePostBowtie
-        for plasmid in 'Pld_42AB_Jing_ACTIN-G_anti-sense' 'Pld_42AB_Jing_HSP70-G_anti-sense' 'Pld_42AB_Jing_UASG' 'Pld_42AB_Jing_ACTIN-G_sense' 'Pld_42AB_Jing_HSP70-G_sense' 'Pld_42AB_Jing_UBIG'
+        for plasmid in "${plasmids[@]}"
             do
                 printf "condor_run -a request_memory=20000 \" /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index "$line"."$2"."$3"mer."$plasmid".unique.dup.bam \" && " >> testcodePostBowtie2
             done
