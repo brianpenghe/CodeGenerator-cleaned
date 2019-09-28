@@ -1,4 +1,5 @@
 #!/bin/bash
+source /woldlab/castor/home/phe/programs/NovelCharacterDefinition.sh
 echo '' >> testcode
 echo "******take a break***********" >> testcode
 echo "refolder,unzip and FastQC codes:" >> testcode
@@ -11,9 +12,9 @@ if [[ "$4" != "SE" && "$4" != "PE" ]]
 fi
 while read line
     do
-        Folders=$(echo $line | cut -d' ' -f1)
-        SampleMeta=$(echo $line | cut -d' ' -f2-)
-        path=$(echo $CurrentLo"/"$Folders$SampleMeta)
+        Folders=$(echo $line | cut -d' ' -f1 | sed -r "$ReplaceNovel")
+        SampleMeta=$(echo $line | cut -d' ' -f2- | sed -r "$ReplaceNovel")
+        path=$(echo $CurrentLo"/"$Folders"_"$SampleMeta)
 		if [[ "$4" == "PE" ]]
 			then
 				printf "cat "$Folders"/*R1.fastq > "$path"R1.fastq && " >> testcode
