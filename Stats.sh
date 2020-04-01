@@ -50,6 +50,11 @@ elif [ "$2" == "dm3" ]
         printf '
             echo "file total_complexity nucleus_complexity eRange3x2Peaks eRange5x4Peaks F-seqPeaksAll F-seqPeaks F-seqFRiP HOMERpeaksAll HOMERpeaks HOMERFRiP processed unique failed suppressed chr2L_reads chr2LHet_reads chr2R_reads chr2RHet_reads chr3L_reads chr3LHet_reads chr3R_reads chr3RHet_reads chr4_reads chrU_reads chrUextra_reads chrX_reads chrXHet_reads chrYHet_reads chrM_reads " >> stats
         ' >> testcodeStats
+elif [ "$2" == "dm6" ]
+    then
+        printf '
+            echo "file total_complexity nucleus_complexity eRange3x2Peaks eRange5x4Peaks F-seqPeaksAll F-seqPeaks F-seqFRiP HOMERpeaksAll HOMERpeaks HOMERFRiP processed unique failed suppressed chr2L_reads chr2R_reads chr3L_reads chr3R_reads chr4_reads chrX_reads chrY_reads chrM_reads " >> stats
+' >> testcodeStats
 elif [ "$2" == "danRer10" ]
     then
         printf '
@@ -94,6 +99,7 @@ genomes["hg38"]=$(echo {1..22} 'X' 'Y' 'M')
 genomes["galGal4"]=$(echo {1..28} 32 'W' 'Z' 'M' 'LGE64')
 genomes["galGal4full"]=$(echo {1..28} 32 'W' 'Z' 'M' 'LGE64')
 genomes["dm3"]=$(echo '2L' '2LHet' '2R' '2RHet' '3L' '3LHet' '3R' '3RHet' '4' 'U' 'Uextra' 'X' 'XHet' 'YHet' 'M')
+genomes["dm6"]=$(echo '2L' '2R' '3L' '3R' '4' 'X' 'Y' 'M')
 genomes["danRer10"]=$(echo {1..25} 'M')
 printf "printf \" \" >> stats\n" >> testcodeStats
 printf "echo -n " >> testcodeStats 
