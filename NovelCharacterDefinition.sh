@@ -1,2 +1,2 @@
 #!/bin/bash
-ReplaceNovel="s/[/\'\ %#;&~+()]/_/g"
+ReplaceNovel="s/[/\'\ %#;&~+():]/_/g"
