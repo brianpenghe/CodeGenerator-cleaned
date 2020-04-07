@@ -16,7 +16,7 @@ echo "export PYTHONPATH=\$PYTHONPATH:/woldlab/castor/proj/genome/programs/deepTo
 
 while read line
     do
-        printf " /woldlab/loxcyc/proj/genome/programs/homer-4.7/bin/makeTagDirectory "$line"."$2"."$3"HomerTags "$line"."$2"."$3".unique.dup.nochrM.bam && " >> testcodeHOMER
+        printf " /woldlab/loxcyc/proj/genome/programs/homer-4.7/bin/makeTagDirectory "$line"."$2"."$3"HomerTags "$line"."$2"."$3".unique.dup.nochrM.bam -single && " >> testcodeHOMER
         printf "/woldlab/loxcyc/proj/genome/programs/homer-4.7/bin/findPeaks "$line"."$2"."$3"HomerTags -localSize 50000 -minDist 50 -size 150 -fragLength 0 -o "$line"."$2"."$3"lS50000mD50s150fL0.HOMER 2> "$line"."$2"."$3"lS50000mD50s150fL0.HOMER.err && " >> testcodeHOMER
         printf "/woldlab/loxcyc/proj/genome/programs/homer-4.7/bin/findPeaks "$line"."$2"."$3"HomerTags -localSize 50000 -fdr 0.0005 -minDist 50 -size 150 -fragLength 0 -o "$line"."$2"."$3"lS50000mD50s150fL0fdr0.0005.HOMER 2> "$line"."$2"."$3"lS50000mD50s150fL0fdr0.0005.HOMER.err && " >> testcodeHOMER
         printf "/woldlab/loxcyc/proj/genome/programs/homer-4.7/bin/findPeaks "$line"."$2"."$3"HomerTags -localSize 50000 -fdr 0.0001 -minDist 50 -size 150 -fragLength 0 -o "$line"."$2"."$3"lS50000mD50s150fL0fdr0.0001.HOMER 2> "$line"."$2"."$3"lS50000mD50s150fL0fdr0.0001.HOMER.err && " >> testcodeHOMER
