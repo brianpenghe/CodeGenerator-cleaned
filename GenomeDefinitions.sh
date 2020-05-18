@@ -114,6 +114,11 @@ then
     chromsizes="/woldlab/castor/home/phe/genomes/hg38/hg38.chrom.sizes"
     blacklist="/woldlab/castor/home/phe/genomes/hg38/hg38.blacklist.bed"
     mitoblack="hg38male.chrM30merslS50000mD50s150fL0.bed"
+    STARDir="/woldlab/castor/home/diane/proj/genome/GRCh38-V29-male"
+    RsemDir="/woldlab/castor/home/diane/proj/genome/GRCh38-V29-male/rsem"
+    GeneNames=""
+    gtf="/woldlab/castor/home/diane/proj/genome/GRCh38-V29-male/gencode.VV29-tRNAs-ERCC.gff"
+    
 elif [ "$1" == "hg38" ]
 then
     fa="/woldlab/castor/home/phe/genomes/hg38/hg38male.fa"
