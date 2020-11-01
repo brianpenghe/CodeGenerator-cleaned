@@ -69,6 +69,39 @@ while read line
 
 cat bowtie$bowtiedate".2.condor" | sed -e 's/.dm3.23_29_unmapped.fastq/allfastq23_29/g' | sed -e 's/.dm3.21_21_unmapped.fastq/allfastq21_21/g' | sed -e 's/unique/vectoronly/g' | sed -e 's/shell2/shell3/g' > bowtie$bowtiedate".3.condor"
 cat testcodePostBowtie2 | sed -e 's/unique/vectoronly/g' > testcodePostBowtie3
+
+declare -i j=0
+
+echo -n '' > testcodePostBowtieStat
+printf 'echo "sample file total mapped failed multi" > stats1 \n' >> testcodePostBowtieStat
+printf 'echo "sample plasmid total mapped failed multi" > stats3 \n' >> testcodePostBowtieStat
+while read line
+    do
+      printf '
+echo '$line' shell.'$bowtiedate'.'$j'.err \
+    $(cat shell.'$bowtiedate'.'$j'.err | grep processed - | cut -d: -f2) \
+    $(cat shell.'$bowtiedate'.'$j'.err | grep least - | cut -d: -f2) \
+    $(cat shell.'$bowtiedate'.'$j'.err | grep failed - | cut -d: -f2) \
+    $(cat shell.'$bowtiedate'.'$j'.err | grep suppressed - | cut -d: -f2) >> stats1
+      ' >> testcodePostBowtieStat
+
+      p_length=${#plasmids[@]}
+      for i in ${!plasmids[@]}
+        do
+          k=$(( j * p_length + i ))
+          printf '
+echo '$line' '${plasmids[i]}' shell3.'$bowtiedate'.'$k'.err \
+    $(cat shell3.'$bowtiedate'.'$k'.err | grep processed - | cut -d: -f2) \
+    $(cat shell3.'$bowtiedate'.'$k'.err | grep least - | cut -d: -f2) \
+    $(cat shell3.'$bowtiedate'.'$k'.err | grep failed - | cut -d: -f2) \
+    $(cat shell3.'$bowtiedate'.'$k'.err | grep suppressed - | cut -d: -f2) >> stats3
+          ' >> testcodePostBowtieStat
+        done
+      j+=1
+    done <$1
+
+
+chmod a+x testcodePostBowtieStat
 chmod a+x testcodePostBowtie
 chmod a+x testcodePostBowtie2
 chmod a+x testcodePostBowtie3
