@@ -100,6 +100,6 @@ echo '$line' '${plasmids[i]}' shell2.'$bowtiedate'.'$k'.err \
 
 
 
-
+chmod a+x testcodePostBowtieStat
 chmod a+x testcodePostBowtie
 chmod a+x testcodePostBowtie2
