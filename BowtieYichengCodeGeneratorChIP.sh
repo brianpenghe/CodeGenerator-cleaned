@@ -67,5 +67,39 @@ while read line
         printf "echo $line & \n " >> testcodePostBowtie2
     done <$1
 
+
+declare -i j=0
+
+echo -n '' > testcodePostBowtieStat
+printf 'echo "sample file total mapped failed multi" > stats1 \n' >> testcodePostBowtieStat
+printf 'echo "sample plasmid total mapped failed multi" > stats2 \n' >> testcodePostBowtieStat
+while read line
+    do
+      printf '
+echo '$line' shell.'$bowtiedate'.'$j'.err \
+    $(cat shell.'$bowtiedate'.'$j'.err | grep processed - | cut -d: -f2) \
+    $(cat shell.'$bowtiedate'.'$j'.err | grep least - | cut -d: -f2) \
+    $(cat shell.'$bowtiedate'.'$j'.err | grep failed - | cut -d: -f2) \
+    $(cat shell.'$bowtiedate'.'$j'.err | grep suppressed - | cut -d: -f2) >> stats1
+      ' >> testcodePostBowtieStat
+
+      p_length=${#plasmids[@]}
+      for i in ${!plasmids[@]}
+        do
+          k=$(( j * p_length + i ))
+          printf '
+echo '$line' '${plasmids[i]}' shell2.'$bowtiedate'.'$k'.err \
+    $(cat shell2.'$bowtiedate'.'$k'.err | grep processed - | cut -d: -f2) \
+    $(cat shell2.'$bowtiedate'.'$k'.err | grep least - | cut -d: -f2) \
+    $(cat shell2.'$bowtiedate'.'$k'.err | grep failed - | cut -d: -f2) \
+    $(cat shell2.'$bowtiedate'.'$k'.err | grep suppressed - | cut -d: -f2) >> stats2
+          ' >> testcodePostBowtieStat
+        done
+      j+=1
+    done <$1
+
+
+
+
 chmod a+x testcodePostBowtie
 chmod a+x testcodePostBowtie2
