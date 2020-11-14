@@ -68,8 +68,8 @@ cat testcodePostBowtie2 | sed -e 's/unique/vectoronly/g' > testcodePostBowtie3
 
 declare -i j=0
 
-echo -n '' > testcodePostBowtieStat
-printf 'echo "sample plasmid total mapped failed multi" > stats3 \n' >> testcodePostBowtieStat
+echo -n '' > testcodePostBowtieStat$bowtiedate
+printf 'echo "sample plasmid total mapped failed multi" > stats3 \n' >> testcodePostBowtieStat$bowtiedate
 while read line
     do
       p_length=${#plasmids[@]}
@@ -82,7 +82,7 @@ echo '$line' '${plasmids[i]}' shell3.'$bowtiedate'.'$k'.err \
     $(cat shell3.'$bowtiedate'.'$k'.err | grep least - | cut -d: -f2) \
     $(cat shell3.'$bowtiedate'.'$k'.err | grep failed - | cut -d: -f2) \
     $(cat shell3.'$bowtiedate'.'$k'.err | grep suppressed - | cut -d: -f2) >> stats3
-          ' >> testcodePostBowtieStat
+          ' >> testcodePostBowtieStat$bowtiedate
         done
       j+=1
     done <$1
@@ -91,4 +91,4 @@ echo '$line' '${plasmids[i]}' shell3.'$bowtiedate'.'$k'.err \
 chmod a+x testcodePostBowtie
 chmod a+x testcodePostBowtie2
 chmod a+x testcodePostBowtie3
-chmod a+x testcodePostBowtieStat
+chmod a+x testcodePostBowtieStat$bowtiedate
