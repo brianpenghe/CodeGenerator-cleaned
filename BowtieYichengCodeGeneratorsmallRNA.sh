@@ -16,7 +16,7 @@ echo "#!/bin/bash" >> testcodePostBowtie2
 echo "#bigWig (Index, SAMstats, idxstats) codes:" >> testcodePostBowtie
 echo "#bigWig (Index, SAMstats, idxstats) codes:" >> testcodePostBowtie2
 
-bowtiedate=$(date +"%y%m%d.%H.%M.%S.%N")
+bowtiedate=$(date +"%y%m%d")$2"_"$3
 printf '''
 universe=vanilla
 
@@ -73,8 +73,8 @@ cat testcodePostBowtie2 | sed -e 's/unique/vectoronly/g' > testcodePostBowtie3
 declare -i j=0
 
 echo -n '' > testcodePostBowtieStat$bowtiedate
-printf 'echo "sample file total mapped failed multi" > stats1 \n' >> testcodePostBowtieStat$bowtiedate
-printf 'echo "sample plasmid total mapped failed multi" > stats3 \n' >> testcodePostBowtieStat$bowtiedate
+printf 'echo "sample file total mapped failed multi" > statsGenome'$bowtiedate' \n' >> testcodePostBowtieStat$bowtiedate
+printf 'echo "sample plasmid total mapped failed multi" > statsVector'$bowtiedate' \n' >> testcodePostBowtieStat$bowtiedate
 while read line
     do
       printf '
@@ -82,7 +82,7 @@ echo '$line' shell.'$bowtiedate'.'$j'.err \
     $(cat shell.'$bowtiedate'.'$j'.err | grep processed - | cut -d: -f2) \
     $(cat shell.'$bowtiedate'.'$j'.err | grep least - | cut -d: -f2) \
     $(cat shell.'$bowtiedate'.'$j'.err | grep failed - | cut -d: -f2) \
-    $(cat shell.'$bowtiedate'.'$j'.err | grep suppressed - | cut -d: -f2) >> stats1
+    $(cat shell.'$bowtiedate'.'$j'.err | grep suppressed - | cut -d: -f2) >> statsGenome'$bowtiedate'
       ' >> testcodePostBowtieStat$bowtiedate
 
       p_length=${#plasmids[@]}
@@ -94,7 +94,7 @@ echo '$line' '${plasmids[i]}' shell3.'$bowtiedate'.'$k'.err \
     $(cat shell3.'$bowtiedate'.'$k'.err | grep processed - | cut -d: -f2) \
     $(cat shell3.'$bowtiedate'.'$k'.err | grep least - | cut -d: -f2) \
     $(cat shell3.'$bowtiedate'.'$k'.err | grep failed - | cut -d: -f2) \
-    $(cat shell3.'$bowtiedate'.'$k'.err | grep suppressed - | cut -d: -f2) >> stats3
+    $(cat shell3.'$bowtiedate'.'$k'.err | grep suppressed - | cut -d: -f2) >> statsVector'$bowtiedate'
           ' >> testcodePostBowtieStat$bowtiedate
         done
       j+=1
