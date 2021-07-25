@@ -1,5 +1,5 @@
 #!/bin/sh
-
+export PYTHONPATH=$PYTHONPATH:/woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/lib/python2.7/site-packages
 #bin counts for vector mappings
 ls *vectoronly*.bam | rev | cut -d. -f2- | rev > bams
 for i in 10 100 1000
