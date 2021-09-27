@@ -9,7 +9,7 @@ plasmids=( '42AB_UASG' '42AB_UBIG' '66A_UASG' '66A_UBIG' 'ACTIN-G' 'GFP_SV40' \
 'HSP70-G' 'Pld_42AB_Jing_ACTIN-G_anti-sense' 'Pld_42AB_Jing_ACTIN-G_sense' \
 'Pld_42AB_Jing_HSP70-G_anti-sense' 'Pld_42AB_Jing_HSP70-G_sense'  'Pld_42AB_Jing_UASG' \
 'Pld_42AB_Jing_UBIG_antisense' 'Pld_42AB_Jing_UBIG' 'UBIG' 'Ubi_promoter_only' \
-'originalUBIG' 'UBIGasG')
+'originalUBIG' 'UBIGasG' 'UASMhc17GFP')
 
 echo "#!/bin/bash" >> testcodePostBowtie
 echo "#!/bin/bash" >> testcodePostBowtie2
@@ -67,7 +67,7 @@ while read line
         printf "echo $line & \n " >> testcodePostBowtie2
     done <$1
 
-cat bowtie$bowtiedate".2.condor" | sed -e 's/.dm3.23_29_unmapped.fastq/allfastq23_29/g' | sed -e 's/.dm3.21_21_unmapped.fastq/allfastq21_21/g' | sed -e 's/.dm3.21_22_unmapped.fastq/allfastq21_22/g' | sed -e 's/unique/vectoronly/g' | sed -e 's/shell2/shell3/g' > bowtie$bowtiedate".3.condor"
+cat bowtie$bowtiedate".2.condor" | sed -e 's/.dm3.19_30_unmapped.fastq/allfastq19_30/g' | sed -e 's/.dm3.23_29_unmapped.fastq/allfastq23_29/g' | sed -e 's/.dm3.21_21_unmapped.fastq/allfastq21_21/g' | sed -e 's/.dm3.21_22_unmapped.fastq/allfastq21_22/g' | sed -e 's/unique/vectoronly/g' | sed -e 's/shell2/shell3/g' > bowtie$bowtiedate".3.condor"
 cat testcodePostBowtie2 | sed -e 's/unique/vectoronly/g' > testcodePostBowtie3
 
 declare -i j=0
