@@ -12,7 +12,7 @@ echo "********(checkout bowtie condor file)*********" >> testcode
 if [[ "$1" != "SE" && "$1" != "PE" ]]
     then
         printf "single end(SE) or paired end(PE)?"
-        exit 1 
+        exit 1
 fi
 while read line
         do
@@ -46,6 +46,6 @@ while read line
                 then
                     ~/programs/FastQCTrim.sh $1 $path $3
             else
-                ~/programs/FastQCTrim.sh $1 $path $3 $4 $5
+                ~/programs/FastQCTrimYicheng.sh $1 $path $3 $4 $5
             fi
         done <testSampleList

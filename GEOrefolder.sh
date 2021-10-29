@@ -11,7 +11,7 @@ echo "********(checkout bowtie condor file)*********" >> testcode
 if [[ "$1" != "SE" && "$1" != "PE" ]]
     then
         printf "single end(SE) or paired end(PE)?"
-        exit 1 
+        exit 1
 fi
 while read line
         do
@@ -29,7 +29,7 @@ while read line
             path=$(echo $CurrentLo"/"$SampleID$SampleMeta)
             printf $path"\n" >> testFolderPath
             k=1
-			
+
 			#now manipulate the files and do a second scan
             while [[ $(echo $line | cut -d' ' -f$k | cut -c1-3) == "ftp" ]]
                 do
@@ -38,7 +38,7 @@ while read line
                             printf "/woldlab/castor/home/georgi/programs/sratoolkit.2.3.1-ubuntu64/bin/fastq-dump.2.3.1 "${Folder[$k]}" --split-3 && " >> testcode
 							printf "mv "$(echo ${Folder[$k]} | sed "s/.sra//g")"_1.fastq "$path$k".R1.fastq && " >> testcode
 							printf "mv "$(echo ${Folder[$k]} | sed "s/.sra//g")"_2.fastq "$path$k".R2.fastq && " >> testcode
-                            
+
                     elif [[ "$1" == "SE" ]]
                         then
 							printf "/woldlab/castor/home/georgi/programs/sratoolkit.2.3.1-ubuntu64/bin/fastq-dump.2.3.1 -Z "${Folder[$k]}" > "$path$k".fastq && " >> testcode
@@ -49,6 +49,6 @@ while read line
                 then
                     ~/programs/FastQCTrim.sh $1 $path $3
             else
-                ~/programs/FastQCTrim.sh $1 $path $3 $4 $5
+                ~/programs/FastQCTrimYicheng.sh $1 $path $3 $4 $5
             fi
         done <testSampleList

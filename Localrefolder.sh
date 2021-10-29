@@ -8,7 +8,7 @@ if [[ "$4" != "SE" && "$4" != "PE" ]]
     then
 		echo $4
         printf "single end(SE) or paired end(PE)?"
-        exit 1 
+        exit 1
 fi
 while read line
     do
@@ -28,6 +28,6 @@ while read line
             then
                 ~/programs/FastQCTrim.sh $4 $path $3
         else
-            ~/programs/FastQCTrim.sh $4 $path $3 $5 $6
+            ~/programs/FastQCTrimYicheng.sh $4 $path $3 $5 $6
         fi
     done <$1
