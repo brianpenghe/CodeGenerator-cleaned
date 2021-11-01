@@ -64,19 +64,19 @@ while read bam
   do
     samtools view -h $bam chr2R:2144349-2386719 > $bam.sam
     python2 ~/190428YichengpiRNA/signature_plot/signature.py $bam.sam 23 29 1 29 $bam.cluster_42AB.pingpong
-  done<<<$(ls *.dm3.23_29mer.unique.dup.bam)
+  done<<<$(ls *.dm6.23_29mer.unique.dup.bam)
 
 while read bam
   do
     samtools view -h $bam chrX:21392175-21431907 > $bam.sam
     python2 ~/190428YichengpiRNA/signature_plot/signature.py $bam.sam 23 29 1 29 $bam.cluster_20A.pingpong
-  done<<<$(ls *.dm3.23_29mer.unique.dup.bam)
+  done<<<$(ls *.dm6.23_29mer.unique.dup.bam)
 
 while read bam
   do
     samtools view -h $bam chrX:21505666-21684449 > $bam.sam
     python2 ~/190428YichengpiRNA/signature_plot/signature.py $bam.sam 23 29 1 29 $bam.cluster_flamenco.pingpong
-  done<<<$(ls *.dm3.23_29mer.unique.dup.bam)
+  done<<<$(ls *.dm6.23_29mer.unique.dup.bam)
 
 #make bigWig
 
@@ -86,4 +86,4 @@ while read bam
 -of bigwig -bs 1 --samFlagInclude 16 -o $bam.1.Minus.bigWig
     /woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/bin/bamCoverage -b $bam \
 -of bigwig -bs 1 --samFlagExclude 16 -o $bam.1.Plus.bigWig
-  done<<<$(ls *.dm3.23_29mer.unique.dup.bam)
+  done<<<$(ls *.dm6.23_29mer.unique.dup.bam)
