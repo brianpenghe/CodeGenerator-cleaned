@@ -1,8 +1,8 @@
 #!/bin/bash
 #Run these codes in the current SERVER directory
 #the file $test has two columns, link and name, only one space allowed
-#Two stages: mapping to dm3 first then mapping to vectors
-#usage: ./bowtieCodeGenerator.sh testFolderPath dm3 23_29
+#Two stages: mapping to dm3/dm6 first then mapping to vectors
+#usage: ./bowtieCodeGenerator.sh testFolderPath dm3/dm6 23_29
 CurrentLo=$(pwd)
 source ~/programs/GenomeDefinitions.sh $2
 plasmids=( '42AB_UASG' '42AB_UBIG' '66A_UASG' '66A_UBIG' 'ACTIN-G' 'GFP_SV40' \
@@ -65,7 +65,7 @@ while read line
         printf "echo $line & \n " >> testcodePostBowtie2
     done <$1
 
-cat bowtie$bowtiedate".2.condor" | sed -e 's/.dm3.19_30_unmapped.fastq/allfastq19_30/g' | sed -e 's/.dm3.23_29_unmapped.fastq/allfastq23_29/g' | sed -e 's/.dm3.21_21_unmapped.fastq/allfastq21_21/g' | sed -e 's/.dm3.21_22_unmapped.fastq/allfastq21_22/g' | sed -e 's/unique/vectoronly/g' | sed -e 's/shell2/shell3/g' > bowtie$bowtiedate".3.condor"
+cat bowtie$bowtiedate".2.condor" | sed -e 's/.'$2'.19_30_unmapped.fastq/allfastq19_30/g' | sed -e 's/.'$2'.23_29_unmapped.fastq/allfastq23_29/g' | sed -e 's/.'$2'.21_21_unmapped.fastq/allfastq21_21/g' | sed -e 's/.'$2'.21_22_unmapped.fastq/allfastq21_22/g' | sed -e 's/unique/vectoronly/g' | sed -e 's/shell2/shell3/g' > bowtie$bowtiedate".3.condor"
 cat testcodePostBowtie2 | sed -e 's/unique/vectoronly/g' > testcodePostBowtie3
 
 declare -i j=0
