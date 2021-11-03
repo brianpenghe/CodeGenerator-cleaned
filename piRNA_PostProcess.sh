@@ -1,6 +1,10 @@
 #!/bin/sh
 export PYTHONPATH=$PYTHONPATH:/woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/lib/python2.7/site-packages
 #bin counts for vector mappings
+Coordinates_20A='chrX:21519548-21560880'
+Coordinates_42AB='chr2R:6256844-6499214'
+Coordinates_Flam='chrX:21632639-21883809'
+
 ls *vectoronly*.bam | rev | cut -d. -f2- | rev > bams
 for i in 10 100 1000
   do
@@ -22,23 +26,23 @@ for i in 10 100 1000
     while read bam
       do
         /woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/bin/bamCoverage -b $bam \
--of bedgraph -bs $i --region chrX:21392175-21431907 -o $bam.$i.20A.bg4
+-of bedgraph -bs $i --region $Coordinates_20A -o $bam.$i.20A.bg4
         /woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/bin/bamCoverage -b $bam \
--of bedgraph -bs $i --region chrX:21392175-21431907 --samFlagInclude 16 -o $bam.$i.20A.Minus.bg4
+-of bedgraph -bs $i --region $Coordinates_20A --samFlagInclude 16 -o $bam.$i.20A.Minus.bg4
         /woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/bin/bamCoverage -b $bam \
--of bedgraph -bs $i --region chrX:21392175-21431907 --samFlagExclude 16 -o $bam.$i.20A.Plus.bg4
+-of bedgraph -bs $i --region $Coordinates_20A --samFlagExclude 16 -o $bam.$i.20A.Plus.bg4
         /woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/bin/bamCoverage -b $bam \
--of bedgraph -bs $i --region chr2R:2144349-2386719 -o $bam.$i.42A.bg4
+-of bedgraph -bs $i --region $Coordinates_42AB -o $bam.$i.42A.bg4
         /woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/bin/bamCoverage -b $bam \
--of bedgraph -bs $i --region chr2R:2144349-2386719 --samFlagInclude 16 -o $bam.$i.42A.Minus.bg4
+-of bedgraph -bs $i --region $Coordinates_42AB --samFlagInclude 16 -o $bam.$i.42A.Minus.bg4
         /woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/bin/bamCoverage -b $bam \
--of bedgraph -bs $i --region chr2R:2144349-2386719 --samFlagExclude 16 -o $bam.$i.42A.Plus.bg4
+-of bedgraph -bs $i --region $Coordinates_42AB --samFlagExclude 16 -o $bam.$i.42A.Plus.bg4
         /woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/bin/bamCoverage -b $bam \
--of bedgraph -bs $i --region chrX:21505666-21684449 -o $bam.$i.flamenco.bg4
+-of bedgraph -bs $i --region $Coordinates_Flam -o $bam.$i.flamenco.bg4
         /woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/bin/bamCoverage -b $bam \
--of bedgraph -bs $i --region chrX:21505666-21684449 --samFlagInclude 16 -o $bam.$i.flamenco.Minus.bg4
+-of bedgraph -bs $i --region $Coordinates_Flam --samFlagInclude 16 -o $bam.$i.flamenco.Minus.bg4
         /woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/bin/bamCoverage -b $bam \
--of bedgraph -bs $i --region chrX:21505666-21684449 --samFlagExclude 16 -o $bam.$i.flamenco.Plus.bg4
+-of bedgraph -bs $i --region $Coordinates_Flam --samFlagExclude 16 -o $bam.$i.flamenco.Plus.bg4
       done<bamsgenome
   done
 
@@ -62,21 +66,21 @@ while read bam
 
 while read bam
   do
-    samtools view -h $bam chr2R:2144349-2386719 > $bam.sam
+    samtools view -h $bam $Coordinates_42AB > $bam.sam
     python2 ~/190428YichengpiRNA/signature_plot/signature.py $bam.sam 23 29 1 29 $bam.cluster_42AB.pingpong
-  done<<<$(ls *.dm6.23_29mer.unique.dup.bam)
+  done<<<$(ls *.dm?.23_29mer.unique.dup.bam)
 
 while read bam
   do
-    samtools view -h $bam chrX:21392175-21431907 > $bam.sam
+    samtools view -h $bam $Coordinates_20A > $bam.sam
     python2 ~/190428YichengpiRNA/signature_plot/signature.py $bam.sam 23 29 1 29 $bam.cluster_20A.pingpong
-  done<<<$(ls *.dm6.23_29mer.unique.dup.bam)
+  done<<<$(ls *.dm?.23_29mer.unique.dup.bam)
 
 while read bam
   do
-    samtools view -h $bam chrX:21505666-21684449 > $bam.sam
+    samtools view -h $bam $Coordinates_Flam > $bam.sam
     python2 ~/190428YichengpiRNA/signature_plot/signature.py $bam.sam 23 29 1 29 $bam.cluster_flamenco.pingpong
-  done<<<$(ls *.dm6.23_29mer.unique.dup.bam)
+  done<<<$(ls *.dm?.23_29mer.unique.dup.bam)
 
 #make bigWig
 
@@ -86,4 +90,4 @@ while read bam
 -of bigwig -bs 1 --samFlagInclude 16 -o $bam.1.Minus.bigWig
     /woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/bin/bamCoverage -b $bam \
 -of bigwig -bs 1 --samFlagExclude 16 -o $bam.1.Plus.bigWig
-  done<<<$(ls *.dm6.23_29mer.unique.dup.bam)
+done<<<$(ls *.dm?.23_29mer.unique.dup.bam)
