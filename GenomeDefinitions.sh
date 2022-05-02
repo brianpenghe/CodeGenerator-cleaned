@@ -17,20 +17,20 @@ then
     bowtieindex="/woldlab/castor/home/phe/genomes/galGal4/galGal4.clean"
     chromsizes="/woldlab/castor/home/phe/genomes/galGal4/galGal4.clean.chrom.sizes"
     blacklist="/woldlab/castor/home/phe/genomes/galGal4/galGal4.chrM30merslS50000mD50s150fL0.bed"
-    mitoblack="/woldlab/castor/home/phe/genomes/galGal4/galGal4.chrM30merslS50000mD50s150fL0.bed"	
+    mitoblack="/woldlab/castor/home/phe/genomes/galGal4/galGal4.chrM30merslS50000mD50s150fL0.bed"
 
 elif [ "$1" == "MG1655" ]
 then
 	fa="/woldlab/castor/home/phe/genomes/K-12MG1655/K-12MG1655.fa"
 	bowtieindex="/woldlab/castor/home/phe/genomes/K-12MG1655/bowtie1-index/K-12MG1655"
 	chromsizes="/woldlab/castor/home/phe/genomes/K-12MG1655/bowtie1-index/K-12MG1655.chrom.sizes"
-	
-elif [ "$1" == "MC4100" ]	
+
+elif [ "$1" == "MC4100" ]
 then
 	fa="/woldlab/castor/home/phe/genomes/K-12MC4100/K-12MC4100.fa"
 	bowtieindex="/woldlab/castor/home/phe/genomes/K-12MC4100/bowtie1-index/K-12MC4100"
 	chromsizes="/woldlab/castor/home/phe/genomes/K-12MC4100/bowtie1-index/K-12MC4100.chrom.sizes"
-	
+
 elif [ "$1" == "Spur4.2" ]
 then
     fa="/woldlab/castor/home/phe/genomes/Spur4.2/Spur4.2_scaffolds.fa"
@@ -38,13 +38,13 @@ then
     chromsizes="/woldlab/castor/home/phe/genomes/Spur4.2/Spur4.2_scaffolds.chrom.sizes"
     blacklist=""
     mitoblack=""
-	
+
 elif [ "$1" == "strPur2" ]
 then
     fa="/woldlab/castor/proj/genome/bowtie-indexes/strPur2.fa"
     bowtieindex="/woldlab/castor/proj/genome/bowtie-indexes/strPur2"
     chromsizes="/woldlab/castor/proj/genome/bowtie-indexes/strPur2.chrom.sizes"
-	
+
 elif [ "$1" == "Spur3.1" ]
 then
     fa="/woldlab/castor/home/phe/genomes/Spur3.1/Spur_v3.1_assembly/LinearScaffolds/Spur_3.1.LinearScaffold.fa"
@@ -118,7 +118,7 @@ then
     RsemDir="/woldlab/castor/home/diane/proj/genome/GRCh38-V24-male/rsem"
     GeneNames="~/genomes/hg38/gencode.vV24-tRNAs-ERCC.GeneNames"
     gtf="/woldlab/castor/home/diane/proj/genome/GRCh38-V24-male/gencode.vV24-tRNAs-ERCC.gff"
-    
+
 elif [ "$1" == "hg38" ]
 then
     fa="/woldlab/castor/home/phe/genomes/hg38/hg38male.fa"
@@ -148,9 +148,9 @@ then
     chromsizes="/woldlab/castor/proj/genome/bowtie-indexes/dm6.chrom.sizes"
     mitoblack="/woldlab/castor/proj/genome/bowtie-indexes/dm6.chrM30merslS50000mD50s150fL0.bed"
     blacklist="/woldlab/castor/proj/genome/bowtie-indexes/dm6-blacklist.v2.bed"
-#   STARDir="/woldlab/castor/home/phe/genomes/dm3/"
-#    RsemDir="/woldlab/castor/home/phe/genomes/dm3/"
-#    gtf="/woldlab/castor/home/phe/genomes/dm3/refGene.20150212.dm3.gtf"
+    STARDir="/woldlab/castor/home/phe/genomes/dm6/"
+    RsemDir="/woldlab/castor/home/phe/genomes/dm6/"
+    gtf="/woldlab/castor/home/phe/genomes/dm6/Drosophila_melanogaster.BDGP6.32.106.fixed.gtf"
 #    rRNAbowtieindex="/woldlab/castor/home/phe/genomes/rRNA/MariaDrosophila/dmel_rRNA_unit"
 #    hotspot_chrom_sizes="/woldlab/castor/home/phe/genomes/hotspot2files/dm3/chrom_sizes.bed"
 #    hotspot_center_sites="/woldlab/castor/home/phe/genomes/hotspot2files/dm3/center_sites.starch"
