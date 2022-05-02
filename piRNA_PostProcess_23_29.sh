@@ -60,27 +60,28 @@ sed -e 's/|/\t/g' > $bg4.chopped.bg4
 while read bam
   do
     samtools view -h $bam > $bam.sam
-    python2 ~/190428YichengpiRNA/signature_plot/signature.py $bam.sam 23 29 1 29 $bam.pingpong
+    python2 ~/programs/signature.py $bam.sam 23 29 1 29 $bam.pingpong
   done <<<$(ls *23_29mer.{GFP_SV40,UBIG,originalUBIG}.vectoronly.dup.bam)
 
 while read bam
   do
     samtools view -h $bam $Coordinates_42AB > $bam.sam
-    python2 ~/190428YichengpiRNA/signature_plot/signature.py $bam.sam 23 29 1 29 $bam.cluster_42AB.pingpong
+    python2 ~/programs/signature.py $bam.sam 23 29 1 29 $bam.cluster_42AB.pingpong
   done<<<$(ls *.dm?.23_29mer.unique.dup.bam)
 
 while read bam
   do
     samtools view -h $bam $Coordinates_20A > $bam.sam
-    python2 ~/190428YichengpiRNA/signature_plot/signature.py $bam.sam 23 29 1 29 $bam.cluster_20A.pingpong
+    python2 ~/programs/signature.py $bam.sam 23 29 1 29 $bam.cluster_20A.pingpong
   done<<<$(ls *.dm?.23_29mer.unique.dup.bam)
 
 while read bam
   do
     samtools view -h $bam $Coordinates_Flam > $bam.sam
-    python2 ~/190428YichengpiRNA/signature_plot/signature.py $bam.sam 23 29 1 29 $bam.cluster_flamenco.pingpong
+    python2 ~/programs/signature.py $bam.sam 23 29 1 29 $bam.cluster_flamenco.pingpong
   done<<<$(ls *.dm?.23_29mer.unique.dup.bam)
 
+rm *.sam
 #make bigWig
 
 while read bam

@@ -2,7 +2,7 @@
 while read bam
     do
         samtools view -h $bam > $bam.sam && \
-        python2 ~/190428YichengpiRNA/signature_plot/signature.py $bam.sam 23 29 1 29 $bam.pingpong && \
+        python2 ~/programs/signature.py $bam.sam 23 29 1 29 $bam.pingpong && \
         rm $bam.sam &
     done<<<$(ls *.DOC.*bam *.Het-A.*bam)
 
@@ -12,11 +12,11 @@ for i in 10 100 1000
     do
         while read bam
             do
-                /woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/bin/bamCoverage -b $bam.bam \
+                bamCoverage -b $bam.bam \
 -of bedgraph -bs $i -o $bam.$i.bg4
-                /woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/bin/bamCoverage -b $bam.bam \
+                bamCoverage -b $bam.bam \
 -of bedgraph -bs $i --samFlagInclude 16 -o $bam.$i.Minus.bg4
-                /woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/bin/bamCoverage -b $bam.bam \
+                bamCoverage -b $bam.bam \
 -of bedgraph -bs $i --samFlagExclude 16 -o $bam.$i.Plus.bg4
             done<bams
     done
