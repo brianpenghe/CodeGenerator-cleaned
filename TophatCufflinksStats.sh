@@ -30,7 +30,7 @@ genomes["hg38"]=$(echo {1..22} 'X' 'Y' 'M')
 genomes["danRer10"]=$(echo {1..25} 'M')
 
 if [[ "$(echo "${genomes[$2]}")" == "" ]]
-    then echo "error in genome version"
+    then echo "tophatcufflinks error in genome version"
 fi
 
 for i in $(echo "${genomes[$2]}")

@@ -60,7 +60,7 @@ elif [ "$2" == "danRer10" ]
         printf '
             echo "file total_complexity nucleus_complexity eRange3x2Peaks eRange5x4Peaks F-seqPeaksAll F-seqPeaks F-seqFRiP HOMERpeaksAll HOMERpeaks HOMERFRiP processed unique failed suppressed chr1_reads chr2_reads chr3_reads chr4_reads chr5_reads chr6_reads chr7_reads chr8_reads chr9_reads chr10_reads chr11_reads chr12_reads chr13_reads chr14_reads chr15_reads chr16_reads chr17_reads chr18_reads chr19_reads chr20_reads chr21_reads chr22_reads chr23_reads chr24_reads chr25_reads chrM_reads " >> stats
         ' >> testcodeStats
-else exit "error in genome version"
+else exit "stats.sh error in genome version"
 fi
 
 
@@ -102,7 +102,7 @@ genomes["dm3"]=$(echo '2L' '2LHet' '2R' '2RHet' '3L' '3LHet' '3R' '3RHet' '4' 'U
 genomes["dm6"]=$(echo '2L' '2R' '3L' '3R' '4' 'X' 'Y' 'M')
 genomes["danRer10"]=$(echo {1..25} 'M')
 printf "printf \" \" >> stats\n" >> testcodeStats
-printf "echo -n " >> testcodeStats 
+printf "echo -n " >> testcodeStats
 for i in $(echo "${genomes[$2]}")
     do
         echo -n " \$(egrep -w 'chr"$i"' "\$line"."$2"."$3"mer.dup.idxstats | cut -f3 | awk '{sum+=\$1} END {print sum}')" >> testcodeStats
@@ -116,4 +116,3 @@ printf '
 ' >> testcodeStats
 
 chmod a+x testcodeStats
-
