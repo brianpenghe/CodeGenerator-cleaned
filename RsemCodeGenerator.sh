@@ -16,7 +16,7 @@ output=rsem-$(Process).out
 error=rsem-$(Process).err
 environment="PATH=/usr/local/bin:/usr/bin:/bin"
 
-RSEM_DIR=/woldlab/loxcyc/home/diane/proj/long-rna-seq-pipeline/rsem/
+RSEM_DIR=/woldlab/castor/home/diane/proj/RSEM/
 
 request_cpus = 8
 request_memory = 42G

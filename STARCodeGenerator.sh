@@ -16,7 +16,7 @@ log=align-star-$(Process).log
 output=align-star-$(Process).out
 error=align-star-$(Process).err
 
-STAR_DIR=/woldlab/castor/proj/programs/STAR-2.5.2a/bin/Linux_x86_64/
+STAR_DIR=/woldlab/castor/home/diane/proj/STAR-2.5.1b/
 
 request_cpus = 8
 request_memory = 30G
@@ -69,4 +69,3 @@ while read path
             $EXTRA_ARGS' "' >> STAR$STARdate.condor
         echo -e '+PostCmd="SamtoolsSort.sh"\n+PostArguments="'$path'FastQCk6/'$2'.'$3'merAligned.toTranscriptome.out.bam"\nqueue\n'>> STAR$STARdate.condor
     done <$1
-

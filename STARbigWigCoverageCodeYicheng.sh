@@ -15,7 +15,7 @@ log=bedgraph-star-$(Process).log
 output=bedgraph-star-$(Process).out
 error=bedgraph-star-$(Process).err
 
-STAR_DIR=/woldlab/castor/proj/programs/STAR-2.5.2a/bin/Linux_x86_64/
+STAR_DIR=/woldlab/castor/home/diane/proj/STAR-2.5.1b/
 
 request_cpus = 1
 request_memory = 4G
