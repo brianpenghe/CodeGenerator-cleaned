@@ -19,7 +19,7 @@ for i in 10 100 1000
   done
 
 #bin counts for genome region mappings
-ls *50mer.unique*.bam > bamsgenome
+ls */*merAligned.sortedByCoord.out.bam > bamsgenome
 for i in 10 100 1000
   do
     while read bam
@@ -55,13 +55,3 @@ for i in 10 100 1000
 sed -e 's/|/\t/g' > $bg4.chopped.bg4
       done<bg4.$i.list
   done
-
-#make bigWig
-
-while read bam
-  do
-    bamCoverage -b $bam \
--of bigwig -bs 1 --samFlagInclude 16 -o $bam.1.Minus.bigWig
-    bamCoverage -b $bam \
--of bigwig -bs 1 --samFlagExclude 16 -o $bam.1.Plus.bigWig
-done<<<$(ls *.dm?.50mer.unique.dup.bam)
