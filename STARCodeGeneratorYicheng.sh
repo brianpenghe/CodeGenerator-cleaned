@@ -18,7 +18,7 @@ log=align-star-$(Process).log
 output=align-star-$(Process).out
 error=align-star-$(Process).err
 
-STAR_DIR=/woldlab/castor/proj/programs/STAR-2.5.2a/bin/Linux_x86_64/
+STAR_DIR=/woldlab/castor/home/diane/proj/STAR-2.5.1b/
 
 request_cpus = 8
 request_memory = 30G
@@ -55,7 +55,7 @@ while read path
             '--alignSJoverhangMin 8' \
             '--alignSJDBoverhangMin 1' \
             '--outFilterMismatchNmax 999' \
-            '--outFilterMismatchNoverReadLmax 0.04' \
+            '--outFilterMismatchNoverReadLmax 0.0' \
             '--alignIntronMin 20' \
             '--alignIntronMax 1000000' \
             '--alignMatesGapMax 1000000' \
@@ -104,6 +104,6 @@ printf "paste -d \"|\" <(echo \"SampleName\") <(cat testFolderPath | paste -s -d
 printf "ls *rRNA.*.err > Bowtie.err.list\n" >> testcode
 printf "paste <(echo \"Sequenced\";echo \"rRNA\";echo \"NonrRNA\") > BowtieStats\n" >> testcode
 printf "while read BowtieStat; do paste -d \"|\" BowtieStats <(grep \"#\" \$BowtieStat | cut -d: -f2) > temp; mv temp BowtieStats; done<Bowtie.err.list\n" >> testcode
-printf "ls *k6/Unique/dm3.50merLog.final.out > STAR.stats.list\n" >> testcode
+printf "ls *k6/Unique/"$2"."$3"merLog.final.out > STAR.stats.list\n" >> testcode
 printf "cut -d \"|\" -f1 \$(head -1 STAR.stats.list) > STARstats\n" >> testcode
 printf "while read STARstat; do paste -d \"|\" STARstats <(cut -d \"|\" -f2 \$STARstat ) > temp; mv temp STARstats; done<STAR.stats.list\n" >> testcode

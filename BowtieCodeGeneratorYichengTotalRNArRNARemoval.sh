@@ -2,7 +2,7 @@
 #Run these codes in the current SERVER directory
 #the file $test has two columns, link and name, only one space allowed
 
-#usage: ./BowtieCodeGeneratorYichengTotalrRNARemoval.sh testFolderPath dm3 30mer
+#usage: ./BowtieCodeGeneratorYichengTotalrRNARemoval.sh testFolderPath dm3 30mer SE
 
 CurrentLo=$(pwd)
 source ~/programs/GenomeDefinitions.sh $2
