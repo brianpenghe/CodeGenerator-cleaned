@@ -8,7 +8,7 @@ CurrentLo=$(pwd)
 source ~/programs/GenomeDefinitions.sh $2
 
 bowtiedate=$(date +"%y%m%d")
-echo '' > bowtie$bowtiedate".condor"
+echo '' > bowtie_rRNA$bowtiedate".condor"
 printf '''
 universe=vanilla
 
@@ -30,9 +30,9 @@ while read line
     do
         if [[ "$4" == "PE" ]]
             then
-                printf "arguments=\"-c \' /woldlab/castor/proj/genome/programs/bowtie-1.0.1+hamrhein_nh_patch/bowtie "$rRNAbowtieindex" -p 8 -v 2 -k 1 --best -X 2000 -t --sam-nh -q -1 "$line"R1allfastq"$3" -2 "$line"R2allfastq"$3" --un "$line"allfastqrRNAUnmapped"$3".fastq "$line"allfastq.rRNA.mapped"$3".map 2> "$line"allfastq.rRNA.mapped"$3".err \' \"\nqueue\n" >> bowtie$bowtiedate".condor"
+                printf "arguments=\"-c \' /woldlab/castor/proj/genome/programs/bowtie-1.0.1+hamrhein_nh_patch/bowtie "$rRNAbowtieindex" -p 8 -v 2 -k 1 --best -X 2000 -t --sam-nh -q -1 "$line"R1allfastq"$3" -2 "$line"R2allfastq"$3" --un "$line"allfastqrRNAUnmapped"$3".fastq "$line"allfastq.rRNA.mapped"$3".map 2> "$line"allfastq.rRNA.mapped"$3".err \' \"\nqueue\n" >> bowtie_rRNA$bowtiedate".condor"
         elif [[ "$4" == "SE" ]]
             then
-                printf "arguments=\"-c \' /woldlab/castor/proj/genome/programs/bowtie-1.0.1+hamrhein_nh_patch/bowtie "$rRNAbowtieindex" -p 8 -v 2 -k 1 --best -t --sam-nh -q "$line"allfastq"$3" --un "$line"allfastqrRNAUnmapped"$3".fastq "$line"allfastq.rRNA.mapped"$3".map 2> "$line"allfastq.rRNA.mapped"$3".err \' \"\nqueue\n" >> bowtie$bowtiedate".condor"
+                printf "arguments=\"-c \' /woldlab/castor/proj/genome/programs/bowtie-1.0.1+hamrhein_nh_patch/bowtie "$rRNAbowtieindex" -p 8 -v 2 -k 1 --best -t --sam-nh -q "$line"allfastq"$3" --un "$line"allfastqrRNAUnmapped"$3".fastq "$line"allfastq.rRNA.mapped"$3".map 2> "$line"allfastq.rRNA.mapped"$3".err \' \"\nqueue\n" >> bowtie_rRNA$bowtiedate".condor"
         fi
     done <$1
