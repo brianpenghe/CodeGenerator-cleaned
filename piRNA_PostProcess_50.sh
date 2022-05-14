@@ -24,6 +24,7 @@ for i in 10 100 1000
   do
     while read bam
       do
+        /woldlab/castor/proj/programs/samtools-0.1.16/bin/samtools index $bam
         bamCoverage -b $bam \
 -of bedgraph -bs $i --region $Coordinates_20A -o $bam.$i.20A.bg4
         bamCoverage -b $bam \
