@@ -14,9 +14,9 @@ universe=vanilla
 
 executable=/bin/sh
 
-log=shell.rRNA.$(Process).log
-output=shell.rRNA.$(Process).out
-error=shell.rRNA.$(Process).err
+log=shell.$(Process).log
+output=shell.$(Process).out
+error=shell.$(Process).err
 
 request_cpus = 8
 request_memory = 4000
