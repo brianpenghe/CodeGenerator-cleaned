@@ -151,7 +151,7 @@ then
     STARDir="/woldlab/castor/home/phe/genomes/dm6/"
     RsemDir="/woldlab/castor/home/phe/genomes/dm6/rsem"
     gtf="/woldlab/castor/home/phe/genomes/dm6/Drosophila_melanogaster.BDGP6.32.106.fixed.gtf"
-#    rRNAbowtieindex="/woldlab/castor/home/phe/genomes/rRNA/MariaDrosophila/dmel_rRNA_unit"
+    rRNAbowtieindex="/woldlab/castor/home/phe/genomes/rRNA/MariaDrosophila/dmel_rRNA_unit"
 #    hotspot_chrom_sizes="/woldlab/castor/home/phe/genomes/hotspot2files/dm3/chrom_sizes.bed"
 #    hotspot_center_sites="/woldlab/castor/home/phe/genomes/hotspot2files/dm3/center_sites.starch"
 
