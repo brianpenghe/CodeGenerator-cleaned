@@ -14,9 +14,9 @@ universe=vanilla
 
 executable=/bin/sh
 
-log=shell.$(Process).log
-output=shell.$(Process).out
-error=shell.$(Process).err
+log=shell.rRNA.$(Process).log
+output=shell.rRNA.$(Process).out
+error=shell.rRNA.$(Process).err
 
 request_cpus = 8
 request_memory = 4000
@@ -24,7 +24,7 @@ request_disk = 0
 
 Requirements = (Machine == "pongo.caltech.edu" || Machine == "myogenin.caltech.edu" || Machine == "mondom.caltech.edu" || Machine == "trog.caltech.edu" || Machine == "wold-clst-3.woldlab" || Machine == "wold-clst-4.woldlab" || Machine == "myostatin.caltech.edu")
 
-''' >> bowtie$bowtiedate".condor"
+''' >> bowtie_rRNA$bowtiedate".condor"
 
 while read line
     do
