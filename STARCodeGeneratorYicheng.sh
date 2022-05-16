@@ -68,9 +68,9 @@ while read path
             '--quantMode TranscriptomeSAM GeneCounts' \
             '--sjdbScore 1' \
             '--limitBAMsortRAM 30000000000' \
-            '--outFileNamePrefix '$path'FastQCk6/Unique/'$2'.'$3'mer' \
+            '--outFileNamePrefix '$path'FastQCk6/'$2'.'$3'mer' \
             $EXTRA_ARGS' "' >> STAR$STARdate.condor
-        echo -e '+PostCmd="SamtoolsSort.sh"\n+PostArguments="'$path'FastQCk6/Unique/'$2'.'$3'merAligned.toTranscriptome.out.bam"\nqueue\n'>> STAR$STARdate.condor
+        echo -e '+PostCmd="SamtoolsSort.sh"\n+PostArguments="'$path'FastQCk6/'$2'.'$3'merAligned.toTranscriptome.out.bam"\nqueue\n'>> STAR$STARdate.condor
 #        echo -e 'arguments="--genomeDir' $STARDir \
 #            '--readFilesIn' $READ1 $READ2 \
 #            '--runThreadN' 8 \
@@ -97,13 +97,13 @@ while read path
 #        echo -e '+PostCmd="SamtoolsSort.sh"\n+PostArguments="'$path'FastQCk6/Multi'$2'.'$3'merAligned.toTranscriptome.out.bam"\nqueue\n'>> STAR$STARdate.condor
     done <$1
 
-printf "ls *k6/Unique/*ReadsPerGene.out.tab > STAR.genes.list\n" >> testcode
+printf "ls *k6/*ReadsPerGene.out.tab > STAR.genes.list\n" >> testcode
 printf "awk '{print \$1}' \$(head -1 STAR.genes.list) > ReadsPerGenes\n" >> testcode
 printf "while read ReadsPerGene; do paste -d \"|\" ReadsPerGenes <(awk '{print \$4}' \$ReadsPerGene) > temp; mv temp ReadsPerGenes; done<STAR.genes.list\n" >> testcode
 printf "paste -d \"|\" <(echo \"SampleName\") <(cat testFolderPath | paste -s -d \"|\") | cat - ReadsPerGenes > temp && mv temp ReadsPerGenes\n" >> testcode
 printf "ls *rRNA.*.err > Bowtie.err.list\n" >> testcode
 printf "paste <(echo \"Sequenced\";echo \"rRNA\";echo \"NonrRNA\") > BowtieStats\n" >> testcode
 printf "while read BowtieStat; do paste -d \"|\" BowtieStats <(grep \"#\" \$BowtieStat | cut -d: -f2) > temp; mv temp BowtieStats; done<Bowtie.err.list\n" >> testcode
-printf "ls *k6/Unique/"$2"."$3"merLog.final.out > STAR.stats.list\n" >> testcode
+printf "ls *k6/"$2"."$3"merLog.final.out > STAR.stats.list\n" >> testcode
 printf "cut -d \"|\" -f1 \$(head -1 STAR.stats.list) > STARstats\n" >> testcode
 printf "while read STARstat; do paste -d \"|\" STARstats <(cut -d \"|\" -f2 \$STARstat ) > temp; mv temp STARstats; done<STAR.stats.list\n" >> testcode
