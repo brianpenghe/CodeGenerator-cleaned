@@ -48,7 +48,7 @@ for i in 10 100 1000
 
 #chop to retrieve empty bins
 for i in 10 100 1000
-  do ls *.$i.*bg4 > bg4.$i.list
+  do ls {*.$i.*bg4 *k6/*.$i.*bg4} > bg4.$i.list
     while read bg4
       do
         awk -vOFS="\t" '{ print $1, $2, $3, ".", $4 }' $bg4 > signal.bed
