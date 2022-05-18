@@ -107,4 +107,4 @@ printf "while read BowtieStat; do paste -d \"|\" BowtieStats <(grep \"#\" \$Bowt
 printf "ls *k6/"$2"."$3"merLog.final.out > STAR.stats.list\n" >> testcode
 printf "cut -d \"|\" -f1 \$(head -1 STAR.stats.list) > STARstats\n" >> testcode
 printf "while read STARstat; do paste -d \"|\" STARstats <(cut -d \"|\" -f2 \$STARstat ) > temp; mv temp STARstats; done<STAR.stats.list\n" >> testcode
-printf "cat <(cat STAR.stats.list | paste -s -d '|') STARstats > STATstat && rm STARstats"
+printf "cat <(cat STAR.stats.list | paste -s -d '|') STARstats > STATstat && rm STARstats" >> testcode
