@@ -19,7 +19,7 @@ for i in 10 100 1000
   done
 
 #bin counts for genome region mappings
-ls *23_29mer.unique*.bam > bamsgenome
+ls *??_??mer.unique*.bam > bamsgenome
 for i in 10 100 1000
   do
     while read bam
@@ -61,25 +61,25 @@ while read bam
   do
     samtools view -h $bam > $bam.sam
     python2 ~/programs/signature.py $bam.sam 23 29 1 29 $bam.pingpong
-  done <<<$(ls *23_29mer.{GFP_SV40,UBIG,originalUBIG}.vectoronly.dup.bam)
+  done <<<$(ls *??_??mer.{GFP_SV40,UBIG,originalUBIG}.vectoronly.dup.bam)
 
 while read bam
   do
     samtools view -h $bam $Coordinates_42AB > $bam.sam
     python2 ~/programs/signature.py $bam.sam 23 29 1 29 $bam.cluster_42AB.pingpong
-  done<<<$(ls *.dm?.23_29mer.unique.dup.bam)
+  done<<<$(ls *.dm?.??_??mer.unique.dup.bam)
 
 while read bam
   do
     samtools view -h $bam $Coordinates_20A > $bam.sam
     python2 ~/programs/signature.py $bam.sam 23 29 1 29 $bam.cluster_20A.pingpong
-  done<<<$(ls *.dm?.23_29mer.unique.dup.bam)
+  done<<<$(ls *.dm?.??_??mer.unique.dup.bam)
 
 while read bam
   do
     samtools view -h $bam $Coordinates_Flam > $bam.sam
     python2 ~/programs/signature.py $bam.sam 23 29 1 29 $bam.cluster_flamenco.pingpong
-  done<<<$(ls *.dm?.23_29mer.unique.dup.bam)
+  done<<<$(ls *.dm?.??_??mer.unique.dup.bam)
 
 rm *.sam
 #make bigWig
@@ -90,4 +90,4 @@ while read bam
 -of bigwig -bs 1 --samFlagInclude 16 -o $bam.1.Minus.bigWig
     bamCoverage -b $bam \
 -of bigwig -bs 1 --samFlagExclude 16 -o $bam.1.Plus.bigWig
-done<<<$(ls *.dm?.23_29mer.unique.dup.bam)
+done<<<$(ls *.dm?.??_??mer.unique.dup.bam)
