@@ -2,7 +2,7 @@
 * This is a set of scripts to generate command-line scripts to handle sequencing data (the codes to write [codes](https://github.com/brianpenghe/Luo_2021_piRNA))
 * It generates codes to download data from Igor's website and codes for sequencing analysis
 
-## [smallRNA-seq]()
+## [smallRNA-seq](https://github.com/brianpenghe/CodeGenerator/blob/master/smallRNA-seq.md)
 * downloading, trimming, genome mapping, vector mapping, bin calculation, ping-pong analyses etc.
 * more information about the generated code can be found [here](https://github.com/brianpenghe/Luo_2021_piRNA)
 ## [totalRNA-seq]()
