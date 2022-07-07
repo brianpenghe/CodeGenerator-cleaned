@@ -25,3 +25,40 @@ Then you should see these messages after cleaning old files and generating scrip
 
 # 2. Run the actual code
 # 2.1 Run fastq trimming
+The codes for fastq trimming and other tasks are stored in the file named 'testcode'.
+
+# 2.1.1 Use the screen commands
+# 2.1.1.0 Introduction
+Screen is a method to let demanding commands run without needing to connect to the server all the time.
+
+A detailed description can be found [here](https://linuxize.com/post/how-to-use-linux-screen/).
+
+A screen is like a dream created in [Reception](https://www.imdb.com/title/tt7311298/). It runs by itself but depends on your physical world (the running server). It can also read and write your files directly.
+
+The five most useful screen commands are:
+
+1. To create a screen session and enter it, `screen -S Yicheng`
+
+2. To exit a screen session, ctrl + a then d
+
+3. To re-enter a screen session, `screen -r Yicheng` or `screen -r` when there's only one session
+
+4. To re-enter an attached screen session (some other tabs connected to it etc.), `screen -dr Yicheng`
+
+5. To scroll up and down in a screen session, ctrl + a then press Esc. Press again to exit scrolling mode
+
+# 2.1.1.1 Enter a screen
+Make sure you are inside a screen (ctrl + a then press d to exit). If not or exited, re-enter using the 3rd or 4th command introduced above. 
+
+# 2.1.2 Paste trimming codes
+The trimming codes are stored in the file named 'testcode', which also contains other commands.
+
+To read it more conveniently, you can download testcode file to your local computer or move to your public directory and read from a browser.
+
+Copy the part for trimming (see highlighted below, one command line for one file) and paste into the terminal to start trimming.
+
+![image](https://user-images.githubusercontent.com/4110443/177880258-53638f9e-db7d-449f-b2dd-bb4fcede8883.png)
+
+The commands will in parallel, which you can inspect by typing `htop` (or `top` if no htop installed).
+
+![image](https://user-images.githubusercontent.com/4110443/177880770-7fdf79ec-52e6-43c8-b8d6-8b15310af312.png)
