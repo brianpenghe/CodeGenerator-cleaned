@@ -61,6 +61,6 @@ Copy the part for trimming (see highlighted below, one command line for one file
 
 ![image](https://user-images.githubusercontent.com/4110443/177880258-53638f9e-db7d-449f-b2dd-bb4fcede8883.png)
 
-The commands will run in parallel, which you can inspect by typing `htop` (or `top` if no htop installed).
+The commands will run in parallel, which you can inspect by typing `htop` (or `top` or `lsof ./` if no htop installed).
 
 ![image](https://user-images.githubusercontent.com/4110443/177880770-7fdf79ec-52e6-43c8-b8d6-8b15310af312.png)
