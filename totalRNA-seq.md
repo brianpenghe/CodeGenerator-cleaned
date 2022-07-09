@@ -26,7 +26,8 @@ Then you should see these messages after cleaning old files and generating scrip
 ![image](https://user-images.githubusercontent.com/4110443/177877172-ae479abf-d0c9-44f3-b9ce-27a6aabb7d04.png)
 
 # 2. Run the actual code
-## 2.1 Run fastq trimming
+## 2.1 Trim reads in fastq files
+
 The codes for fastq trimming and other tasks are stored in the file named 'testcode'.
 
 ### 2.1.1 Use the screen commands
@@ -65,7 +66,8 @@ The commands will run in parallel, which you can inspect by typing `htop` (or `t
 
 ![image](https://user-images.githubusercontent.com/4110443/177880770-7fdf79ec-52e6-43c8-b8d6-8b15310af312.png)
 
-## 2.2 Run rRNA mapping codes
+## 2.2 Ribosomal RNA removal
+
 After all the trimming commands finish after inspection, start running bowtie alignment codes stored in the .condor file
 
 `condor_submit bowtie_rRNA220707.condor`
@@ -76,14 +78,60 @@ After job submission, you can inspect the running threads using `condor_q`
 
 After the commands finish running, you will see the files for unmapped reads (`*_unmapped.fastq`) which are the input for the next step.
 
-## 2.3 Run non-rRNA mapping codes
+
+## 2.3 Non-rRNA alignment
+
+### 2.3.1 Run alighment codes
 
 `condor_submit tophat220707.condor` submits commands to run STAR (please check your file name, which depends on the date).
 
-## 2.4 Run Rsem quantification and bigWig generation codes
+### 2.3.2 Run bedgraph generation codes
 
-After 2.3 finishes, these two commands can be submitted together since they do not depend on each other.
+After 2.3.1 is finished, run `condor_submit bedgraph220707.condor`
 
-`condor_submit bedgraph220707.condor`
+### 2.3.3 Run mapping stats codes
 
-`condor_submit Rsem220707.condor`
+After 2.3.1 is finished, copy-paste the codes for STAR stats extraction from the `testcode` file.
+
+![image](https://user-images.githubusercontent.com/4110443/178122093-6056ced4-b90c-4872-8caa-55f9dbc64e51.png)
+
+The stats will be saved in `STATstat` that can be copy-pasted into an Excel file.
+
+
+## 2.4 Rsem quantification based on STAR alignment
+
+### 2.4.1 Run Rsem
+
+After 2.3.1 finishes, you can run `condor_submit Rsem220707.condor` in parallel to 2.3.2 or not, to get gene and transcript counts.
+
+### 2.4.2 Extract Rsem quantification table
+
+After 2.4.1 finishes, you can organize Rsem quantifications of genes and transcripts into tables.
+
+The codes to do that are also stored in the file `testcode`.
+
+![image](https://user-images.githubusercontent.com/4110443/178122374-5f0ee47d-afdb-4861-9627-0fb69c7f59dc.png)
+
+The tables will be named `rsem_FPKM_genes.tsv`, `rsem_count_genes.tsv`, `rsem_FPKM_isoforms.tsv`, and `rsem_count_isoforms.tsv`.
+
+## 2.5 Vector alignment
+
+### 2.5.1 Align non-rRNA reads against vectors
+
+`condor_submit bowtie220707dm6_50.3.condor` submits bowtie commands to the server.
+
+Please make sure to use the `.3.condor` file instead of other scripts with similar filenames.
+
+### 2.5.2 Index alignment files
+
+`./testcodePostBowtie3`
+
+![image](https://user-images.githubusercontent.com/4110443/178122694-6d141299-e803-4d87-9fbe-c82e7c9a106f.png)
+
+### 2.5.3 Generate bin counts
+
+After commands in 2.5.2 finish, run `bash ~phe/programs/piRNA_PostProcess_50.sh` to generate bg4 files of bin counts.
+
+This will call Deeptools that require a python3 environment. Please make sure your current environment has python3 as the default version of python
+
+
