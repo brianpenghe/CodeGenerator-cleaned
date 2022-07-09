@@ -68,7 +68,7 @@ The commands will run in parallel, which you can inspect by typing `htop` (or `t
 ## 2.2 Run rRNA mapping codes
 After all the trimming commands finish after inspection, start running bowtie alignment codes stored in the .condor file
 
-`condor_submit bowtie220707dm6_50.condor`
+`condor_submit bowtie_rRNA220707.condor`
 
 After job submission, you can inspect the running threads using `condor_q`
 
