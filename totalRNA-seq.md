@@ -74,4 +74,16 @@ After job submission, you can inspect the running threads using `condor_q`
 
 ![image](https://user-images.githubusercontent.com/4110443/178102982-949586bf-64dc-4a71-aa4e-4333c1bbeb54.png)
 
+After the commands finish running, you will see the files for unmapped reads (`*_unmapped.fastq`) which are the input for the next step.
 
+## 2.3 Run non-rRNA mapping codes
+
+`condor_submit tophat220707.condor` submits commands to run STAR (please check your file name, which depends on the date).
+
+## 2.4 Run Rsem quantification and bigWig generation codes
+
+After 2.3 finishes, these two commands can be submitted together since they do not depend on each other.
+
+`condor_submit bedgraph220707.condor`
+
+`condor_submit Rsem220707.condor`
