@@ -134,4 +134,12 @@ After commands in 2.5.2 finish, run `bash ~phe/programs/piRNA_PostProcess_50.sh`
 
 This will call Deeptools that require a python3 environment. Please make sure your current environment has python3 as the default version of python
 
+### 2.5.4 Get bowtie mapping stats
+
+After 2.5.2 finishes, bowtie mapping stats can be extracted by running `./testcodePostBowtieStat220707dm6_50`
+
+![image](https://user-images.githubusercontent.com/4110443/178123643-96ee8817-4a7a-4836-b684-ba57d7be5c96.png)
+
+The stats will be stored in the output file `statsGenome220707dm6_50` and `statsVector220707dm6_50`
+
 
