@@ -65,12 +65,13 @@ The commands will run in parallel, which you can inspect by typing `htop` (or `t
 
 ![image](https://user-images.githubusercontent.com/4110443/177880770-7fdf79ec-52e6-43c8-b8d6-8b15310af312.png)
 
-## 2.2 Run mapping codes
-After all the trimming commands finish after inspection, start running STAR alignment codes stored in the .condor file
+## 2.2 Run rRNA mapping codes
+After all the trimming commands finish after inspection, start running bowtie alignment codes stored in the .condor file
 
-`condor_submit STAR220707.condor`
+`condor_submit bowtie220707dm6_50.condor`
 
 After job submission, you can inspect the running threads using `condor_q`
 
-![image](https://user-images.githubusercontent.com/4110443/178102770-71981e79-bdfd-4a67-8d7d-ec3708fb6688.png)
+![image](https://user-images.githubusercontent.com/4110443/178102982-949586bf-64dc-4a71-aa4e-4333c1bbeb54.png)
+
 
