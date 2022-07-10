@@ -35,7 +35,7 @@ Then you should see these messages after cleaning old files and generating scrip
 ![image](https://user-images.githubusercontent.com/4110443/178153973-7dda5fdd-f049-4eb5-8a06-02b043515eef.png)
 
 
-# 2. Run the actual code
+# 2. Run the actual code for 23-29mer and 21-22mer
 
 ## 2.1 Trim reads in fastq files
 
@@ -79,7 +79,7 @@ The commands will run in parallel, which you can inspect by typing `htop` (or `t
 ![image](https://user-images.githubusercontent.com/4110443/178154249-63262ae6-303c-4aa3-a46b-128f9dfd9dc0.png)
 
 
-## 2.2 Align 23-29mers and 21-22mers to genome and vectors
+## 2.2 Uniquely align 23-29mers and 21-22mers to genome and vectors
 
 ### 2.2.1 Submit bowtie commands using condor
 
@@ -97,7 +97,7 @@ After job submission, you can inspect the running threads using `condor_q`
 
 ### 2.2.2 Index alignment files
 
-After 2.2.1 finishes run
+After 2.2.1 finishes running
 ```
 ./testcodePostBowtie
 ./testcodePostBowtie3
@@ -105,4 +105,31 @@ After 2.2.1 finishes run
 
 These will index the bam files
 
+### 2.2.3 Make bigWig files
 
+After 2.2.2 finishes, `./testcodebigWig` produces bigWig files for genome browser visualization
+
+### 2.2.4 Calculate bins and analyze ping-pong signatures
+
+*This step can be very time consuming*
+
+After 2.2.3 finishes, run `bash ~/programs/piRNA_PostProcess_23_29.sh`
+
+### 2.2.5 Extract mapping stats
+
+Run these commands after mapping is finished
+```
+./testcodePostBowtieStat220710dm6_21_22
+./testcodePostBowtieStat220710dm6_23_29
+```
+
+## 2.3 "Dual" mapping for the same reads
+This step is similar to the unique mapping session except for skipping the reads trimming.
+
+### 2.3.1 Move useful results to a separate folder
+I usually move the entire folder to a new place, and then move back the files I need (`*fastq2?_2?`,`bowite*` and `test`) for the next step.
+
+### 2.3.2 Modify the bowtie mapping parameter `-m 1` to `-m 2`
+`sed -i 's/-v 0 -a -m 1/-v 0 -a -m 2/g' bowtie*`
+
+Then, follow the session 2.2 for dual mapping.
