@@ -144,4 +144,10 @@ After 2.5.2 finishes, bowtie mapping stats can be extracted by running `./testco
 
 The stats will be stored in the output file `statsGenome220707dm6_50` and `statsVector220707dm6_50`
 
+## 2.6 Vector dual mapping
 
+After Step 2.5 finishes, you can move all the useful files from Vector mapping to a separate folder, and change the parameter of your bowtie script to repeat the Step 2.5. The command below changes `-m 1` to `-m 2`.
+
+`sed -i 's/-v 0 -a -m 1 -t/-v 0 -a -m 2 -t/g' bowtie220707dm6_50.3.condor`
+
+Then, follow the Steps 2.5.1 to 2.5.4 for dual mapping.
