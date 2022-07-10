@@ -65,7 +65,7 @@ The five most useful screen commands are:
 #### 2.1.1.1 Enter a screen
 Make sure you are inside a screen (ctrl + a then press d to exit). If not or exited, re-enter using the 3rd or 4th command introduced above. 
 
-### 2.1.2 Paste trimming codes
+### 2.1.2 Paste filtering and trimming codes
 The trimming codes are stored in the file named `testcode`, which also contains other commands.
 
 To read it more conveniently, you can download the `testcode` file to your local computer or move to your public directory and read from a browser.
@@ -79,4 +79,30 @@ The commands will run in parallel, which you can inspect by typing `htop` (or `t
 ![image](https://user-images.githubusercontent.com/4110443/178154249-63262ae6-303c-4aa3-a46b-128f9dfd9dc0.png)
 
 
-### 2.1.2 Paste trimming codes
+## 2.2 Align 23-29mers and 21-22mers to genome and vectors
+
+### 2.2.1 Submit bowtie commands using condor
+
+After 2.1 finishes, run these four commands:
+```
+#genome
+condor_submit bowtie220710dm6_21_22.condor  
+condor_submit bowtie220710dm6_23_29.condor
+#vectors
+condor_submit bowtie220710dm6_21_22.3.condor
+condor_submit bowtie220710dm6_23_29.3.condor
+```
+
+After job submission, you can inspect the running threads using `condor_q`
+
+### 2.2.2 Index alignment files
+
+After 2.2.1 finishes run
+```
+./testcodePostBowtie
+./testcodePostBowtie3
+```
+
+These will index the bam files
+
+
