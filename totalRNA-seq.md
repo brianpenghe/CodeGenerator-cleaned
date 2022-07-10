@@ -1,4 +1,6 @@
 This is the totalRNA-seq pipeline instruction:
+# 0. Create a soft link to all the scripts and genome references in the ~phe folders
+`ln -s ~phe/programs ~/programs; ln -s ~phe/genomes ~/genomes`
 
 # 1. Run the code-generation pipeline
 ## 1.1 Organize the fastq files in subfolders
