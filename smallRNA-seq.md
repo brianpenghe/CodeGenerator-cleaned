@@ -74,3 +74,9 @@ Copy the part for trimming (see highlighted below, one command line for one file
 
 ![image](https://user-images.githubusercontent.com/4110443/178154056-76f0f5fc-37d9-4ac4-bf61-7adc4c83ba4b.png)
 
+The commands will run in parallel, which you can inspect by typing `htop` (or `top` or `lsof ./` if no htop installed).
+
+![image](https://user-images.githubusercontent.com/4110443/178154249-63262ae6-303c-4aa3-a46b-128f9dfd9dc0.png)
+
+
+### 2.1.2 Paste trimming codes
