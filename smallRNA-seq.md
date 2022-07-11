@@ -127,9 +127,24 @@ Run these commands after mapping is finished
 This step is similar to the unique mapping session except for skipping the reads trimming.
 
 ### 2.3.1 Move useful results to a separate folder
-I usually move the entire folder to a new place, and then move back the files I need (`*fastq2?_2?`,`bowite*` and `test`) for the next step.
+I usually move the entire folder to a new place, and then move back the files I need (`*fastq2?_2?`,`bowtie*` and `test*`) for the next step.
 
 ### 2.3.2 Modify the bowtie mapping parameter `-m 1` to `-m 2`
 `sed -i 's/-v 0 -a -m 1/-v 0 -a -m 2/g' bowtie*`
 
 Then, follow the session 2.2 for dual mapping.
+
+## 2.4 Map the same reads onto transposable elements (TEs)
+
+### 2.4.1 Move useful results to a separate folder 
+I usually move the entire folder to a new place, and then move back the files I need (`*fastq2?_2?`,`bowtie*` and `test*`) for the next step.
+
+### 2.4.2 
+Run the script for code generation for TE mapping
+`/woldlab/castor/home/phe/programs/BowtieYichengCodeGeneratorsmallRNA220424TE.sh testFolderPath dm6 23_29 SE`
+
+![image](https://user-images.githubusercontent.com/4110443/178339981-8d810ec2-e16d-4f56-8c3f-ebcb078c0d0d.png)
+
+### 2.4.3
+Submit the .condor script for bowtie alignment against TE reference
+`condor_submit bowtie220711.12.09.30.080723186.3.condor`
