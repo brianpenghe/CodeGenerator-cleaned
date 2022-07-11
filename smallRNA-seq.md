@@ -162,7 +162,7 @@ I usually move the entire folder to a new place, and then move back the files I 
 
 # 3. Run the actual code for 19-30mer
 
-## 3.1 Run the code generator
+## 3.0 Run the code generator
 
 ~/programs/LocalCodeGeneratorYichengpiRNA19_30.sh test dm6 0 SE
 
