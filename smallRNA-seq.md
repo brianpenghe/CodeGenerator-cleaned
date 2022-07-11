@@ -123,16 +123,16 @@ Run these commands after mapping is finished
 ./testcodePostBowtieStat220710dm6_23_29
 ```
 
+### 2.2.6 Move useful results to a separate folder
+I usually move the entire folder to a new place, and then move back the files I need (`*fastq2?_2?`,`bowtie*` and `test*`) for the next step.
+
 ## 2.3 "Dual" mapping for the same reads
 This step is similar to the unique mapping session except for skipping the reads trimming.
 
-### 2.3.1 Move useful results to a separate folder
-I usually move the entire folder to a new place, and then move back the files I need (`*fastq2?_2?`,`bowtie*` and `test*`) for the next step.
-
-### 2.3.2 Modify the bowtie mapping parameter `-m 1` to `-m 2`
+### 2.3.1 Modify the bowtie mapping parameter `-m 1` to `-m 2`
 `sed -i 's/-v 0 -a -m 1/-v 0 -a -m 2/g' bowtie*`
 
-Then, follow the session 2.2 for dual mapping.
+### 2.3.2 Follow the session 2.2 for dual mapping.
 
 ## 2.4 Map the same reads onto transposable elements (TEs)
 
@@ -152,4 +152,26 @@ after 2.4.3 finishes, run `./testcodePostBowtie3`
 
 ### 2.4.5 Calculate bin counts and perform ping-pong analysis
 after 2.4.4 finishes, run `~/programs/piRNA_PostProcess_TE.sh`
+
+### 2.4.6 Extract mapping stats
+after 2.4.6 finishes, run `./testcodePostBowtieStat220711.12.09.30.080723186`
+*Please make sure the script filename doesn't have "dm6" in it*
+
+### 2.4.7 Move useful results to a separate folder
+I usually move the entire folder to a new place, and then move back the files I need (fastq files and `test`) for the next step.
+
+# 3. Run the actual code for 19-30mer
+
+## 3.1 Run the code generator
+
+~/programs/LocalCodeGeneratorYichengpiRNA19_30.sh test dm6 0 SE
+
+## 3.1 Trim reads in fastq files
+
+The codes for fastq trimming and other tasks are stored in the file named 'testcode'.
+
+*Note that the codes were adapted from those for 23-29mers and 21-22mers (now become 19-30mers and 21-22mers), so they still contain the parts to generate 21-22mers, which won't harm the whole analysis.
+
+![image](https://user-images.githubusercontent.com/4110443/178374961-5f711e4b-11ea-47f7-ab1c-376914610024.png)
+
 
