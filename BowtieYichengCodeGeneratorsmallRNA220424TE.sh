@@ -7,8 +7,8 @@ CurrentLo=$(pwd)
 source ~/programs/GenomeDefinitions.sh $2
 plasmids=( 'DOC' 'Het-A' )
 
-echo "#!/bin/bash" >> testcodePostBowtie
-echo "#!/bin/bash" >> testcodePostBowtie2
+echo "#!/bin/bash" > testcodePostBowtie
+echo "#!/bin/bash" > testcodePostBowtie2
 echo "#bigWig (Index, SAMstats, idxstats) codes:" >> testcodePostBowtie
 echo "#bigWig (Index, SAMstats, idxstats) codes:" >> testcodePostBowtie2
 
