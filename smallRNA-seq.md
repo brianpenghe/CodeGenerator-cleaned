@@ -174,4 +174,17 @@ The codes for fastq trimming and other tasks are stored in the file named 'testc
 
 ![image](https://user-images.githubusercontent.com/4110443/178374961-5f711e4b-11ea-47f7-ab1c-376914610024.png)
 
+## 3.2 Uniquely align 19-30mers to genome and vectors
+
+### 3.2.1 Submit bowtie commands using condor
+
+After 3.1 finishes, run these two commands:
+```
+#genome
+condor_submit bowtie220711dm6_19_30.condor
+#vectors
+condor_submit bowtie220711dm6_19_30.3.condor
+```
+
+After job submission, you can inspect the running threads using `condor_q`
 
