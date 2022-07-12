@@ -16,6 +16,6 @@ source /woldlab/castor/home/phe/programs/Localrefolder.sh $1 $2 0 $4 19 30
 
 /woldlab/castor/home/phe/programs/BowtieYichengCodeGeneratorsmallRNA.sh testFolderPath $2 19_30 $4
 
-/woldlab/castor/home/phe/programs/bigWigCode.sh testFolderPath $2 "19_30mer"
+/woldlab/castor/home/phe/programs/bigWigCodePython2on3.sh testFolderPath $2 "19_30mer"
 
 /woldlab/castor/home/phe/programs/TrackSummary.sh bigWig
