@@ -97,7 +97,7 @@ After job submission, you can inspect the running threads using `condor_q`
 
 ### 2.2.2 Index alignment files
 
-After 2.2.1 finishes running
+After 2.2.1 finishes, run these
 ```
 ./testcodePostBowtie
 ./testcodePostBowtie3
@@ -137,7 +137,7 @@ This step is similar to the unique mapping session except for skipping the reads
 ## 2.4 Map the same reads onto transposable elements (TEs)
 
 ### 2.4.1 Move useful results to a separate folder 
-I usually move the entire folder to a new place, and then move back the files I need (`*fastq2?_2?`,`bowtie*` and `test*`) for the next step.
+I usually move the entire folder to a new place, and then copy back the files I need (`*fastq??_??` and `test*`) for the next step.
 
 ### 2.4.2 Run the script for code generation for TE mapping
 `/woldlab/castor/home/phe/programs/BowtieYichengCodeGeneratorsmallRNA220424TE.sh testFolderPath dm6 23_29 SE`
@@ -154,11 +154,11 @@ after 2.4.3 finishes, run `./testcodePostBowtie3`
 after 2.4.4 finishes, run `~/programs/piRNA_PostProcess_TE.sh`
 
 ### 2.4.6 Extract mapping stats
-after 2.4.6 finishes, run `./testcodePostBowtieStat220711.12.09.30.080723186`
+after 2.4.5 finishes, run `./testcodePostBowtieStat220711.12.09.30.080723186`
 *Please make sure the script filename doesn't have "dm6" in it*
 
 ### 2.4.7 Move useful results to a separate folder
-I usually move the entire folder to a new place, and then move back the files I need (fastq files and `test`) for the next step.
+I usually move the entire folder to a new place, and then move back the files I need (fastq folders and `test`) for the next step.
 
 # 3. Run the actual code for 19-30mer
 
@@ -178,7 +178,7 @@ The codes for fastq trimming and other tasks are stored in the file named 'testc
 
 ### 3.2.1 Submit bowtie commands using condor
 
-After 3.1 finishes, run these two commands:
+After 3.1 finishes, run these two commands (to save time, we don't map 21-22mers again):
 ```
 #genome
 condor_submit bowtie220711dm6_19_30.condor
@@ -188,3 +188,61 @@ condor_submit bowtie220711dm6_19_30.3.condor
 
 After job submission, you can inspect the running threads using `condor_q`
 
+### 3.2.2 Index the alignment files
+
+After 3.2.1 finishes, run these
+```
+./testcodePostBowtie
+./testcodePostBowtie3
+```
+
+### 3.2.3 Make bigWig files
+
+After 3.2.2 finishes, `./testcodebigWig` produces bigWig files for genome browser visualization
+
+### 3.2.4 Calculate bins and analyze ping-pong signatures
+
+*This step can be very time consuming*
+
+After 3.2.3 finishes, run `bash ~/programs/piRNA_PostProcess_19_30.sh`
+
+### 3.2.5 Extract mapping stats
+
+After 3.2.4, run `testcodePostBowtieStat220711dm6_19_30`
+
+### 3.2.6 Move useful results to a separate folder
+I usually move the entire folder to a new place, and then move back the files I need (`*fastq??_??`,`bowtie*` and `test*`) for the next step.
+
+## 3.3 "Dual" mapping for the same reads
+This step is similar to the unique mapping session except for skipping the reads trimming.
+
+### 3.3.1 Modify the bowtie mapping parameter `-m 1` to `-m 2`
+`sed -i 's/-v 0 -a -m 1/-v 0 -a -m 2/g' bowtie*`
+
+### 3.3.2 Follow the session 3.2 for dual mapping.
+
+## 3.4 Map the same reads onto transposable elements (TEs)
+
+### 3.4.1 Move useful results to a separate folder 
+I usually move the entire folder to a new place, and then copy back the files I need (`*fastq??_??` and `test*`) for the next step.
+
+### 3.4.2 Run the script for code generation for TE mapping
+`/woldlab/castor/home/phe/programs/BowtieYichengCodeGeneratorsmallRNA220424TE.sh testFolderPath dm6 19_30 SE`
+
+![image](https://user-images.githubusercontent.com/4110443/178524831-c62a470d-0204-4ac5-92a4-c3f9c96f5f6c.png)
+
+### 3.4.3 bowtie alignment against TE reference
+`condor_submit bowtie220712.08.15.22.991582814.3.condor`
+
+### 3.4.4 Index the alignment files
+after 3.4.3 finishes, run `./testcodePostBowtie3`
+
+### 3.4.5 Calculate bin counts and perform ping-pong analysis
+after 3.4.4 finishes, run `~/programs/piRNA_PostProcess_TE.sh`
+
+### 3.4.6 Extract mapping stats
+after 3.4.5 finishes, run `./testcodePostBowtieStat220712.08.15.22.991582814`
+*Please make sure the script filename doesn't have "dm6" in it*
+
+### 3.4.7 Move useful results to a separate folder
+I usually move the entire folder to a new place, and then move back the files I need (fastq files and `test`) for the next step.
