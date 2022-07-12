@@ -1,4 +1,9 @@
 This is the totalRNA-seq pipeline instruction:
+# 0. Set up the codes of generating scripts
+
+You can create a soft link to all the scripts and genome references in the ~phe folders if you haven't never done that.
+
+`ln -s ~phe/programs ~/programs; ln -s ~phe/genomes ~/genomes`
 
 # 1. Run the code-generation pipeline
 ## 1.1 Organize the fastq files in subfolders
@@ -142,4 +147,10 @@ After 2.5.2 finishes, bowtie mapping stats can be extracted by running `./testco
 
 The stats will be stored in the output file `statsGenome220707dm6_50` and `statsVector220707dm6_50`
 
+## 2.6 Vector dual mapping
 
+After Step 2.5 finishes, you can move all the useful files from Vector mapping to a separate folder, and change the parameter of your bowtie script to repeat the Step 2.5. The command below changes `-m 1` to `-m 2`.
+
+`sed -i 's/-v 0 -a -m 1 -t/-v 0 -a -m 2 -t/g' bowtie220707dm6_50.3.condor`
+
+Then, follow the Steps 2.5.1 to 2.5.4 for dual mapping.
