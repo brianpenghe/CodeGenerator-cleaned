@@ -10,7 +10,7 @@ You can create a soft link to all the scripts and genome references in the ~phe 
 
 ## 1.1 Organize the fastq files in subfolders
 
-If there are only fastq.gz files in subfolders, run gunzip */*.gz to extract them
+If there are only fastq.gz files in subfolders, run `gunzip */*.gz` to extract them
 
 The files you have should look like this
 
