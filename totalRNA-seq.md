@@ -88,7 +88,7 @@ After the commands finish running, you will see the files for unmapped reads (`*
 
 ### 2.3.1 Run alighment codes
 
-`condor_submit tophat220707.condor` submits commands to run STAR (please check your file name, which depends on the date).
+`condor_submit STAR220707.condor` submits commands to run STAR (please check your file name, which depends on the date).
 
 ### 2.3.2 Run bedgraph generation codes
 
