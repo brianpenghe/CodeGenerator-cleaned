@@ -208,7 +208,7 @@ After 3.2.3 finishes, run `bash ~/programs/piRNA_PostProcess_19_30.sh`
 
 ### 3.2.5 Extract mapping stats
 
-After 3.2.4, run `testcodePostBowtieStat220711dm6_19_30`
+After 3.2.4, run `./testcodePostBowtieStat220711dm6_19_30`
 
 ### 3.2.6 Move useful results to a separate folder
 I usually move the entire folder to a new place, and then move back the files I need (`*fastq??_??`,`bowtie*` and `test*`) for the next step.
