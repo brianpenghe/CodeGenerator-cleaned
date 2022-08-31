@@ -4,7 +4,7 @@
 
 ## [smallRNA-seq](https://github.com/brianpenghe/CodeGenerator/blob/master/smallRNA-seq.md)
 * downloading, trimming, genome mapping, vector mapping, bin calculation, ping-pong analyses etc.
-* more information about the generated code can be found [here](https://github.com/brianpenghe/Luo_2021_piRNA)
+* more information about the generated code can be found [here](https://github.com/brianpenghe/Luo_2021_piRNA/blob/main/piRNA-seq.md)
 ## [totalRNA-seq](https://github.com/brianpenghe/CodeGenerator/blob/master/totalRNA-seq.md)
 * downloading, trimming, rRNA removal, transcriptome mapping, vector mapping, bin calculation, phasing etc.
 ## [polyA-RNA-seq]()
