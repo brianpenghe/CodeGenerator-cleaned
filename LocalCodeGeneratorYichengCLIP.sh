@@ -1,7 +1,7 @@
 #!/bin/bash
 #Run these codes in the current SERVER directory
 #it generates three testfiles: testcode, testFolderPath and testSampleList
-#usage: ~/programs/LocalCodeGeneratorYichengpiRNA.sh test mm9 36 SE #36 is useless
+#usage: ~/programs/LocalCodeGeneratorYichengCLIP.sh test mm9 36 SE #36 is useless
 #but in fact hard trimming won't be performed. See line 15
 #the file test has two columns, Full Location Path and name, only one space allowed
 #this script enables combining multiple flowcells.
