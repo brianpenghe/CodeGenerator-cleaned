@@ -1,4 +1,4 @@
-This is the totalRNA-seq pipeline instruction:
+This is the totalRNA-seq/RIP-seq pipeline instruction:
 # 0. Set up the codes of generating scripts
 
 You can create a soft link to all the scripts and genome references in the ~phe folders if you haven't never done that.
@@ -21,8 +21,11 @@ The 'test' file should contain all the folder names
 ![image](https://user-images.githubusercontent.com/4110443/177876758-f870fc07-d086-4d87-9fb3-b17b9db6bcbb.png)
 
 ## 1.3 Run the code generator
-
+For total RNA-seq:
 `~/programs/LocalCodeGeneratorYichengTotalRNAseq.sh test dm6 50 SE`
+
+For RIP-seq:
+`~/programs/LocalCodeGeneratorYichengCLIP.sh test dm6 50 SE`
 
 `test` is the file containing all the folder names. `dm6` is the name of the reference genome. `50` is the read length to trim to. `SE` means single-ended (paired-end reads are currently not supported for this tutorial). One thing to notice is that, although this pipeline uses R1 of paired-end reads for analysis as single-end reads, some protocols of strand-specific totalRNA-seq reads the fragment from R2, which is on the opposite strand. To account for that, manual flipping of the strand +/- may be necessary.
 
