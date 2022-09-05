@@ -6,7 +6,7 @@
 # for example: /woldlab/castor/home/phe/ChIPseq   test1
 #delete the testFolderPath file
 #it generates three files: bowtieXXXXXX testcode & testFolderPath
-#usage: ~/programs/GECCodeGeneratorATAC.sh test mm9 36
+#usage: ~/programs/GECCodeGeneratorATAC.sh test mm9 36 SE
 
 /woldlab/castor/home/phe/programs/Cleanup.sh RNAseq
 echo '' > testcode
