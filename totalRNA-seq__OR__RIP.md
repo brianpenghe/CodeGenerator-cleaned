@@ -1,7 +1,7 @@
 This is the totalRNA-seq/RIP-seq pipeline instruction:
 # 0. Set up the codes of generating scripts
 
-You can create a soft link to all the scripts and genome references in the ~phe folders if you haven't never done that.
+You can create a soft link to all the scripts and genome references in the ~phe folders if you haven't ever done that.
 
 `ln -s ~phe/programs ~/programs; ln -s ~phe/genomes ~/genomes`
 
