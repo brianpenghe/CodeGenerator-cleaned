@@ -89,7 +89,7 @@ After the commands finish running, you will see the files for unmapped reads (`*
 
 ## 2.3 Non-rRNA alignment
 
-### 2.3.1 Run alighment codes
+### 2.3.1 Run alignment codes
 
 `condor_submit STAR220707.condor` submits commands to run STAR (please check your file name, which depends on the date).
 
