@@ -13,3 +13,4 @@
 * downloading, trimming, genome mapping, normalization, peak calling, track generation etc. 
 ## [4C-seq]()
 
+## [ChIP-seq](https://github.com/brianpenghe/CodeGenerator/blob/master/ChIP-seq.md)
