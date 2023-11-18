@@ -181,16 +181,16 @@ do
 while read bam
 do
 /woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/bin/bamCoverage -b $bam  -of bedgraph -bs $i --region chr2
-R:2144349-2386719  -o $bam.$i.42AB.bg4; /woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/bin/bamCoverage -b
+R:6256844-6499214  -o $bam.$i.42AB.bg4; /woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/bin/bamCoverage -b
  $bam  -of bedgraph -bs $i --region chr2R:2144349-2386719  --samFlagInclude 16 -o $bam.$i.42AB.Minus.bg4; 
 /woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/bin/bamCoverage -b $bam  -of bedgraph -bs $i --region chr2
-R:2144349-2386719  --samFlagExclude 16 -o $bam.$i.42AB.Plus.bg4
+R:6256844-6499214  --samFlagExclude 16 -o $bam.$i.42AB.Plus.bg4
 
 /woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/bin/bamCoverage -b $bam  -of bedgraph -bs $i --region chrX
-:21392175-21431907  -o $bam.$i.20A.bg4; /woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/bin/bamCoverage -b
+:21521148-21560880  -o $bam.$i.20A.bg4; /woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/bin/bamCoverage -b
  $bam  -of bedgraph -bs $i --region chrX:21392175-21431907  --samFlagInclude 16 -o $bam.$i.20A.Minus.bg4;
 /woldlab/castor/proj/genome/programs/deepTools-2.4.2_develop/bin/bamCoverage -b $bam  -of bedgraph -bs $i --region chrX
-:21392175-21431907  --samFlagExclude 16 -o $bam.$i.20A.Plus.bg4
+:21521148-21560880  --samFlagExclude 16 -o $bam.$i.20A.Plus.bg4
 
 awk -vOFS="\t" '{ print $1, $2, $3, ".", $4 }' $bam.$i.42AB.Minus.bg4 > signal.bed; bedops --chop $i signal.bed | bedma
 p --echo --echo-map-score - signal.bed | sed -e 's/|/\t/g' > $bam.$i.42AB.Minus.bg4chopped.bg4;
