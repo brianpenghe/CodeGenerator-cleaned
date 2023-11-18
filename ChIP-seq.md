@@ -207,7 +207,7 @@ awk -vOFS="\t" '{ print $1, $2, $3, ".", $4 }' $bam.$i.20A.bg4 > signal.bed; bed
 o --echo-map-score - signal.bed | sed -e 's/|/\t/g' > $bam.$i.20A.bg4chopped.bg4;
 
 
-done<<<$(ls *dm3.50mer.unique.dup.bam)
+done<<<$(ls *dm6.50mer.unique.dup.bam)
 done
 
 ```
