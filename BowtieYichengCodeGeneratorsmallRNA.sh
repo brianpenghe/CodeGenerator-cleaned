@@ -9,7 +9,8 @@ plasmids=( '42AB_UASG' '42AB_UBIG' '66A_UASG' '66A_UBIG' 'ACTIN-G' 'GFP_SV40' \
 'HSP70-G' 'Pld_42AB_Jing_UBIG' 'UBIG' \
 'originalUBIG' 'UBIGasG' 'UASMhc17GFP' \
 'LNLB' 'UBIGBox' 'Dmel_Circe' 'PlacW' \
-'MIMIC' '2kbCirceSDGFP' 'ActinSDSAGFP' '2kbCirceSDSAGFP')
+'MIMIC' '2kbCirceSDGFP' 'ActinSDSAGFP' '2kbCirceSDSAGFP' \
+'NosBxLuciBxNosAS' 'NosLuciASBx' 'UASPmk2K10' 'UASmk2BxBUASas')
 
 echo "#!/bin/bash" >> testcodePostBowtie
 echo "#!/bin/bash" >> testcodePostBowtie2
