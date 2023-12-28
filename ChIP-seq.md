@@ -27,10 +27,6 @@ The 'test' file should contain all the folder names
 
 `~/programs/LocalCodeGeneratorYichengChIP.sh test dm6 50 SE`
 
-or, for generic ChIP-seq/ATAC-seq that doesn't need alignment to Yicheng's vectors:
-
-`~/programs/LocalCodeGeneratorATAC.sh test dm6 50 SE`
-
 `test` is the file containing all the folder names. `dm6` is the name of the reference genome. `50` is the read length to trim to. `SE` means single-ended (paired-end reads are currently not supported for this tutorial). One thing to notice is that, although this pipeline uses R1 of paired-end reads for analysis as single-end reads, some protocols of strand-specific totalRNA-seq reads the fragment from R2, which is on the opposite strand. To account for that, manual flipping of the strand +/- may be necessary.
 
 Then you should see these messages after cleaning old files and generating script files.
