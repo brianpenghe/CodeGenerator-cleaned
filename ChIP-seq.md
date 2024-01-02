@@ -105,7 +105,7 @@ You may also explore peak callers for ATAC-seq data using eRange, F-seq, HOMER, 
 
 Run these commands after mapping is finished
 ```
-./testcodeStats
+./testcodePostBowtieStat231117.14.19.22.504931482
 ```
 
 ## 2.3 Downstream analysis
