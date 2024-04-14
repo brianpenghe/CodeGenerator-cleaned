@@ -5,7 +5,7 @@
 #usage: ./bowtieCodeGenerator.sh testFolderPath dm3/dm6 23_29
 CurrentLo=$(pwd)
 source ~/programs/GenomeDefinitions.sh $2
-plasmids=( 'UBIG' 'MIMIC' 'originalUBIG' 'UBIGasG' 'Dmel_Circe' 'drorep')
+plasmids=( 'UBIG' 'MIMIC' 'originalUBIG' 'UBIGasG' 'Dmel_Circe' 'drorep' '2kbCirceSDGFP')
 
 echo "#!/bin/bash" >> testcodePostBowtie
 echo "#!/bin/bash" >> testcodePostBowtie2
