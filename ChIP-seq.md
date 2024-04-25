@@ -1,11 +1,17 @@
 This is the ChIP-seq pipeline instruction:
-# 0. Set up the codes of generating scripts
+
+<details>
+  <summary><b>0. Set up the codes of generating scripts</b></summary>
 
 You can create a soft link to all the scripts and genome references in the ~phe folders if you haven't ever done that.
 
 `ln -s ~phe/programs ~/programs; ln -s ~phe/genomes ~/genomes`
 
-# 1. Run the code-generation pipeline
+</details>
+
+<details>
+  <summary><b>1. Run the code-generation pipeline</b></summary>
+ 
 ## 1.1 Organize the fastq files in subfolders
 If there are only fastq.gz files in subfolders, run `gunzip */*.gz` to extract them
 
@@ -33,7 +39,11 @@ Then you should see these messages after cleaning old files and generating scrip
 
 ![image](https://github.com/brianpenghe/CodeGenerator/assets/4110443/88ec019d-501a-4a5b-a965-54745eb6f2f9)
 
-# 2. Run the actual code
+</details>
+
+<details>
+  <summary><b>2. Run the actual code</b></summary>
+    
 ## 2.1 Trim reads in fastq files
 
 The codes for fastq trimming and other tasks are stored in the file named `testcode`.
@@ -208,4 +218,4 @@ done
 
 ```
 
-
+</details>
