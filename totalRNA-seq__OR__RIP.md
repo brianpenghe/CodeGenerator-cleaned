@@ -1,11 +1,15 @@
 This is the totalRNA-seq/RIP-seq pipeline instruction:
-# 0. Set up the codes of generating scripts
+<details>
+  <summary><b>0. Set up the codes of generating scripts</b></summary>
 
 You can create a soft link to all the scripts and genome references in the ~phe folders if you haven't ever done that.
 
 `ln -s ~phe/programs ~/programs; ln -s ~phe/genomes ~/genomes`
+</details>
 
-# 1. Run the code-generation pipeline
+<details>
+  <summary><b>1. Run the code-generation pipeline</b></summary>
+
 ## 1.1 Organize the fastq files in subfolders
 If there are only fastq.gz files in subfolders, run `gunzip */*.gz` to extract them
 
@@ -33,8 +37,13 @@ Then you should see these messages after cleaning old files and generating scrip
 
 ![image](https://user-images.githubusercontent.com/4110443/177877172-ae479abf-d0c9-44f3-b9ce-27a6aabb7d04.png)
 
-# 2. Run the actual code
-## 2.1 Trim reads in fastq files
+</details>
+
+<details>
+  <summary><b>2. Run the actual code</b></summary>
+
+<details>
+  <summary><b>&nbsp&nbsp2.1 Trim reads in fastq files</b></summary>
 
 The codes for fastq trimming and other tasks are stored in the file named 'testcode'.
 
@@ -74,7 +83,10 @@ The commands will run in parallel, which you can inspect by typing `htop` (or `t
 
 ![image](https://user-images.githubusercontent.com/4110443/177880770-7fdf79ec-52e6-43c8-b8d6-8b15310af312.png)
 
-## 2.2 Ribosomal RNA removal
+  </details>
+
+<details>
+  <summary><b>&nbsp&nbsp2.2 Ribosomal RNA removal</b></summary>
 
 After all the trimming commands finish after inspection, start running bowtie alignment codes stored in the .condor file
 
@@ -86,8 +98,10 @@ After job submission, you can inspect the running threads using `condor_q`
 
 After the commands finish running, you will see the files for unmapped reads (`*_unmapped.fastq`) which are the input for the next step.
 
+</details>
 
-## 2.3 Non-rRNA alignment
+<details>
+  <summary><b>&nbsp&nbsp2.3 Non-rRNA alignment</b></summary>
 
 ### 2.3.1 Run alignment codes
 
@@ -105,8 +119,10 @@ After 2.3.1 is finished, copy-paste the codes for STAR stats extraction from the
 
 The stats will be saved in `STATstat` that can be copy-pasted into an Excel file.
 
+</details>
 
-## 2.4 Rsem quantification based on STAR alignment
+<details>
+  <summary><b>&nbsp&nbsp2.4 Rsem quantification based on STAR alignment</b></summary>
 
 ### 2.4.1 Run Rsem
 
@@ -122,7 +138,10 @@ The codes to do that are also stored in the file `testcode`.
 
 The tables will be named `rsem_FPKM_genes.tsv`, `rsem_count_genes.tsv`, `rsem_FPKM_isoforms.tsv`, and `rsem_count_isoforms.tsv`.
 
-## 2.5 Vector alignment
+</details>
+
+<details>
+  <summary><b>&nbsp&nbsp2.5 Vector alignment</b></summary>
 
 ### 2.5.1 Align non-rRNA reads against vectors
 
@@ -150,10 +169,17 @@ After 2.5.2 finishes, bowtie mapping stats can be extracted by running `./testco
 
 The stats will be stored in the output file `statsGenome220707dm6_50` and `statsVector220707dm6_50`
 
-## 2.6 Vector dual mapping
+</details>
+
+<details>
+  <summary><b>&nbsp&nbsp2.6 Vector dual mapping</b></summary>
 
 After Step 2.5 finishes, you can move all the useful files from Vector mapping to a separate folder, and change the parameter of your bowtie script to repeat the Step 2.5. The command below changes `-m 1` to `-m 2`.
 
 `sed -i 's/-v 0 -a -m 1 -t/-v 0 -a -m 2 -t/g' bowtie220707dm6_50.3.condor`
 
 Then, follow the Steps 2.5.1 to 2.5.4 for dual mapping.
+
+</details>
+
+</details>
