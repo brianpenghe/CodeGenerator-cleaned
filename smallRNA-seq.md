@@ -1,12 +1,16 @@
 This is the smallRNA-seq pipeline instruction:
 
-# 0. Set up the codes of generating scripts
+<details>
+  <summary><b>0. Set up the codes of generating scripts</b></summary>
 
 You can create a soft link to all the scripts and genome references in the ~phe folders if you haven't never done that.
 
 `ln -s ~phe/programs ~/programs; ln -s ~phe/genomes ~/genomes`
 
-# 1. Run the code-generation pipeline
+</details>
+
+<details>
+  <summary><b>1. Run the code-generation pipeline</b></summary>
 
 ## 1.1 Organize the fastq files in subfolders
 
@@ -34,8 +38,10 @@ Then you should see these messages after cleaning old files and generating scrip
 
 ![image](https://user-images.githubusercontent.com/4110443/178153973-7dda5fdd-f049-4eb5-8a06-02b043515eef.png)
 
+</details>
 
-# 2. Run the actual code for 23-29mer and 21-22mer
+<details>
+  <summary><b>2. Run the actual code for 23-29mer and 21-22mer</b></summary> 
 
 ## 2.1 Trim reads in fastq files
 
@@ -160,6 +166,11 @@ after 2.4.5 finishes, run `./testcodePostBowtieStat220711.12.09.30.080723186`
 ### 2.4.7 Move useful results to a separate folder
 I usually move the entire folder to a new place, and then move back the files I need (fastq folders and `test`) for the next step.
 
+</details>
+
+<details>
+  <summary><b>3. Run the actual code for 19-30mer</b></summary> 
+
 # 3. Run the actual code for 19-30mer
 
 ## 3.0 Run the code generator
@@ -246,3 +257,5 @@ after 3.4.5 finishes, run `./testcodePostBowtieStat220712.08.15.22.991582814`
 
 ### 3.4.7 Move useful results to a separate folder
 I usually move the entire folder to a new place, and then move back the files I need (fastq files and `test`) for the next step.
+
+</details>
