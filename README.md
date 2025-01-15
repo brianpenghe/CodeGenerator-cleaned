@@ -1,3 +1,7 @@
+# ⚠️⚠️Repo MOVED to [HERE](https://github.com/Peng-He-Lab/Bulk-seq-pipelines) ⚠️⚠️!
+# ⚠️⚠️Updated Folder [HERE](https://github.com/Peng-He-Lab/Bulk-seq-pipelines)⚠️⚠️!
+# ⚠️⚠️Newer version [HERE](https://github.com/Peng-He-Lab/Bulk-seq-pipelines) ⚠️⚠️!
+
 # Code generator instructions
 * This is a set of scripts to generate command-line scripts to handle sequencing data (the codes to write [codes](https://github.com/brianpenghe/Luo_2021_piRNA))
 * It generates codes to download data from Igor's website and codes for sequencing analysis
